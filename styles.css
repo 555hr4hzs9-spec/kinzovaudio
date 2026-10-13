@@ -3184,4 +3184,5 @@ body::before {
   pointer-events:none;
 }
 @keyframes starTwinkle { from{opacity:.45} to{opacity:.75} }
+@media (max-width:620px) { body::before { background-size:850px auto; } }
 @media (prefers-reduced-motion:reduce) { body::before{animation:none; opacity:.4} }
