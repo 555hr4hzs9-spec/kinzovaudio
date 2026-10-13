@@ -796,31 +796,42 @@ canvas {
 }
 
 .marquee {
+  position: relative;
   overflow: hidden;
   border-top: 1px solid var(--line-soft);
   border-bottom: 1px solid var(--line-soft);
-  background: rgba(255, 255, 255, .015);
+  background: linear-gradient(90deg, rgba(183,101,255,.035), rgba(255,255,255,.012) 42%, rgba(98,215,255,.025));
 }
 
 .marquee-track {
   display: flex;
   width: max-content;
   align-items: center;
-  gap: 34px;
-  padding: 20px 0;
-  animation: marquee 34s linear infinite;
+  gap: 22px;
+  padding: 16px 0;
+  animation: marquee 42s linear infinite;
+  will-change: transform;
 }
 
 .marquee span {
-  color: rgba(245, 243, 250, .72);
-  font: 600 clamp(1.1rem, 2vw, 1.55rem)/1 var(--display);
-  letter-spacing: .08em;
+  color: rgba(245, 243, 250, .58);
+  font: 600 clamp(.64rem, 1vw, .82rem)/1 var(--mono);
+  letter-spacing: .16em;
+  white-space: nowrap;
+}
+
+.marquee .marquee-brand {
+  color: var(--text);
+  font-family: var(--display);
+  font-size: clamp(.82rem, 1.3vw, 1rem);
+  letter-spacing: .12em;
 }
 
 .marquee i {
-  color: var(--accent);
+  color: var(--accent-soft);
   font-style: normal;
-  font-size: .85rem;
+  font-size: .72rem;
+  opacity: .82;
 }
 
 .section {
@@ -2676,8 +2687,28 @@ canvas {
 .lab-footer { bottom:24px; left:25px; right:25px; display:flex; justify-content:space-between; color:rgba(255,255,255,.34); font:600 .52rem/1 var(--mono); letter-spacing:.11em; }
 .interface-viewer { overflow:hidden; border:1px solid var(--line); border-radius:22px; background:#0a090e; box-shadow:0 35px 90px rgba(0,0,0,.35); }
 .interface-viewer .engine-tabs { padding:18px 18px 0; margin:0; }
-.interface-viewer [role="tabpanel"] { margin:18px; min-height:380px; display:grid; place-items:center; overflow:hidden; border:1px solid rgba(255,255,255,.1); border-radius:14px; background:#000; }
-#interfaceImage { display:block; width:100%; max-height:min(62vw,720px); object-fit:contain; transition:opacity .25s, transform .25s; }
+.interface-viewer [role="tabpanel"] {
+  display:flex;
+  min-height:0;
+  margin:18px 18px 0;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:14px;
+  background:
+    radial-gradient(circle at 50% 35%, rgba(183,101,255,.08), transparent 42%),
+    #050507;
+}
+#interfaceImage {
+  display:block;
+  width:auto;
+  max-width:100%;
+  max-height:min(70vh, 760px);
+  height:auto;
+  object-fit:contain;
+  transition:opacity .25s, transform .25s;
+}
 .viewer-caption { display:flex; align-items:center; justify-content:space-between; padding:0 20px 20px; color:var(--muted); font:600 .64rem/1 var(--mono); letter-spacing:.12em; }
 .viewer-caption span { color:var(--text); }
 .viewer-caption button { border:0; padding:6px 0; color:var(--accent-soft); background:none; cursor:pointer; font:inherit; letter-spacing:inherit; }
@@ -2685,6 +2716,8 @@ canvas {
 .plugin-screenshot { display:block; width:calc(100% + 8px); padding:0; cursor:pointer; }
 .plugin-screenshot img { display:block; width:100%; height:100%; object-fit:cover; object-position:center; transition:transform .7s cubic-bezier(.22,1,.36,1), filter .5s; }
 .plugin-screenshot:hover img { transform:scale(1.045); filter:saturate(1.08) brightness(1.08); }
+.plugin-chek .plugin-screenshot { background:radial-gradient(circle at 50% 35%, rgba(183,101,255,.13), transparent 60%), #050507; }
+.plugin-chek .plugin-screenshot img { object-fit:contain; padding:0 16px; }
 .screenshot-zoom { position:absolute; right:12px; bottom:12px; padding:8px 10px; border:1px solid rgba(255,255,255,.16); border-radius:5px; background:rgba(4,4,7,.74); color:var(--text); opacity:0; transform:translateY(8px); transition:opacity .25s, transform .25s; font:600 .52rem/1 var(--mono); letter-spacing:.09em; }
 .plugin-screenshot:hover .screenshot-zoom { opacity:1; transform:none; }
 .dialog-image { display:block; width:100%; max-height:42vh; margin:24px 0; object-fit:contain; border:1px solid rgba(255,255,255,.12); border-radius:12px; background:#000; }
@@ -2699,7 +2732,7 @@ canvas {
   .lab-spectrum { left:8%; right:8%; bottom:29%; height:70px; }
   .lab-products { left:8%; right:8%; bottom:15%; grid-template-columns:repeat(2,1fr); }
   .lab-footer { left:18px; right:18px; bottom:18px; font-size:.43rem; }
-  .interface-viewer [role="tabpanel"] { margin:12px; min-height:250px; }
+  .interface-viewer [role="tabpanel"] { margin:12px 12px 0; }
   .interface-viewer .engine-tabs { padding:12px 12px 0; grid-template-columns:repeat(3,1fr); }
   .viewer-caption { padding:0 14px 14px; }
 }
