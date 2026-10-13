@@ -405,9 +405,9 @@
   root.classList.add('site-ready');
 })();
 
-/* Modular prism motion: keeps the lively interaction while changing the visual concept. */
+/* Hero tide motion: gentle pointer tilt for the wave panel. */
 (() => {
-  const stage = document.querySelector('.signal-prism');
+  const stage = document.querySelector('.signal-tide, .signal-prism');
   if (!stage || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   let tx = 0, ty = 0, cx = 0, cy = 0;
   stage.addEventListener('pointermove', event => {
@@ -420,8 +420,8 @@
   stage.addEventListener('pointerleave', () => { tx = 0; ty = 0; });
   const tick = () => {
     cx += (tx - cx) * .08; cy += (ty - cy) * .08;
-    stage.style.setProperty('--rx', `${cy * -2.2}deg`);
-    stage.style.setProperty('--ry', `${cx * 2.8}deg`);
+    stage.style.setProperty('--rx', `${cy * -1.4}deg`);
+    stage.style.setProperty('--ry', `${cx * 1.8}deg`);
     requestAnimationFrame(tick);
   };
   tick();

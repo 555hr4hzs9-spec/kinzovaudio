@@ -3033,3 +3033,124 @@ canvas {
 @keyframes prismOrbitReverse { to { transform:translate(-50%,-50%) rotateY(62deg) rotateZ(-360deg); } }
 @media (max-width:900px) { .signal-prism{min-height:520px}.prism-module{width:145px}.prism-core{width:205px;height:230px}.module-delay{left:3%}.module-mobile{right:3%}.module-pulse{left:3%}.module-chek{right:3%} }
 @media (max-width:620px) { .signal-prism{min-height:470px;border-radius:20px}.prism-topline,.prism-footer{left:19px;right:19px}.prism-topline{top:20px;font-size:.45rem}.prism-footer{bottom:19px;font-size:.42rem}.prism-core{width:166px;height:194px;padding:14px}.core-title{margin-top:34px;font-size:1.6rem}.core-wave{height:35px;margin:18px 0 12px}.prism-module{width:128px;min-height:45px;padding:8px 9px}.prism-module strong{font-size:.48rem}.prism-module small{font-size:.35rem}.module-delay{top:19%;left:2%}.module-verb{top:35%;left:0%}.module-pulse{bottom:18%;left:2%}.module-mobile{top:19%;right:2%}.module-dist{top:35%;right:0%}.module-chek{bottom:18%;right:2%}.orbit-left{width:92%;}.orbit-right{height:75%;} }
+
+/* Hero Tide: full-width live wave + static module grid. No absolute overlap by design. */
+.signal-tide {
+  --mx:0;
+  --my:0;
+  --rx:0deg;
+  --ry:0deg;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  min-height:560px;
+  padding:30px 30px 26px;
+  overflow:hidden;
+  border-radius:28px;
+  background:
+    radial-gradient(120% 70% at 50% 0%, rgba(183,101,255,.16), transparent 55%),
+    linear-gradient(180deg, #12111b 0%, #08080d 60%, #0a1218 100%);
+  box-shadow:0 45px 100px rgba(0,0,0,.42);
+  transform:perspective(1200px) rotateX(var(--rx)) rotateY(var(--ry));
+  transition:transform .18s ease-out;
+  isolation:isolate;
+}
+.signal-tide::after {
+  content:"";
+  position:absolute;
+  inset:14px;
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:20px;
+  pointer-events:none;
+}
+.tide-glow {
+  position:absolute;
+  top:-120px;
+  left:50%;
+  width:min(560px,90%);
+  height:300px;
+  border-radius:50%;
+  background:rgba(183,101,255,.16);
+  filter:blur(70px);
+  transform:translateX(calc(-50% + var(--mx) * 22px));
+  pointer-events:none;
+}
+.tide-head,.tide-meter,.tide-foot {
+  position:relative;
+  z-index:1;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.tide-head { color:rgba(255,255,255,.4); font:600 .58rem/1 var(--mono); letter-spacing:.14em; }
+.tide-live { display:flex; align-items:center; gap:9px; color:var(--text); font-family:var(--display); letter-spacing:.12em; }
+.tide-live i { width:7px; height:7px; border-radius:50%; background:#58f4b5; box-shadow:0 0 14px #58f4b5; animation:labBlink 1.8s ease-in-out infinite; }
+.tide-wave {
+  position:relative;
+  z-index:1;
+  display:flex;
+  align-items:center;
+  gap:5px;
+  height:132px;
+  margin:44px 0 6px;
+}
+.tide-wave i {
+  flex:1;
+  min-width:3px;
+  height:var(--h,34%);
+  border-radius:6px;
+  background:linear-gradient(180deg,#e3c6ff,#a14de4);
+  box-shadow:0 0 14px rgba(183,101,255,.32);
+  transform-origin:center;
+  animation:tideBars 1.25s ease-in-out infinite alternate;
+  animation-delay:var(--d,0s);
+}
+.tide-wave i:nth-child(4n){--h:62%;--d:-.5s}
+.tide-wave i:nth-child(5n){--h:88%;--d:-.9s}
+.tide-wave i:nth-child(7n){--h:48%;--d:-.3s}
+.tide-wave i:nth-child(8n){--h:100%;--d:-.7s}
+.tide-wave i:nth-child(11n){--h:26%;--d:-1.1s}
+@keyframes tideBars { from{transform:scaleY(.45)} to{transform:scaleY(1)} }
+.tide-meter { margin-top:10px; color:rgba(255,255,255,.42); font:600 .56rem/1 var(--mono); letter-spacing:.12em; }
+.tide-meter b { color:var(--text); font-weight:600; }
+.tide-modules {
+  position:relative;
+  z-index:1;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-top:26px;
+}
+.tide-module {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-height:58px;
+  padding:12px 14px;
+  border:1px solid rgba(255,255,255,.11);
+  border-radius:12px;
+  background:rgba(9,9,14,.66);
+  color:var(--text);
+  cursor:pointer;
+  text-align:left;
+  transition:border-color .25s,background .25s,transform .25s;
+}
+.tide-module:hover { border-color:var(--accent); background:rgba(183,101,255,.12); transform:translateY(-3px); }
+.tide-module span { color:var(--accent-soft); font:600 .58rem/1 var(--mono); }
+.tide-module strong { flex:1; font:600 .62rem/1.2 var(--mono); letter-spacing:.08em; }
+.tide-module b { color:var(--accent-soft); font-size:.95rem; }
+.tide-foot { margin-top:auto; padding-top:24px; color:rgba(255,255,255,.34); font:600 .54rem/1 var(--mono); letter-spacing:.13em; }
+@media (max-width:900px) { .signal-tide{min-height:540px} }
+@media (max-width:620px) {
+  .signal-tide{min-height:0;padding:22px 18px 20px;border-radius:20px}
+  .signal-tide::after{inset:10px;border-radius:14px}
+  .tide-head{font-size:.48rem}
+  .tide-wave{height:84px;margin:30px 0 4px;gap:4px}
+  .tide-meter{font-size:.48rem}
+  .tide-modules{grid-template-columns:repeat(2,1fr);gap:8px;margin-top:20px}
+  .tide-module{min-height:54px;padding:11px 12px}
+  .tide-module strong{font-size:.56rem}
+  .tide-foot{font-size:.46rem}
+}
+@media (prefers-reduced-motion:reduce) { .tide-wave i,.tide-live i{animation:none} }
