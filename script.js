@@ -6,103 +6,187 @@
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const pluginData = {
-    delay: {
-      index: '01',
-      code: 'MQ-DELAY',
-      title: 'Эхо, которое держит темп.',
-      text: 'Музыкальный delay с точными делениями, широким стерео и подвижным ping-pong. Feedback и Mix управляют длиной хвоста, а фильтры убирают всё лишнее.',
-      accent: '#b765ff',
-      features: [
-        ['SYNC', '1/2, 1/4, 1/8 и триольные деления'],
-        ['PING-PONG', 'Живое движение между каналами'],
-        ['DUCKING', 'Чистые повторы под вокалом'],
-        ['LOW / HIGH CUT', 'Точная посадка эха в микс']
+  "delay": {
+    "index": "01",
+    "code": "MQ-DELAY",
+    "title": "Эхо в твоём ритме.",
+    "text": "Стереодилей для короткого slap-эхо и ритмических повторов. AMOUNT задаёт количество эффекта, PRE-DELAY — время, FEEDBACK — повторы. SYNC привязывает задержку к темпу проекта, а PING-PONG перемещает повторы между каналами.",
+    "summary": "Стереоэхо с синхронизацией, ping-pong, фильтрами повторов и даккингом.",
+    "features": [
+      [
+        "SYNC / PRE-DELAY",
+        "Время в миллисекундах или делениях темпа"
       ],
-      mode: 'RHYTHMIC ECHO',
-      value: 36,
-      wave: 'delay'
-    },
-    verb: {
-      index: '02',
-      code: 'MQ-VERB',
-      title: 'Пространство без грязи.',
-      text: 'Алгоритмический реверб от плотной комнаты до большого зала и shimmer-атмосфер. Отдельный контроль баланса помогает сохранить источник впереди.',
-      accent: '#7f8cff',
-      features: [
-        ['5 MODES', 'Room, Plate, Hall, Shimmer, Galactic'],
-        ['WET / DRY', 'Главный макро без потери ясности'],
-        ['FREEZE', 'Бесконечный хвост по одной кнопке'],
-        ['DUCKING', 'Вокал остаётся в центре микса']
+      [
+        "FEEDBACK / WIDTH",
+        "Повторы и ширина обработанного сигнала"
       ],
-      mode: 'ATMOSPHERIC SPACE',
-      value: 42,
-      wave: 'reverb'
-    },
-    pulse: {
-      index: '03',
-      code: 'MQ-PULSE',
-      title: 'Движение внутри звука.',
-      text: 'Ритмический модулятор, который превращает статичную обработку в живой groove. Все акценты жёстко следуют темпу проекта.',
-      accent: '#48e6b3',
-      features: [
-        ['TEMPO SYNC', 'Пульсация всегда в темпе DAW'],
-        ['1/8 + 1/16', 'Быстрые музыкальные режимы'],
-        ['DEPTH', 'От лёгкого движения до sidechain'],
-        ['SMOOTH', 'Чистые переходы без щелчков']
+      [
+        "TONE / LOW / HIGH CUT",
+        "Окраска и частотная полоса эха"
       ],
-      mode: 'RHYTHM MODULATION',
-      value: 64,
-      wave: 'pulse'
-    },
-    mobile: {
-      index: '04',
-      code: 'MQ-MOBILE',
-      title: 'Телефонный характер.',
-      text: 'Компактный фильтр и линейный обработчик для вокала, синтов и сэмплов. Быстро превращает широкий сигнал в сфокусированный lo-fi источник.',
-      accent: '#ff9f5a',
-      features: [
-        ['12 / 24 dB', 'Две музыкальные крутизны среза'],
-        ['BAND PASS', 'Характерный телефонный тон'],
-        ['DRIVE', 'Мягкое уплотнение после фильтра'],
-        ['WIDTH', 'Контроль ширины обработанного сигнала']
+      [
+        "DUCK / DELTA",
+        "Даккинг и прослушивание только эффекта"
+      ]
+    ],
+    "mode": "STEREO DELAY",
+    "value": 45,
+    "wave": "delay",
+    "accent": "#b765ff",
+    "image": "plugin-images/mq-delay.jpg"
+  },
+  "verb": {
+    "index": "02",
+    "code": "MQ-VERB",
+    "title": "От комнаты до галактики.",
+    "text": "Ревербератор с пятью пространствами: ROOM, AMBIENCE, HALL, SHIMMER и GALACTIC. AMOUNT регулирует количество реверба; SIZE, PRE-DELAY, DIFFUSION, TONE и WIDTH формируют пространство. Спектральный DUCK освобождает место источнику в хвосте.",
+    "summary": "Пять пространств, спектральный даккинг, фильтры и заморозка хвоста.",
+    "features": [
+      [
+        "5 MODES",
+        "Room · Ambience · Hall · Shimmer · Galactic"
       ],
-      mode: 'MOBILE FILTER',
-      value: 68,
-      wave: 'mobile'
-    },
-    dist: {
-      index: '05',
-      code: 'MQ-DIST',
-      title: 'Грязь под контролем.',
-      text: 'От мягкого тёплого слоя до плотного каскада. Встроенные input/output meter и быстрый баланс позволяют держать агрессию в пределах микса.',
-      accent: '#ff5d78',
-      features: [
-        ['4 MODES', 'Warm, Crush, Bias и Hard'],
-        ['CASCADE', 'Два этапа перегруза в одном ядре'],
-        ['AUTO GAIN', 'Мощность без прыжков уровня'],
-        ['POST FILTER', 'Финальная очистка верхов']
+      [
+        "SIZE / DIFFUSION",
+        "Размер пространства и плотность отражений"
       ],
-      mode: 'DRIVE INTENSITY',
-      value: 74,
-      wave: 'dist'
-    },
-    chek: {
-      index: '06',
-      code: 'MQ-CHEK',
-      title: 'Проверь сигнал быстрее.',
-      text: 'Компактный анализатор, который показывает динамику, пики, частотный баланс и потенциальные проблемы до того, как они становятся заметны в миксе.',
-      accent: '#f3dc65',
-      features: [
-        ['LUFS', 'Мгновенная оценка громкости'],
-        ['PHASE', 'Понятная корреляция стерео'],
-        ['SPECTRUM', 'Проблемные зоны без перегруза'],
-        ['PEAK', 'Контроль цифровых перегрузов']
+      [
+        "DUCK / SAT",
+        "Спектральный даккинг и сатурация реверба"
       ],
-      mode: 'SIGNAL ANALYSIS',
-      value: 94,
-      wave: 'check'
-    }
-  };
+      [
+        "FREEZE / FILTERS",
+        "Заморозка хвоста, low-cut и high-cut"
+      ]
+    ],
+    "mode": "FIVE REVERB SPACES",
+    "value": 32,
+    "wave": "reverb",
+    "accent": "#b765ff",
+    "image": "plugin-images/mq-verb.jpg"
+  },
+  "pulse": {
+    "index": "03",
+    "code": "MQ-PULSE",
+    "title": "Нарисуй свой пульс.",
+    "text": "Ритмическая обработка громкости с редактируемой шкалой до 32 шагов. ADSR-огибающая формирует каждый импульс, а MIX смешивает результат с исходным сигналом. Синхронизация с DAW, свободная частота и TAP задают ритм.",
+    "summary": "Редактируемые 2–32 шага, ADSR, восемь паттернов и синхронизация с DAW.",
+    "features": [
+      [
+        "PULSE TIMELINE",
+        "Редактирование паттерна длиной 2–32 шага"
+      ],
+      [
+        "ADSR / MIX",
+        "Attack, Decay, Sustain, Release и баланс"
+      ],
+      [
+        "SYNC / FREE / TAP",
+        "Темп DAW, свободная частота или tap tempo"
+      ],
+      [
+        "8 PATTERNS",
+        "Восемь слотов, Randomize и Reset"
+      ]
+    ],
+    "mode": "32-STEP PULSE SHAPER",
+    "value": 100,
+    "wave": "pulse",
+    "accent": "#b765ff",
+    "image": "plugin-images/mq-pulse.jpg"
+  },
+  "mobile": {
+    "index": "04",
+    "code": "MQ-MOBILE",
+    "title": "Телефонный звук. Одна ручка.",
+    "text": "Одноручный эффект мобильного телефона. MOBILE одновременно сужает частотную полосу, добавляет мягкую сатурацию и увеличивает долю обработки. Компенсация громкости помогает сравнивать характер звука, а не только уровень.",
+    "summary": "Сужение частотной полосы, мягкая сатурация и dry/wet под одной ручкой.",
+    "features": [
+      [
+        "MOBILE 0–100%",
+        "Полоса, сатурация и баланс движутся вместе"
+      ],
+      [
+        "PHONE BAND",
+        "HPF 80–380 Гц · LPF 18–3,2 кГц"
+      ],
+      [
+        "LEVEL COMPENSATION",
+        "Компенсация уровня обработанного сигнала"
+      ],
+      [
+        "OFF / 2× / 4×",
+        "Оверсемплинг для офлайн-экспорта"
+      ]
+    ],
+    "mode": "PHONE COLOR",
+    "value": 100,
+    "wave": "mobile",
+    "accent": "#b765ff",
+    "image": "plugin-images/mq-mobile.jpg"
+  },
+  "dist": {
+    "index": "05",
+    "code": "MQ-DIST",
+    "title": "От тепла до цифровой грязи.",
+    "text": "Одна ручка постепенно раскрывает цепочку clipper → distortion → bitcrusher → адаптивный low-pass. Стадии подключаются плавно и перекрываются: от мягких гармоник к плотному перегрузу и цифровой текстуре. Компенсация громкости и софт-лимитер завершают цепь.",
+    "summary": "Клиппер, дисторшн и биткрашер с адаптивным фильтром под одной ручкой.",
+    "features": [
+      [
+        "ONE CONTROL",
+        "Плавное управление всей цепью обработки"
+      ],
+      [
+        "CLIP / DIST / CRUSH",
+        "Контроль пиков, гармоники и биткрашинг"
+      ],
+      [
+        "ADAPTIVE LPF",
+        "Фильтр смягчает верха по мере усиления эффекта"
+      ],
+      [
+        "OFFLINE 2× / 4×",
+        "Оверсемплинг при офлайн-экспорте"
+      ]
+    ],
+    "mode": "CLIP · DISTORT · CRUSH",
+    "value": 50,
+    "wave": "dist",
+    "accent": "#b765ff",
+    "image": "plugin-images/mq-dist.jpg"
+  },
+  "chek": {
+    "index": "06",
+    "code": "MQ-CHEK",
+    "title": "Микс из DAW — на iPhone.",
+    "text": "Мониторинг мастер-сигнала на iPhone по локальной сети. Плагин передаёт копию звука, не изменяя выход DAW. Нужны приложение-приёмник и устройства в одной сети. Версия MVP: работа на реальном iPhone и Wi-Fi требует отдельной проверки; это не анализатор LUFS и не эквалайзер.",
+    "summary": "Передача мастер-сигнала из DAW на iPhone по локальной сети. Версия MVP.",
+    "features": [
+      [
+        "DAW → iPHONE",
+        "Проверка микса на другом устройстве"
+      ],
+      [
+        "LOCAL NETWORK",
+        "Передача аудио внутри локальной сети"
+      ],
+      [
+        "PASSTHROUGH",
+        "Мастер-выход DAW остаётся неизменным"
+      ],
+      [
+        "MVP / RECEIVER",
+        "Нужен iOS-приёмник; проверка на устройстве ещё требуется"
+      ]
+    ],
+    "mode": "DAW TO iPHONE / MVP",
+    "value": 0,
+    "wave": "check",
+    "accent": "#b765ff",
+    "image": "plugin-images/mq-chek.jpg"
+  }
+};
 
   const onScroll = () => {
     nav?.classList.toggle('scrolled', window.scrollY > 28);
@@ -216,152 +300,33 @@
     });
   }
 
-  const enginePanel = document.querySelector('.engine-panel');
-  const engineTabs = document.querySelectorAll('[data-engine]');
-  const engineValue = document.getElementById('engineValue');
-  const engineMode = document.getElementById('engineMode');
-  const engineDisplay = document.querySelector('.engine-display');
-  let activeWave = 'delay';
-  let wavePhase = 0;
-  let targetLevel = 0.7;
-  let currentLevel = 0.7;
-
-  engineTabs.forEach(tab => {
+  const engineTabs = [...document.querySelectorAll('[data-engine]')];
+  engineTabs.forEach((tab, index) => {
     tab.addEventListener('click', () => {
-      const key = tab.dataset.engine;
-      const data = pluginData[key];
-      if (!data) return;
-
+      const data = pluginData[tab.dataset.engine];
       engineTabs.forEach(item => {
         const active = item === tab;
         item.classList.toggle('active', active);
         item.setAttribute('aria-selected', String(active));
+        item.tabIndex = active ? 0 : -1;
       });
-
-      enginePanel?.style.setProperty('--accent', data.accent);
-      enginePanel?.style.setProperty('--accent-soft', data.accent);
-      if (engineValue) animateNumber(engineValue, Number(engineValue.textContent), data.value, 360);
-      if (engineMode) {
-        engineMode.animate(
-          [{ opacity: 1, transform: 'translateY(0)' }, { opacity: 0, transform: 'translateY(-8px)' }],
-          { duration: 120, fill: 'forwards' }
-        ).onfinish = () => {
-          engineMode.textContent = data.mode;
-          engineMode.animate(
-            [{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'translateY(0)' }],
-            { duration: 220, fill: 'forwards' }
-          );
-        };
-      }
-      activeWave = data.wave;
-      targetLevel = Math.max(.38, Math.min(.96, data.value / 100));
-      engineDisplay?.animate(
-        [{ filter: 'brightness(1)' }, { filter: 'brightness(1.35)' }, { filter: 'brightness(1)' }],
-        { duration: 360, easing: 'ease-out' }
-      );
+      const image = document.getElementById('interfaceImage');
+      image.src = data.image;
+      image.alt = `Интерфейс ${data.code}`;
+      document.getElementById('interfacePanel').setAttribute('aria-labelledby', tab.id);
+      document.getElementById('viewerName').textContent = data.code;
+      document.getElementById('viewerDetails').dataset.open = tab.dataset.engine;
+      if (!reducedMotion) image.animate([{opacity:0, transform:'translateY(12px)'},{opacity:1, transform:'none'}], {duration:380, easing:'ease-out'});
+    });
+    tab.addEventListener('keydown', event => {
+      let next;
+      if (event.key === 'ArrowRight') next = (index + 1) % engineTabs.length;
+      if (event.key === 'ArrowLeft') next = (index - 1 + engineTabs.length) % engineTabs.length;
+      if (event.key === 'Home') next = 0;
+      if (event.key === 'End') next = engineTabs.length - 1;
+      if (next !== undefined) { event.preventDefault(); engineTabs[next].focus(); engineTabs[next].click(); }
     });
   });
-
-  function animateNumber(element, from, to, duration) {
-    const start = performance.now();
-    const update = now => {
-      const progress = Math.min(1, (now - start) / duration);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      element.textContent = String(Math.round(from + (to - from) * eased));
-      if (progress < 1) requestAnimationFrame(update);
-    };
-    requestAnimationFrame(update);
-  }
-
-  const canvas = document.getElementById('waveCanvas');
-  const ctx = canvas?.getContext('2d');
-
-  function resizeCanvas() {
-    if (!canvas || !ctx) return;
-    const rect = canvas.getBoundingClientRect();
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width = Math.max(1, Math.round(rect.width * dpr));
-    canvas.height = Math.max(1, Math.round(rect.height * dpr));
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  }
-
-  function waveValue(type, x, phase) {
-    switch (type) {
-      case 'reverb':
-        return Math.sin(x * 0.046 + phase) * Math.exp(-x * 0.0042) +
-          Math.sin(x * 0.11 - phase * .7) * Math.exp(-x * .006) * .38;
-      case 'pulse':
-        return Math.sin(x * 0.055 + phase) * (Math.sin(x * .17 + phase) > .15 ? .94 : .34);
-      case 'mobile':
-        return Math.sin(x * .07 + phase) * .55 + Math.sin(x * .018 - phase * .3) * .2;
-      case 'dist': {
-        const value = Math.sin(x * .07 + phase) + Math.sin(x * .13 - phase * .45) * .42;
-        return Math.max(-1, Math.min(1, value * 1.3));
-      }
-      case 'check':
-        return Math.sin(x * .038 + phase) * .46 + Math.sin(x * .17 + phase * .9) * .2 + Math.sin(x * .011) * .22;
-      default: {
-        const echo = Math.sin(x * .055 + phase) * .55;
-        const repeat = Math.sin((x - 68) * .055 + phase) * .3 * (x > 68 ? 1 : 0);
-        const repeat2 = Math.sin((x - 136) * .055 + phase) * .17 * (x > 136 ? 1 : 0);
-        return echo + repeat + repeat2;
-      }
-    }
-  }
-
-  function drawWave(time) {
-    if (!canvas || !ctx) return;
-    const rect = canvas.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    if (!width || !height) {
-      requestAnimationFrame(drawWave);
-      return;
-    }
-
-    ctx.clearRect(0, 0, width, height);
-    currentLevel += (targetLevel - currentLevel) * .045;
-    wavePhase += reducedMotion ? 0 : .027;
-
-    const accent = getComputedStyle(enginePanel).getPropertyValue('--accent').trim() || '#b765ff';
-    const middle = height * .56;
-    const amplitude = height * .27 * currentLevel;
-
-    const gradient = ctx.createLinearGradient(0, 0, width, 0);
-    gradient.addColorStop(0, `${accent}18`);
-    gradient.addColorStop(.14, accent);
-    gradient.addColorStop(.78, accent);
-    gradient.addColorStop(1, `${accent}20`);
-
-    ctx.beginPath();
-    for (let x = 0; x <= width; x += 2) {
-      const envelope = Math.min(1, x / 45) * Math.min(1, (width - x) / 45);
-      const y = middle + waveValue(activeWave, x, wavePhase) * amplitude * envelope;
-      if (x === 0) ctx.moveTo(x, y);
-      else ctx.lineTo(x, y);
-    }
-    ctx.strokeStyle = gradient;
-    ctx.lineWidth = 2;
-    ctx.shadowColor = accent;
-    ctx.shadowBlur = 10;
-    ctx.stroke();
-    ctx.shadowBlur = 0;
-
-    ctx.beginPath();
-    ctx.moveTo(0, middle);
-    ctx.lineTo(width, middle);
-    ctx.strokeStyle = 'rgba(255,255,255,.055)';
-    ctx.lineWidth = 1;
-    ctx.stroke();
-
-    if (!reducedMotion) requestAnimationFrame(drawWave);
-  }
-
-  if (canvas && ctx) {
-    resizeCanvas();
-    drawWave(performance.now());
-    window.addEventListener('resize', resizeCanvas, { passive: true });
-  }
 
   const dialog = document.getElementById('pluginDialog');
   const dialogIndex = document.getElementById('dialogIndex');
@@ -381,6 +346,9 @@
       dialogCode.textContent = data.code;
       dialogTitle.textContent = data.title;
       dialogText.textContent = data.text;
+      const image = document.getElementById('dialogImage');
+      image.src = data.image;
+      image.alt = `Интерфейс ${data.code}`;
       dialogFeatures.innerHTML = data.features
         .map(([label, text]) => `<div class="dialog-feature"><b>${label}</b><span>${text}</span></div>`)
         .join('');
@@ -408,4 +376,26 @@
   dialog?.querySelector('a[href="#contact"]')?.addEventListener('click', closeDialog);
 
   root.classList.add('site-ready');
+})();
+
+/* Signal-lab particle vortex and Slimz-style pointer tilt. */
+(() => {
+  const lab = document.querySelector('.signal-lab');
+  const canvas = document.getElementById('signalCanvas');
+  if (!lab || !canvas || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const ctx = canvas.getContext('2d');
+  const particles = Array.from({length: 74}, (_, i) => ({a: Math.random()*Math.PI*2, r: .13+Math.random()*.46, s: .0002+Math.random()*.00045, z: .4+Math.random()*.8, p: i*.71}));
+  let w=0,h=0,dpr=1,px=.5,py=.5;
+  const resize=()=>{ const r=lab.getBoundingClientRect(); dpr=Math.min(devicePixelRatio||1,2); w=r.width; h=r.height; canvas.width=w*dpr; canvas.height=h*dpr; canvas.style.width=`${w}px`; canvas.style.height=`${h}px`; ctx.setTransform(dpr,0,0,dpr,0,0); };
+  const draw=(t)=>{
+    if(!w||!h) resize(); ctx.clearRect(0,0,w,h); const cx=w*(.52+(px-.5)*.035), cy=h*(.5+(py-.5)*.035), max=Math.min(w,h)*.48;
+    ctx.save(); ctx.translate(cx,cy);
+    for(const q of particles){ q.a += q.s*16; const rr=max*q.r*(1+Math.sin(t*.001+q.p)*.035), x=Math.cos(q.a)*rr, y=Math.sin(q.a)*rr*.62; const alpha=.12+q.z*.18; ctx.fillStyle=`rgba(216,167,255,${alpha})`; ctx.shadowColor='rgba(183,101,255,.5)'; ctx.shadowBlur=8; ctx.beginPath(); ctx.arc(x,y,1+q.z*1.5,0,Math.PI*2); ctx.fill(); }
+    ctx.shadowBlur=0; ctx.strokeStyle='rgba(216,167,255,.16)'; ctx.lineWidth=1;
+    for(const scale of [.45,.63,.82,1]) { ctx.beginPath(); ctx.ellipse(0,0,max*scale,max*scale*.62,0,0,Math.PI*2); ctx.stroke(); }
+    ctx.restore(); requestAnimationFrame(draw);
+  };
+  lab.addEventListener('pointermove', e=>{const r=lab.getBoundingClientRect();px=(e.clientX-r.left)/r.width;py=(e.clientY-r.top)/r.height; if(matchMedia('(hover:hover)').matches) lab.style.transform=`perspective(1100px) rotateX(${(0.5-py)*2.2}deg) rotateY(${(px-.5)*2.8}deg) translateY(-4px)`;});
+  lab.addEventListener('pointerleave',()=>{px=.5;py=.5;lab.style.transform='';});
+  resize(); window.addEventListener('resize',resize,{passive:true}); requestAnimationFrame(draw);
 })();
