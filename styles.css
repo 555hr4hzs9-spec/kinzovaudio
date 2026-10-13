@@ -2776,6 +2776,43 @@ canvas {
 .screenshot-zoom { position:absolute; right:12px; bottom:12px; padding:8px 10px; border:1px solid rgba(255,255,255,.16); border-radius:5px; background:rgba(4,4,7,.74); color:var(--text); opacity:0; transform:translateY(8px); transition:opacity .25s, transform .25s; font:600 .52rem/1 var(--mono); letter-spacing:.09em; }
 .plugin-screenshot:hover .screenshot-zoom { opacity:1; transform:none; }
 .dialog-image { display:block; width:100%; max-height:42vh; margin:24px 0; object-fit:contain; border:1px solid rgba(255,255,255,.12); border-radius:12px; background:#000; }
+
+/* Desktop card reset: real plugin shots stay compact and fully visible. */
+@media (min-width: 901px) {
+  .plugin-card {
+    min-height: 0;
+    height: auto;
+  }
+  .plugin-card .plugin-screenshot {
+    flex: 0 0 280px;
+    height: 280px;
+    min-height: 280px;
+    margin-top: 16px;
+    margin-bottom: 14px;
+    box-sizing: border-box;
+  }
+  .plugin-card .plugin-screenshot img {
+    width: 100%;
+    height: 100%;
+    padding: 16px;
+    box-sizing: border-box;
+  }
+  .plugin-card .plugin-card-copy {
+    min-height: 112px;
+  }
+  .plugin-card .card-link {
+    margin-top: auto;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1180px) {
+  .plugin-card .plugin-screenshot {
+    flex-basis: 245px;
+    height: 245px;
+    min-height: 245px;
+  }
+}
+
 @keyframes labAurora { to { transform:rotate(360deg); } }
 @keyframes labBlink { 50% { opacity:.35; transform:scale(.65); } }
 @keyframes labBars { to { transform:scaleY(.35); opacity:.55; } }
