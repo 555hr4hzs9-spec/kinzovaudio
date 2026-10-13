@@ -2884,7 +2884,7 @@ canvas {
 }
 
 /* Final framing pass: compact desktop cards, proportional mobile cards. */
-.plugin-grid { align-items: start; }
+.plugin-grid { align-items: stretch; }
 .plugin-screenshot { background-color: #07070a; }
 .plugin-screenshot::before {
   z-index: 0;
