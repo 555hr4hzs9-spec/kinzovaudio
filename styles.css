@@ -3159,24 +3159,8 @@ canvas {
 }
 @media (prefers-reduced-motion:reduce) { .tide-wave i,.tide-live i{animation:none} }
 
-/* Plugins starfield: fills the side voids, echoes the screenshot night skies. */
+/* Plugins side glows: soften the voids left and right of the grid. */
 .plugins-section { overflow:hidden; }
-.plugins-section::before {
-  content:"";
-  position:absolute;
-  inset:0;
-  opacity:.55;
-  background-image:
-    radial-gradient(rgba(255,255,255,.55) 1px, transparent 1.6px),
-    radial-gradient(rgba(216,167,255,.5) 1px, transparent 1.7px),
-    radial-gradient(rgba(255,255,255,.28) 1px, transparent 1.5px);
-  background-size:150px 150px, 260px 260px, 90px 90px;
-  background-position:0 0, 60px 110px, 30px 40px;
-  mask-image:linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
-  -webkit-mask-image:linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
-  animation:starTwinkle 7s ease-in-out infinite alternate;
-  pointer-events:none;
-}
 .plugins-section::after {
   content:"";
   position:absolute;
@@ -3188,25 +3172,24 @@ canvas {
   pointer-events:none;
 }
 .plugins-section .shell { position:relative; z-index:1; }
-@keyframes starTwinkle { from{opacity:.35} to{opacity:.6} }
-@media (prefers-reduced-motion:reduce) { .plugins-section::before{animation:none; opacity:.45} }
 
-/* Engine starfield: continuous night sky from plugins through the viewer. */
-.engine-section::before {
+/* Global night sky: one fixed starfield behind everything — header, sections, footer.
+   Prime-number tiles (137/251/89/331) desync repetition so stars read as random.
+   Thin 1px dots + a few soft bright ones for a quality sky. */
+body::before {
   content:"";
-  position:absolute;
+  position:fixed;
   inset:0;
-  opacity:.5;
+  z-index:-1;
   background-image:
-    radial-gradient(rgba(255,255,255,.55) 1px, transparent 1.6px),
-    radial-gradient(rgba(216,167,255,.5) 1px, transparent 1.7px),
-    radial-gradient(rgba(255,255,255,.28) 1px, transparent 1.5px);
-  background-size:170px 170px, 280px 280px, 100px 100px;
-  background-position:40px 20px, 0 90px, 80px 0;
-  mask-image:linear-gradient(to bottom, transparent, #000 10%, #000 92%, transparent);
-  -webkit-mask-image:linear-gradient(to bottom, transparent, #000 10%, #000 92%, transparent);
-  animation:starTwinkle 8s ease-in-out infinite alternate-reverse;
+    radial-gradient(circle, rgba(255,255,255,.85) .7px, transparent 1.3px),
+    radial-gradient(circle, rgba(255,255,255,.5) .8px, transparent 1.4px),
+    radial-gradient(circle, rgba(216,167,255,.55) .8px, transparent 1.5px),
+    radial-gradient(circle, rgba(255,255,255,.3) .7px, transparent 1.2px);
+  background-size:331px 331px, 251px 251px, 137px 137px, 89px 89px;
+  background-position:12px 48px, 120px 30px, 44px 96px, 8px 8px;
+  animation:starTwinkle 9s ease-in-out infinite alternate;
   pointer-events:none;
 }
-.engine-section .shell { position:relative; z-index:1; }
-@media (prefers-reduced-motion:reduce) { .engine-section::before{animation:none; opacity:.45} }
+@keyframes starTwinkle { from{opacity:.32} to{opacity:.58} }
+@media (prefers-reduced-motion:reduce) { body::before{animation:none; opacity:.4} }
