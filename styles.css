@@ -2829,3 +2829,84 @@ canvas {
   .viewer-caption { padding:0 14px 14px; }
   .plugin-screenshot { height:250px; }
 }
+
+/* Final responsive framing for real plugin screenshots. */
+.plugin-card {
+  min-height: 0;
+  height: auto;
+}
+.plugin-screenshot {
+  flex: 0 0 auto;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: var(--shot-ratio, 1.24);
+  box-sizing: border-box;
+}
+.plugin-screenshot::before {
+  z-index: 0;
+  opacity: .32;
+}
+.plugin-screenshot img {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+}
+.screenshot-zoom { z-index: 2; }
+
+@media (min-width: 901px) {
+  .plugin-card .plugin-screenshot {
+    flex: 0 0 auto;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: var(--shot-ratio, 1.24);
+    margin-bottom: 14px;
+  }
+  .plugin-card .plugin-screenshot img {
+    padding: 12px;
+  }
+  .plugin-card .plugin-card-copy {
+    min-height: 104px;
+  }
+}
+
+@media (max-width: 900px) {
+  .plugin-card {
+    min-height: 0;
+  }
+  .plugin-card .plugin-screenshot {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: var(--shot-ratio, 1.24);
+  }
+  .plugin-card .plugin-screenshot img {
+    padding: 0;
+  }
+}
+
+/* Final framing pass: compact desktop cards, proportional mobile cards. */
+.plugin-grid { align-items: start; }
+.plugin-screenshot { background-color: #07070a; }
+.plugin-screenshot::before {
+  z-index: 0;
+  opacity: .42;
+  filter: blur(24px) saturate(1.35) brightness(.8);
+}
+.plugin-screenshot img { z-index: 1; }
+
+@media (min-width: 901px) {
+  .plugin-card .plugin-screenshot,
+  .plugin-card .plugin-screenshot:focus-visible {
+    height: 280px;
+    min-height: 280px;
+    aspect-ratio: auto;
+  }
+  .plugin-card .plugin-screenshot img { padding: 14px; }
+}
+
+@media (max-width: 900px) {
+  .plugin-card .plugin-screenshot {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: var(--shot-ratio, 1.24);
+  }
+}
