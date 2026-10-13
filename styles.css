@@ -2701,12 +2701,11 @@ canvas {
   border:1px solid rgba(255,255,255,.1);
   border-radius:14px;
   background:
-    radial-gradient(rgba(255,255,255,.5) 1px, transparent 1.6px),
-    radial-gradient(rgba(216,167,255,.45) 1px, transparent 1.7px),
+    url("stars.svg"),
     radial-gradient(circle at 50% 35%, rgba(183,101,255,.08), transparent 42%),
     #050507;
-  background-size:150px 150px, 260px 260px, auto, auto;
-  background-position:0 0, 60px 110px, 0 0, 0 0;
+  background-size:1100px auto, auto, auto;
+  background-position:center, 0 0, 0 0;
   isolation:isolate;
 }
 .interface-viewer [role="tabpanel"]::before {
@@ -3173,21 +3172,15 @@ canvas {
 }
 .plugins-section .shell { position:relative; z-index:1; }
 
-/* Global night sky: one fixed starfield behind everything — header, sections, footer.
-   Prime-number tiles (137/251/89/331) desync repetition so stars read as random.
-   Thin 1px dots + a few soft bright ones for a quality sky. */
+/* Global night sky: one fixed random starfield behind everything — header, sections, footer.
+   Single 1400x900 hand-scattered SVG tile: no visible repetition, thin dots. */
 body::before {
   content:"";
   position:fixed;
   inset:0;
   z-index:-1;
-  background-image:
-    radial-gradient(circle, rgba(255,255,255,.85) .7px, transparent 1.3px),
-    radial-gradient(circle, rgba(255,255,255,.5) .8px, transparent 1.4px),
-    radial-gradient(circle, rgba(216,167,255,.55) .8px, transparent 1.5px),
-    radial-gradient(circle, rgba(255,255,255,.3) .7px, transparent 1.2px);
-  background-size:331px 331px, 251px 251px, 137px 137px, 89px 89px;
-  background-position:12px 48px, 120px 30px, 44px 96px, 8px 8px;
+  background-image:url("stars.svg");
+  background-size:1400px 900px;
   animation:starTwinkle 9s ease-in-out infinite alternate;
   pointer-events:none;
 }
