@@ -800,7 +800,7 @@ canvas {
   overflow: hidden;
   border-top: 0;
   border-bottom: 0;
-  background: linear-gradient(90deg, rgba(183,101,255,.035), rgba(255,255,255,.012) 42%, rgba(98,215,255,.025));
+  background: transparent;
 }
 
 .marquee-track {
@@ -1494,8 +1494,7 @@ canvas {
   border-top: 0;
   border-bottom: 0;
   background:
-    radial-gradient(circle at 75% 50%, rgba(183, 101, 255, .09), transparent 32rem),
-    rgba(255, 255, 255, .012);
+    radial-gradient(circle at 75% 50%, rgba(183, 101, 255, .09), transparent 32rem);
 }
 
 .engine-layout {
@@ -3184,5 +3183,5 @@ body::before {
   animation:starTwinkle 9s ease-in-out infinite alternate;
   pointer-events:none;
 }
-@keyframes starTwinkle { from{opacity:.32} to{opacity:.58} }
+@keyframes starTwinkle { from{opacity:.45} to{opacity:.75} }
 @media (prefers-reduced-motion:reduce) { body::before{animation:none; opacity:.4} }
