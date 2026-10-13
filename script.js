@@ -405,24 +405,26 @@
   root.classList.add('site-ready');
 })();
 
-/* Signal-lab particle vortex and Slimz-style pointer tilt. */
+/* Modern signal-console motion: particles and a responsive data field. */
 (() => {
   const lab = document.querySelector('.signal-lab');
   const canvas = document.getElementById('signalCanvas');
   if (!lab || !canvas || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const ctx = canvas.getContext('2d');
-  const particles = Array.from({length: 74}, (_, i) => ({a: Math.random()*Math.PI*2, r: .13+Math.random()*.46, s: .0002+Math.random()*.00045, z: .4+Math.random()*.8, p: i*.71}));
-  let w=0,h=0,dpr=1,px=.5,py=.5;
-  const resize=()=>{ const r=lab.getBoundingClientRect(); dpr=Math.min(devicePixelRatio||1,2); w=r.width; h=r.height; canvas.width=w*dpr; canvas.height=h*dpr; canvas.style.width=`${w}px`; canvas.style.height=`${h}px`; ctx.setTransform(dpr,0,0,dpr,0,0); };
-  const draw=(t)=>{
-    if(!w||!h) resize(); ctx.clearRect(0,0,w,h); const cx=w*(.52+(px-.5)*.035), cy=h*(.5+(py-.5)*.035), max=Math.min(w,h)*.48;
-    ctx.save(); ctx.translate(cx,cy);
-    for(const q of particles){ q.a += q.s*16; const rr=max*q.r*(1+Math.sin(t*.001+q.p)*.035), x=Math.cos(q.a)*rr, y=Math.sin(q.a)*rr*.62; const alpha=.12+q.z*.18; ctx.fillStyle=`rgba(216,167,255,${alpha})`; ctx.shadowColor='rgba(183,101,255,.5)'; ctx.shadowBlur=8; ctx.beginPath(); ctx.arc(x,y,1+q.z*1.5,0,Math.PI*2); ctx.fill(); }
-    ctx.shadowBlur=0; ctx.strokeStyle='rgba(216,167,255,.16)'; ctx.lineWidth=1;
-    for(const scale of [.45,.63,.82,1]) { ctx.beginPath(); ctx.ellipse(0,0,max*scale,max*scale*.62,0,0,Math.PI*2); ctx.stroke(); }
-    ctx.restore(); requestAnimationFrame(draw);
+  const particles = Array.from({length: 42}, (_, i) => ({x: Math.random(), y: Math.random(), r: 1 + Math.random()*2, a: i*.31}));
+  let w=0, h=0, dpr=1, mx=.5, my=.5;
+  const resize=()=>{const r=lab.getBoundingClientRect(); dpr=Math.min(devicePixelRatio||1,2); w=r.width; h=r.height; canvas.width=w*dpr; canvas.height=h*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);};
+  const draw=(time)=>{
+    if (!w || !h) resize(); ctx.clearRect(0,0,w,h);
+    for (const q of particles) {
+      const x=q.x*w + Math.sin(time*.00045+q.a)*18 + (mx-.5)*20;
+      const y=q.y*h + Math.cos(time*.00035+q.a)*12 + (my-.5)*14;
+      ctx.fillStyle='rgba(216,167,255,.28)'; ctx.shadowColor='rgba(183,101,255,.5)'; ctx.shadowBlur=10;
+      ctx.beginPath(); ctx.arc(x,y,q.r,0,Math.PI*2); ctx.fill();
+    }
+    ctx.shadowBlur=0; requestAnimationFrame(draw);
   };
-  lab.addEventListener('pointermove', e=>{const r=lab.getBoundingClientRect();px=(e.clientX-r.left)/r.width;py=(e.clientY-r.top)/r.height; if(matchMedia('(hover:hover)').matches) lab.style.transform=`perspective(1100px) rotateX(${(0.5-py)*2.2}deg) rotateY(${(px-.5)*2.8}deg) translateY(-4px)`;});
-  lab.addEventListener('pointerleave',()=>{px=.5;py=.5;lab.style.transform='';});
+  lab.addEventListener('pointermove', e=>{const r=lab.getBoundingClientRect(); mx=(e.clientX-r.left)/r.width; my=(e.clientY-r.top)/r.height; lab.style.transform=`perspective(1100px) rotateX(${(0.5-my)*1.5}deg) rotateY(${(mx-.5)*2}deg) translateY(-3px)`;});
+  lab.addEventListener('pointerleave',()=>{mx=.5;my=.5;lab.style.transform='';});
   resize(); window.addEventListener('resize',resize,{passive:true}); requestAnimationFrame(draw);
 })();
