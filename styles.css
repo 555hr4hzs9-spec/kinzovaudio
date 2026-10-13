@@ -2701,8 +2701,12 @@ canvas {
   border:1px solid rgba(255,255,255,.1);
   border-radius:14px;
   background:
+    radial-gradient(rgba(255,255,255,.5) 1px, transparent 1.6px),
+    radial-gradient(rgba(216,167,255,.45) 1px, transparent 1.7px),
     radial-gradient(circle at 50% 35%, rgba(183,101,255,.08), transparent 42%),
     #050507;
+  background-size:150px 150px, 260px 260px, auto, auto;
+  background-position:0 0, 60px 110px, 0 0, 0 0;
   isolation:isolate;
 }
 .interface-viewer [role="tabpanel"]::before {
@@ -3186,3 +3190,23 @@ canvas {
 .plugins-section .shell { position:relative; z-index:1; }
 @keyframes starTwinkle { from{opacity:.35} to{opacity:.6} }
 @media (prefers-reduced-motion:reduce) { .plugins-section::before{animation:none; opacity:.45} }
+
+/* Engine starfield: continuous night sky from plugins through the viewer. */
+.engine-section::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:.5;
+  background-image:
+    radial-gradient(rgba(255,255,255,.55) 1px, transparent 1.6px),
+    radial-gradient(rgba(216,167,255,.5) 1px, transparent 1.7px),
+    radial-gradient(rgba(255,255,255,.28) 1px, transparent 1.5px);
+  background-size:170px 170px, 280px 280px, 100px 100px;
+  background-position:40px 20px, 0 90px, 80px 0;
+  mask-image:linear-gradient(to bottom, transparent, #000 10%, #000 92%, transparent);
+  -webkit-mask-image:linear-gradient(to bottom, transparent, #000 10%, #000 92%, transparent);
+  animation:starTwinkle 8s ease-in-out infinite alternate-reverse;
+  pointer-events:none;
+}
+.engine-section .shell { position:relative; z-index:1; }
+@media (prefers-reduced-motion:reduce) { .engine-section::before{animation:none; opacity:.45} }
