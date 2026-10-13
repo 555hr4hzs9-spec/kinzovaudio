@@ -301,6 +301,31 @@
   }
 
   const engineTabs = [...document.querySelectorAll('[data-engine]')];
+  const shotRatios = {
+    delay: '1280 / 1036',
+    verb: '1164 / 1280',
+    pulse: '780 / 620',
+    mobile: '1 / 1',
+    dist: '1 / 1',
+    chek: '960 / 1220'
+  };
+  const viewerRatios = {
+    delay: '1280 / 1036',
+    verb: '1164 / 1280',
+    pulse: '780 / 620',
+    mobile: '1 / 1',
+    dist: '1 / 1',
+    chek: '960 / 1220'
+  };
+  document.querySelectorAll('.plugin-screenshot').forEach(button => {
+    const key = button.dataset.open;
+    const data = pluginData[key];
+    button.style.setProperty('--shot-image', `url("${data.image}")`);
+    button.style.setProperty('--shot-ratio', shotRatios[key] || '1.24');
+  });
+  const interfacePanel = document.getElementById('interfacePanel');
+  interfacePanel?.style.setProperty('--viewer-image', `url("${pluginData.delay.image}")`);
+  interfacePanel?.style.setProperty('--viewer-ratio', viewerRatios.delay);
   engineTabs.forEach((tab, index) => {
     tab.addEventListener('click', () => {
       const data = pluginData[tab.dataset.engine];
@@ -313,6 +338,8 @@
       const image = document.getElementById('interfaceImage');
       image.src = data.image;
       image.alt = `Интерфейс ${data.code}`;
+      interfacePanel?.style.setProperty('--viewer-image', `url("${data.image}")`);
+      interfacePanel?.style.setProperty('--viewer-ratio', viewerRatios[tab.dataset.engine] || '1.235');
       document.getElementById('interfacePanel').setAttribute('aria-labelledby', tab.id);
       document.getElementById('viewerName').textContent = data.code;
       document.getElementById('viewerDetails').dataset.open = tab.dataset.engine;
