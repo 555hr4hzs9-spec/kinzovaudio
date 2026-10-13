@@ -1491,8 +1491,8 @@ canvas {
 
 .engine-section {
   overflow: hidden;
-  border-top: 1px solid var(--line-soft);
-  border-bottom: 1px solid var(--line-soft);
+  border-top: 0;
+  border-bottom: 0;
   background:
     radial-gradient(circle at 75% 50%, rgba(183, 101, 255, .09), transparent 32rem),
     rgba(255, 255, 255, .012);
@@ -2737,7 +2737,7 @@ canvas {
   object-fit:contain;
   transition:opacity .25s, transform .25s;
 }
-.viewer-caption { display:flex; align-items:center; justify-content:space-between; padding:0 20px 20px; color:var(--muted); font:600 .64rem/1 var(--mono); letter-spacing:.12em; }
+.viewer-caption { display:flex; align-items:center; justify-content:space-between; padding:16px 20px 20px; color:var(--muted); font:600 .64rem/1 var(--mono); letter-spacing:.12em; }
 .viewer-caption span { color:var(--text); }
 .viewer-caption button { border:0; padding:6px 0; color:var(--accent-soft); background:none; cursor:pointer; font:inherit; letter-spacing:inherit; }
 .viewer-caption button:hover { color:var(--text); }
@@ -2829,7 +2829,7 @@ canvas {
   .lab-footer { left:18px; right:18px; bottom:18px; font-size:.43rem; }
   .interface-viewer [role="tabpanel"] { width:calc(100% - 24px); max-height:none; margin:12px 12px 0; }
   .interface-viewer .engine-tabs { padding:12px 12px 0; grid-template-columns:repeat(3,1fr); }
-  .viewer-caption { padding:0 14px 14px; }
+  .viewer-caption { padding:14px 14px 14px; }
   .plugin-screenshot { height:250px; }
 }
 
