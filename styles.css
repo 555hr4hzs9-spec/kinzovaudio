@@ -798,8 +798,8 @@ canvas {
 .marquee {
   position: relative;
   overflow: hidden;
-  border-top: 1px solid var(--line-soft);
-  border-bottom: 1px solid var(--line-soft);
+  border-top: 0;
+  border-bottom: 0;
   background: linear-gradient(90deg, rgba(183,101,255,.035), rgba(255,255,255,.012) 42%, rgba(98,215,255,.025));
 }
 
@@ -2685,16 +2685,16 @@ canvas {
 .lab-chip b { float:right; color:var(--accent-soft); font-size:.8rem; }
 .lab-chip:hover { color:var(--text); border-color:var(--accent); background:rgba(183,101,255,.12); transform:translateY(-4px); }
 .lab-footer { bottom:24px; left:25px; right:25px; display:flex; justify-content:space-between; color:rgba(255,255,255,.34); font:600 .52rem/1 var(--mono); letter-spacing:.11em; }
-.interface-viewer { overflow:hidden; border:1px solid var(--line); border-radius:22px; background:#0a090e; box-shadow:0 35px 90px rgba(0,0,0,.35); }
-.interface-viewer .engine-tabs { padding:18px 18px 0; margin:0; }
+.interface-viewer { overflow:visible; border:0; border-radius:0; background:transparent; box-shadow:none; }
+.interface-viewer .engine-tabs { padding:0; margin:0 0 18px; }
 .interface-viewer [role="tabpanel"] {
   position: relative;
   display:flex;
-  width: calc(100% - 36px);
+  width: 100%;
   aspect-ratio: var(--viewer-ratio, 1.235);
   min-height: 0;
   max-height: min(72vh, 760px);
-  margin:18px 18px 0;
+  margin:0;
   align-items:center;
   justify-content:center;
   overflow:hidden;
@@ -2737,7 +2737,7 @@ canvas {
   object-fit:contain;
   transition:opacity .25s, transform .25s;
 }
-.viewer-caption { display:flex; align-items:center; justify-content:space-between; padding:16px 20px 20px; color:var(--muted); font:600 .64rem/1 var(--mono); letter-spacing:.12em; }
+.viewer-caption { display:flex; align-items:center; justify-content:space-between; padding:18px 4px 0; color:var(--muted); font:600 .64rem/1 var(--mono); letter-spacing:.12em; }
 .viewer-caption span { color:var(--text); }
 .viewer-caption button { border:0; padding:6px 0; color:var(--accent-soft); background:none; cursor:pointer; font:inherit; letter-spacing:inherit; }
 .viewer-caption button:hover { color:var(--text); }
@@ -2827,9 +2827,9 @@ canvas {
   .lab-spectrum { left:8%; right:8%; bottom:29%; height:70px; }
   .lab-products { left:8%; right:8%; bottom:15%; grid-template-columns:repeat(2,1fr); }
   .lab-footer { left:18px; right:18px; bottom:18px; font-size:.43rem; }
-  .interface-viewer [role="tabpanel"] { width:calc(100% - 24px); max-height:none; margin:12px 12px 0; }
-  .interface-viewer .engine-tabs { padding:12px 12px 0; grid-template-columns:repeat(3,1fr); }
-  .viewer-caption { padding:14px 14px 14px; }
+  .interface-viewer [role="tabpanel"] { width:100%; max-height:none; margin:12px 0 0; }
+  .interface-viewer .engine-tabs { padding:0; grid-template-columns:repeat(3,1fr); }
+  .viewer-caption { padding:14px 4px 0; }
   .plugin-screenshot { height:250px; }
 }
 
