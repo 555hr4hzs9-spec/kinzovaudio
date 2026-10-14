@@ -3177,12 +3177,14 @@ body::before {
   content:"";
   position:fixed;
   inset:0;
-  z-index:-1;
+  z-index:0;
   background-image:url("stars.svg");
   background-size:1400px 900px;
   animation:starTwinkle 9s ease-in-out infinite alternate;
   pointer-events:none;
 }
+/* Content rides above the stars; stars ride above the page gradient. */
+main { position:relative; z-index:1; }
 @keyframes starTwinkle { from{opacity:.45} to{opacity:.75} }
 @media (max-width:620px) { body::before { background-size:850px auto; } }
 @media (prefers-reduced-motion:reduce) { body::before{animation:none; opacity:.4} }
