@@ -33,8 +33,11 @@
     "mode": "STEREO DELAY",
     "value": 45,
     "wave": "delay",
-    "accent": "#b765ff",
-    "image": "plugin-images/mq-delay.jpg"
+    "accent": "#ff7a1a",
+    "image": "plugin-images/mq-delay.jpg",
+    "price": "3 000 ₽",
+    "kind": "plugin",
+    "platforms": ["MACOS", "VST3", "AU"]
   },
   "verb": {
     "index": "02",
@@ -63,8 +66,11 @@
     "mode": "FIVE REVERB SPACES",
     "value": 32,
     "wave": "reverb",
-    "accent": "#b765ff",
-    "image": "plugin-images/mq-verb.jpg"
+    "accent": "#ff7a1a",
+    "image": "plugin-images/mq-verb.jpg",
+    "price": "10 000 ₽",
+    "kind": "plugin",
+    "platforms": ["MACOS", "VST3", "AU"]
   },
   "pulse": {
     "index": "03",
@@ -93,8 +99,11 @@
     "mode": "32-STEP PULSE SHAPER",
     "value": 100,
     "wave": "pulse",
-    "accent": "#b765ff",
-    "image": "plugin-images/mq-pulse.jpg"
+    "accent": "#ff7a1a",
+    "image": "plugin-images/mq-pulse.jpg",
+    "price": "5 000 ₽",
+    "kind": "plugin",
+    "platforms": ["MACOS", "VST3", "AU"]
   },
   "mobile": {
     "index": "04",
@@ -123,8 +132,11 @@
     "mode": "PHONE COLOR",
     "value": 100,
     "wave": "mobile",
-    "accent": "#b765ff",
-    "image": "plugin-images/mq-mobile.jpg"
+    "accent": "#ff7a1a",
+    "image": "plugin-images/mq-mobile.jpg",
+    "price": "5 000 ₽",
+    "kind": "plugin",
+    "platforms": ["MACOS", "VST3", "AU"]
   },
   "dist": {
     "index": "05",
@@ -153,38 +165,176 @@
     "mode": "CLIP · DISTORT · CRUSH",
     "value": 50,
     "wave": "dist",
-    "accent": "#b765ff",
-    "image": "plugin-images/mq-dist.jpg"
+    "accent": "#ff7a1a",
+    "image": "plugin-images/mq-dist.jpg",
+    "price": "4 000 ₽",
+    "kind": "plugin",
+    "platforms": ["MACOS", "VST3", "AU"]
   },
   "chek": {
     "index": "06",
     "code": "MQ-CHEK",
-    "title": "Микс из DAW — на iPhone.",
-    "text": "Мониторинг мастер-сигнала на iPhone по локальной сети. Плагин передаёт копию звука, не изменяя выход DAW. Нужны приложение-приёмник и устройства в одной сети. Версия MVP: работа на реальном iPhone и Wi-Fi требует отдельной проверки; это не анализатор LUFS и не эквалайзер.",
-    "summary": "Передача мастер-сигнала из DAW на iPhone по локальной сети. Версия MVP.",
+    "title": "Микс из DAW — на iPhone. Без QR-кодов.",
+    "text": "MQ-CHEK находит iPhone сам: включите приёмник, и плагин увидит его в локальной сети. Никаких QR-кодов, ручного ввода IP и повторного сопряжения при каждом переподключении — открыл проект и проверяешь микс. Копия мастер-сигнала идёт на телефон, а выход DAW остаётся нетронутым passthrough. На экране всегда живая диагностика: потери, буфер, обрывы, формат, сессия и порт, а честный RTT меряется на самом iPhone, а не угадывается. Это не LUFS-анализатор и не эквалайзер.",
+    "summary": "Авто-поиск iPhone в сети без QR-кодов. Диагностика линка и честный RTT.",
     "features": [
       [
-        "DAW → iPHONE",
-        "Проверка микса на другом устройстве"
+        "АВТО-ПОИСК",
+        "iPhone находится сам — QR-коды не нужны"
       ],
       [
-        "LOCAL NETWORK",
-        "Передача аудио внутри локальной сети"
+        "ДИАГНОСТИКА",
+        "Потери, буфер, обрывы, формат и сессия"
+      ],
+      [
+        "ЧЕСТНЫЙ RTT",
+        "Задержка меряется на iPhone, а не угадывается"
       ],
       [
         "PASSTHROUGH",
         "Мастер-выход DAW остаётся неизменным"
-      ],
-      [
-        "MVP / RECEIVER",
-        "Нужен iOS-приёмник; проверка на устройстве ещё требуется"
       ]
     ],
-    "mode": "DAW TO iPHONE / MVP",
+    "mode": "DAW TO iPHONE / NO QR",
     "value": 0,
     "wave": "check",
-    "accent": "#b765ff",
-    "image": "plugin-images/mq-chek.jpg"
+    "accent": "#ff7a1a",
+    "image": "plugin-images/mq-chek.png",
+    "price": "5 000 ₽",
+    "kind": "plugin",
+    "platforms": ["MACOS", "VST3", "AU", "iOS"]
+  },
+  "detune": {
+    "index": "07",
+    "code": "MQ-DETUNE",
+    "title": "Один морф вместо четырёх ручек.",
+    "text": "Атмосферный вокальный detune: одна ручка INTENSITY непрерывно морфирует detune → chorus → flanger → mega-wide doubler без стыков и щелчков. Два micro-pitch голоса, защита низов и моно-совместимость. Маленькая ручка DUCK спектрально пригибает эффект под вокал.",
+    "summary": "Морф detune → chorus → flanger → doubler. Спектральный даккинг DUCK.",
+    "features": [
+      [
+        "INTENSITY 0–100%",
+        "Бесшовный морф четырёх характеров"
+      ],
+      [
+        "MICRO-PITCH",
+        "Два расстроенных голоса L −24 / R +24 цента"
+      ],
+      [
+        "SPECTRAL DUCK",
+        "Вокальная полоса −12 дБ, тело почти цело"
+      ],
+      [
+        "FREE",
+        "Бесплатно: ноль задержки, ~1% CPU"
+      ]
+    ],
+    "mode": "VOCAL MORPH",
+    "value": 50,
+    "wave": "detune",
+    "accent": "#ff7a1a",
+    "image": "plugin-images/mq-detune.png",
+    "price": "Бесплатно",
+    "kind": "plugin",
+    "platforms": ["MACOS", "VST3", "AU"]
+  },
+  "detect": {
+    "index": "08",
+    "code": "MQ-DETECT",
+    "title": "Темп и тональность — сразу.",
+    "text": "Простой измеритель темпа и тональности с возможностью тапинга: постучите темп пальцем и сразу увидите BPM и тональность материала. Никаких настроек и регистрации — открыл и пользуешься.",
+    "summary": "Измеритель темпа и тональности с тапингом. Бесплатно.",
+    "features": [
+      [
+        "TAP TEMPO",
+        "Настучите темп — BPM посчитается сам"
+      ],
+      [
+        "KEY DETECT",
+        "Определение тональности материала"
+      ],
+      [
+        "SIMPLE",
+        "Ничего лишнего: открыл и пользуешься"
+      ],
+      [
+        "FREE",
+        "Бесплатно, без регистрации"
+      ]
+    ],
+    "mode": "BPM · KEY",
+    "value": 0,
+    "wave": "detect",
+    "accent": "#ff7a1a",
+    "image": null,
+    "price": "Бесплатно",
+    "kind": "plugin",
+    "platforms": ["MACOS", "VST3", "AU"]
+  },
+  "monitor": {
+    "index": "09",
+    "code": "MQ-MONITOR",
+    "title": "Консоль без привязки к карте.",
+    "text": "Замена знаменитой консоли, которая работает с любой аудиокартой. Выбирайте входы и выходы, вешайте любимые VST3/AU и мониторьте в реальном времени с минимальной задержкой — восемь каналов под рукой, ничего лишнего.",
+    "summary": "Консоль мониторинга с любой картой. Свои VST3/AU, реалтайм.",
+    "features": [
+      [
+        "ANY INTERFACE",
+        "Работает с любой аудиокартой"
+      ],
+      [
+        "VST3 / AU HOST",
+        "Любимые плагины внутри консоли"
+      ],
+      [
+        "8 CHANNELS",
+        "Восемь каналов мониторинга"
+      ],
+      [
+        "REALTIME",
+        "Мониторинг в реальном времени"
+      ]
+    ],
+    "mode": "CONSOLE APP",
+    "value": 0,
+    "wave": "monitor",
+    "accent": "#ff7a1a",
+    "image": "plugin-images/mq-monitor.png",
+    "price": "15 000 ₽",
+    "kind": "program",
+    "platforms": ["MACOS", "APP"]
+  },
+  "ai": {
+    "index": "10",
+    "code": "MQ-AI",
+    "title": "Дубли L/R из твоего вокала.",
+    "text": "AI-генератор даблов: загрузите вокал и получите левый и правый дубли для широкой стерео-картины. Возможности шире: превращайте свой голос в любой другой и обучайте модели на базе собственного голоса.",
+    "summary": "AI-дубли L/R, конверсия голоса, обучение моделей.",
+    "features": [
+      [
+        "DOUBLES L/R",
+        "Генерация стерео-даблов из вокала"
+      ],
+      [
+        "VOICE CONVERT",
+        "Превращение голоса в любой другой"
+      ],
+      [
+        "TRAIN MODELS",
+        "Обучение моделей на своём голосе"
+      ],
+      [
+        "WAV EXPORT",
+        "Сохранение даблов в WAV"
+      ]
+    ],
+    "mode": "VOCAL AI APP",
+    "value": 100,
+    "wave": "ai",
+    "accent": "#ff7a1a",
+    "image": "plugin-images/mq-ai.png",
+    "price": "15 000 ₽",
+    "kind": "program",
+    "platforms": ["MACOS", "APP"]
   }
 };
 
@@ -307,7 +457,10 @@
     pulse: '780 / 620',
     mobile: '1 / 1',
     dist: '1 / 1',
-    chek: '960 / 1220'
+    chek: '960 / 1292',
+    detune: '1 / 1',
+    monitor: '780 / 1640',
+    ai: '2252 / 1818'
   };
   const viewerRatios = {
     delay: '1280 / 1036',
@@ -315,11 +468,15 @@
     pulse: '780 / 620',
     mobile: '1 / 1',
     dist: '1 / 1',
-    chek: '960 / 1220'
+    chek: '960 / 1292',
+    detune: '1 / 1',
+    monitor: '780 / 1640',
+    ai: '2252 / 1818'
   };
   document.querySelectorAll('.plugin-screenshot').forEach(button => {
     const key = button.dataset.open;
     const data = pluginData[key];
+    if (!data || !data.image) return;
     button.style.setProperty('--shot-image', `url("${data.image}")`);
     button.style.setProperty('--shot-ratio', shotRatios[key] || '1.24');
   });
@@ -374,8 +531,18 @@
       dialogTitle.textContent = data.title;
       dialogText.textContent = data.text;
       const image = document.getElementById('dialogImage');
-      image.src = data.image;
-      image.alt = `Интерфейс ${data.code}`;
+      if (data.image) {
+        image.style.display = '';
+        image.src = data.image;
+        image.alt = `Интерфейс ${data.code}`;
+      } else {
+        image.style.display = 'none';
+      }
+      const free = data.price === 'Бесплатно';
+      document.getElementById('dialogPrice').textContent = data.price;
+      document.getElementById('dialogPrice').classList.toggle('free', free);
+      document.getElementById('dialogBuy').querySelector('span').textContent = free ? 'Забрать в Telegram' : 'Купить в Telegram';
+      document.getElementById('dialogMeta').innerHTML = (data.platforms || ['MACOS', 'VST3', 'AU']).map(p => `<span>${p}</span>`).join('');
       dialogFeatures.innerHTML = data.features
         .map(([label, text]) => `<div class="dialog-feature"><b>${label}</b><span>${text}</span></div>`)
         .join('');
@@ -403,6 +570,23 @@
   dialog?.querySelector('a[href="#contact"]')?.addEventListener('click', closeDialog);
 
   root.classList.add('site-ready');
+})();
+
+/* Catalog filter: all / plugins / programs / free. */
+(() => {
+  const chips = [...document.querySelectorAll('.filter-chip')];
+  const cards = [...document.querySelectorAll('.plugin-card')];
+  if (!chips.length || !cards.length) return;
+  chips.forEach(chip => chip.addEventListener('click', () => {
+    chips.forEach(c => c.classList.toggle('active', c === chip));
+    const f = chip.dataset.filter;
+    cards.forEach(card => {
+      const show = f === 'all'
+        || (f === 'free' && card.hasAttribute('data-free'))
+        || card.dataset.category === f;
+      card.classList.toggle('hidden', !show);
+    });
+  }));
 })();
 
 /* Hero tide motion: gentle pointer tilt for the wave panel. */
