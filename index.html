@@ -6,9 +6,9 @@
   <meta name="theme-color" content="#07070a">
   <meta name="description" content="KINZOVAUDIO — десять музыкальных плагинов и программ: ритм, пространство, голос, характер звука и мониторинг.">
   <title>KINZOVAUDIO — плагины и программы</title>
-  <link rel="stylesheet" href="styles.css?v=20261015-2">
+  <link rel="stylesheet" href="styles.css?v=20261015-4">
   <script>document.documentElement.classList.add('motion-ready');</script>
-  <script src="script.js?v=20261013-11" defer onerror="document.documentElement.classList.remove('motion-ready')"></script>
+  <script src="script.js?v=20261015-4" defer onerror="document.documentElement.classList.remove('motion-ready')"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">К содержанию</a>
@@ -130,29 +130,50 @@
         </div>
 
         <div class="plugin-grid">
-          <article class="plugin-card plugin-delay reveal" data-plugin="delay" data-category="plugin" style="--card-accent:#3a86ff;--card-accent-soft:#9dc0ff;">
+          <article class="plugin-card plugin-monitor reveal" data-plugin="monitor" data-category="program" style="--card-accent:#ff7a1a;--card-accent-soft:#ffb37a;">
             <div class="card-spot" aria-hidden="true"></div>
             <div class="plugin-card-top">
               <div class="plugin-index">01 / 10</div>
-              <div class="plugin-status"><i></i> RHYTHM</div>
+              <div class="plugin-status"><i></i> CONSOLE</div>
             </div>
-            <button class="plugin-visual plugin-screenshot" type="button" data-open="delay" aria-label="Рассмотреть интерфейс MQ-DELAY">
-              <img src="plugin-images/mq-delay.jpg" alt="Интерфейс MQ-DELAY" loading="lazy" decoding="async">
+            <div class="plugin-badge hot"><i></i>HOT</div>
+            <button class="plugin-visual plugin-screenshot" type="button" data-open="monitor" aria-label="Рассмотреть интерфейс MQ-MONITOR">
+              <img src="plugin-images/mq-monitor.png" alt="Интерфейс MQ-MONITOR" loading="lazy" decoding="async">
               <span class="screenshot-zoom">Рассмотреть ↗</span>
             </button>
             <div class="plugin-card-copy">
-              <div class="plugin-name">MQ-DELAY</div>
-              <h3>Эхо в твоём ритме.</h3>
-              <p>Стереоэхо с синхронизацией, ping-pong, фильтрами повторов и даккингом.</p>
-              <div class="plugin-price">3 000 ₽</div>
+              <div class="plugin-name">MQ-MONITOR</div>
+              <h3>Консоль без привязки к карте.</h3>
+              <p>Мониторинг и маршрутизация с любым аудиоинтерфейсом. Любимые VST3/AU внутри, работа в реальном времени.</p>
+              <div class="plugin-price">15 000 ₽</div>
             </div>
-            <button class="card-link" type="button" data-open="delay"><span>Открыть детали</span><b aria-hidden="true">↗</b></button>
+            <button class="card-link" type="button" data-open="monitor"><span>Открыть детали</span><b aria-hidden="true">↗</b></button>
           </article>
 
-          <article class="plugin-card plugin-verb reveal" data-plugin="verb" data-category="plugin" style="--card-accent:#3a86ff;--card-accent-soft:#9dc0ff;">
+          <article class="plugin-card plugin-ai reveal" data-plugin="ai" data-category="program" style="--card-accent:#ff7a1a;--card-accent-soft:#ffb37a;">
             <div class="card-spot" aria-hidden="true"></div>
             <div class="plugin-card-top">
               <div class="plugin-index">02 / 10</div>
+              <div class="plugin-status"><i></i> VOICE AI</div>
+            </div>
+            <div class="plugin-badge hot"><i></i>HOT</div>
+            <button class="plugin-visual plugin-screenshot" type="button" data-open="ai" aria-label="Рассмотреть интерфейс MQ-AI">
+              <img src="plugin-images/mq-ai.png" alt="Интерфейс MQ-AI" loading="lazy" decoding="async">
+              <span class="screenshot-zoom">Рассмотреть ↗</span>
+            </button>
+            <div class="plugin-card-copy">
+              <div class="plugin-name">MQ-AI</div>
+              <h3>Дубли L/R из твоего вокала.</h3>
+              <p>AI-генератор даблов и превращение голоса в любой другой. Обучение моделей на своём голосе.</p>
+              <div class="plugin-price">15 000 ₽</div>
+            </div>
+            <button class="card-link" type="button" data-open="ai"><span>Открыть детали</span><b aria-hidden="true">↗</b></button>
+          </article>
+
+          <article class="plugin-card plugin-verb reveal" data-plugin="verb" data-category="plugin" style="--card-accent:#ff7a1a;--card-accent-soft:#ffb37a;">
+            <div class="card-spot" aria-hidden="true"></div>
+            <div class="plugin-card-top">
+              <div class="plugin-index">03 / 10</div>
               <div class="plugin-status"><i></i> SPACE</div>
             </div>
             <button class="plugin-visual plugin-screenshot" type="button" data-open="verb" aria-label="Рассмотреть интерфейс MQ-VERB">
@@ -168,10 +189,10 @@
             <button class="card-link" type="button" data-open="verb"><span>Открыть детали</span><b aria-hidden="true">↗</b></button>
           </article>
 
-          <article class="plugin-card plugin-pulse reveal" data-plugin="pulse" data-category="plugin" style="--card-accent:#3a86ff;--card-accent-soft:#9dc0ff;">
+          <article class="plugin-card plugin-pulse reveal" data-plugin="pulse" data-category="plugin" style="--card-accent:#ff7a1a;--card-accent-soft:#ffb37a;">
             <div class="card-spot" aria-hidden="true"></div>
             <div class="plugin-card-top">
-              <div class="plugin-index">03 / 10</div>
+              <div class="plugin-index">04 / 10</div>
               <div class="plugin-status"><i></i> MOTION</div>
             </div>
             <button class="plugin-visual plugin-screenshot" type="button" data-open="pulse" aria-label="Рассмотреть интерфейс MQ-PULSE">
@@ -187,10 +208,10 @@
             <button class="card-link" type="button" data-open="pulse"><span>Открыть детали</span><b aria-hidden="true">↗</b></button>
           </article>
 
-          <article class="plugin-card plugin-mobile reveal" data-plugin="mobile" data-category="plugin" style="--card-accent:#3a86ff;--card-accent-soft:#9dc0ff;">
+          <article class="plugin-card plugin-mobile reveal" data-plugin="mobile" data-category="plugin" style="--card-accent:#ff7a1a;--card-accent-soft:#ffb37a;">
             <div class="card-spot" aria-hidden="true"></div>
             <div class="plugin-card-top">
-              <div class="plugin-index">04 / 10</div>
+              <div class="plugin-index">05 / 10</div>
               <div class="plugin-status"><i></i> FILTER</div>
             </div>
             <button class="plugin-visual plugin-screenshot" type="button" data-open="mobile" aria-label="Рассмотреть интерфейс MQ-MOBILE">
@@ -206,26 +227,7 @@
             <button class="card-link" type="button" data-open="mobile"><span>Открыть детали</span><b aria-hidden="true">↗</b></button>
           </article>
 
-          <article class="plugin-card plugin-dist reveal" data-plugin="dist" data-category="plugin" style="--card-accent:#3a86ff;--card-accent-soft:#9dc0ff;">
-            <div class="card-spot" aria-hidden="true"></div>
-            <div class="plugin-card-top">
-              <div class="plugin-index">05 / 10</div>
-              <div class="plugin-status"><i></i> DRIVE</div>
-            </div>
-            <button class="plugin-visual plugin-screenshot" type="button" data-open="dist" aria-label="Рассмотреть интерфейс MQ-DIST">
-              <img src="plugin-images/mq-dist.jpg" alt="Интерфейс MQ-DIST" loading="lazy" decoding="async">
-              <span class="screenshot-zoom">Рассмотреть ↗</span>
-            </button>
-            <div class="plugin-card-copy">
-              <div class="plugin-name">MQ-DIST</div>
-              <h3>От тепла до цифровой грязи.</h3>
-              <p>Клиппер, дисторшн и биткрашер с адаптивным фильтром под одной ручкой.</p>
-              <div class="plugin-price">4 000 ₽</div>
-            </div>
-            <button class="card-link" type="button" data-open="dist"><span>Открыть детали</span><b aria-hidden="true">↗</b></button>
-          </article>
-
-          <article class="plugin-card plugin-chek reveal" data-plugin="chek" data-category="plugin" style="--card-accent:#3a86ff;--card-accent-soft:#9dc0ff;">
+          <article class="plugin-card plugin-chek reveal" data-plugin="chek" data-category="plugin" style="--card-accent:#ff7a1a;--card-accent-soft:#ffb37a;">
             <div class="card-spot" aria-hidden="true"></div>
             <div class="plugin-card-top">
               <div class="plugin-index">06 / 10</div>
@@ -244,10 +246,48 @@
             <button class="card-link" type="button" data-open="chek"><span>Открыть детали</span><b aria-hidden="true">↗</b></button>
           </article>
 
-          <article class="plugin-card plugin-detune reveal" data-plugin="detune" data-category="plugin" data-free="true" style="--card-accent:#3a86ff;--card-accent-soft:#9dc0ff;">
+          <article class="plugin-card plugin-dist reveal" data-plugin="dist" data-category="plugin" style="--card-accent:#ff7a1a;--card-accent-soft:#ffb37a;">
             <div class="card-spot" aria-hidden="true"></div>
             <div class="plugin-card-top">
               <div class="plugin-index">07 / 10</div>
+              <div class="plugin-status"><i></i> DRIVE</div>
+            </div>
+            <button class="plugin-visual plugin-screenshot" type="button" data-open="dist" aria-label="Рассмотреть интерфейс MQ-DIST">
+              <img src="plugin-images/mq-dist.jpg" alt="Интерфейс MQ-DIST" loading="lazy" decoding="async">
+              <span class="screenshot-zoom">Рассмотреть ↗</span>
+            </button>
+            <div class="plugin-card-copy">
+              <div class="plugin-name">MQ-DIST</div>
+              <h3>От тепла до цифровой грязи.</h3>
+              <p>Клиппер, дисторшн и биткрашер с адаптивным фильтром под одной ручкой.</p>
+              <div class="plugin-price">4 000 ₽</div>
+            </div>
+            <button class="card-link" type="button" data-open="dist"><span>Открыть детали</span><b aria-hidden="true">↗</b></button>
+          </article>
+
+          <article class="plugin-card plugin-delay reveal" data-plugin="delay" data-category="plugin" style="--card-accent:#ff7a1a;--card-accent-soft:#ffb37a;">
+            <div class="card-spot" aria-hidden="true"></div>
+            <div class="plugin-card-top">
+              <div class="plugin-index">08 / 10</div>
+              <div class="plugin-status"><i></i> RHYTHM</div>
+            </div>
+            <button class="plugin-visual plugin-screenshot" type="button" data-open="delay" aria-label="Рассмотреть интерфейс MQ-DELAY">
+              <img src="plugin-images/mq-delay.jpg" alt="Интерфейс MQ-DELAY" loading="lazy" decoding="async">
+              <span class="screenshot-zoom">Рассмотреть ↗</span>
+            </button>
+            <div class="plugin-card-copy">
+              <div class="plugin-name">MQ-DELAY</div>
+              <h3>Эхо в твоём ритме.</h3>
+              <p>Стереоэхо с синхронизацией, ping-pong, фильтрами повторов и даккингом.</p>
+              <div class="plugin-price">3 000 ₽</div>
+            </div>
+            <button class="card-link" type="button" data-open="delay"><span>Открыть детали</span><b aria-hidden="true">↗</b></button>
+          </article>
+
+          <article class="plugin-card plugin-detune reveal" data-plugin="detune" data-category="plugin" data-free="true" style="--card-accent:#ff7a1a;--card-accent-soft:#ffb37a;">
+            <div class="card-spot" aria-hidden="true"></div>
+            <div class="plugin-card-top">
+              <div class="plugin-index">09 / 10</div>
               <div class="plugin-status"><i></i> VOICE</div>
             </div>
             <button class="plugin-visual plugin-screenshot" type="button" data-open="detune" aria-label="Рассмотреть интерфейс MQ-DETUNE">
@@ -263,10 +303,10 @@
             <button class="card-link" type="button" data-open="detune"><span>Открыть детали</span><b aria-hidden="true">↗</b></button>
           </article>
 
-          <article class="plugin-card plugin-detect reveal" data-plugin="detect" data-category="plugin" data-free="true" style="--card-accent:#3a86ff;--card-accent-soft:#9dc0ff;">
+          <article class="plugin-card plugin-detect reveal" data-plugin="detect" data-category="plugin" data-free="true" style="--card-accent:#ff7a1a;--card-accent-soft:#ffb37a;">
             <div class="card-spot" aria-hidden="true"></div>
             <div class="plugin-card-top">
-              <div class="plugin-index">08 / 10</div>
+              <div class="plugin-index">10 / 10</div>
               <div class="plugin-status"><i></i> TEMPO</div>
             </div>
             <button class="plugin-visual plugin-screenshot" type="button" data-open="detect" aria-label="Рассмотреть интерфейс MQ-DETECT">
@@ -280,44 +320,6 @@
               <div class="plugin-price free">Бесплатно</div>
             </div>
             <button class="card-link" type="button" data-open="detect"><span>Открыть детали</span><b aria-hidden="true">↗</b></button>
-          </article>
-
-          <article class="plugin-card plugin-monitor reveal" data-plugin="monitor" data-category="program" style="--card-accent:#3a86ff;--card-accent-soft:#9dc0ff;">
-            <div class="card-spot" aria-hidden="true"></div>
-            <div class="plugin-card-top">
-              <div class="plugin-index">09 / 10</div>
-              <div class="plugin-status"><i></i> CONSOLE</div>
-            </div>
-            <button class="plugin-visual plugin-screenshot" type="button" data-open="monitor" aria-label="Рассмотреть интерфейс MQ-MONITOR">
-              <img src="plugin-images/mq-monitor.png" alt="Интерфейс MQ-MONITOR" loading="lazy" decoding="async">
-              <span class="screenshot-zoom">Рассмотреть ↗</span>
-            </button>
-            <div class="plugin-card-copy">
-              <div class="plugin-name">MQ-MONITOR</div>
-              <h3>Консоль без привязки к карте.</h3>
-              <p>Мониторинг и маршрутизация с любым аудиоинтерфейсом. Любимые VST3/AU внутри, работа в реальном времени.</p>
-              <div class="plugin-price">15 000 ₽</div>
-            </div>
-            <button class="card-link" type="button" data-open="monitor"><span>Открыть детали</span><b aria-hidden="true">↗</b></button>
-          </article>
-
-          <article class="plugin-card plugin-ai reveal" data-plugin="ai" data-category="program" style="--card-accent:#3a86ff;--card-accent-soft:#9dc0ff;">
-            <div class="card-spot" aria-hidden="true"></div>
-            <div class="plugin-card-top">
-              <div class="plugin-index">10 / 10</div>
-              <div class="plugin-status"><i></i> VOICE AI</div>
-            </div>
-            <button class="plugin-visual plugin-screenshot" type="button" data-open="ai" aria-label="Рассмотреть интерфейс MQ-AI">
-              <img src="plugin-images/mq-ai.png" alt="Интерфейс MQ-AI" loading="lazy" decoding="async">
-              <span class="screenshot-zoom">Рассмотреть ↗</span>
-            </button>
-            <div class="plugin-card-copy">
-              <div class="plugin-name">MQ-AI</div>
-              <h3>Дубли L/R из твоего вокала.</h3>
-              <p>AI-генератор даблов и превращение голоса в любой другой. Обучение моделей на своём голосе.</p>
-              <div class="plugin-price">15 000 ₽</div>
-            </div>
-            <button class="card-link" type="button" data-open="ai"><span>Открыть детали</span><b aria-hidden="true">↗</b></button>
           </article>
         </div>
       </div>
