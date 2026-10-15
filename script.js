@@ -345,6 +345,25 @@
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
+  /* Liquid Glass: move the refraction glint with the cursor over the panel. */
+  const navPanel = document.querySelector('.nav-panel');
+  if (navPanel && !reducedMotion) {
+    let raf = 0;
+    let px = 0;
+    let py = 0;
+    navPanel.addEventListener('pointermove', event => {
+      const rect = navPanel.getBoundingClientRect();
+      px = ((event.clientX - rect.left) / rect.width) * 100;
+      py = ((event.clientY - rect.top) / rect.height) * 100;
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        navPanel.style.setProperty('--gx', `${px.toFixed(1)}%`);
+        navPanel.style.setProperty('--gy', `${py.toFixed(1)}%`);
+        raf = 0;
+      });
+    });
+  }
+
   menuButton?.addEventListener('click', () => {
     const open = menuButton.classList.toggle('open');
     menuButton.setAttribute('aria-expanded', String(open));
