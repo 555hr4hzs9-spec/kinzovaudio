@@ -265,7 +265,7 @@
     "value": 0,
     "wave": "detect",
     "accent": "#ff7a1a",
-    "image": null,
+    "image": "plugin-images/mq-detect.png",
     "price": "Бесплатно",
     "kind": "plugin",
     "platforms": ["MACOS", "VST3", "AU"]
@@ -459,6 +459,7 @@
     dist: '1 / 1',
     chek: '960 / 1292',
     detune: '1 / 1',
+    detect: '420 / 168',
     monitor: '780 / 1640',
     ai: '2252 / 1818'
   };
@@ -470,6 +471,7 @@
     dist: '1 / 1',
     chek: '960 / 1292',
     detune: '1 / 1',
+    detect: '420 / 168',
     monitor: '780 / 1640',
     ai: '2252 / 1818'
   };
