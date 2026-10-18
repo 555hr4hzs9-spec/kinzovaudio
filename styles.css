@@ -1669,8 +1669,38 @@ canvas {
   transition: transform .25s var(--ease);
 }
 
-.card-link:hover b {
-  transform: translate(4px, -4px);
+/* Download buttons in plugin cards. */
+.card-downloads {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font: 600 .7rem/1 var(--mono);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: border-color .2s, background .2s, transform .2s;
+}
+
+.download-btn:hover {
+  border-color: var(--accent);
+  background: rgba(0, 153, 204, .06);
+  transform: translateY(-1px);
+}
+
+.download-btn b {
+  color: var(--accent);
+  font-size: .9rem;
 }
 
 .engine-section {

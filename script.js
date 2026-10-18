@@ -626,12 +626,88 @@
     };
     drawBg();
   }
+  /* Add download buttons to plugin cards. */
+  const downloadUrls = {
+    ai:      { win: 'downloads/mq-ai-win.exe', mac: 'downloads/mq-ai-mac.dmg' },
+    monitor: { mac: 'downloads/mq-monitor-mac.dmg' },
+    chek:    { win: 'downloads/mq-chek-win.exe', mac: 'downloads/mq-chek-mac.dmg' },
+    verb:    { win: 'downloads/mq-verb-win.exe', mac: 'downloads/mq-verb-mac.dmg' },
+    pulse:   { mac: 'downloads/mq-pulse-mac.dmg' },
+    mobile:  { win: 'downloads/mq-mobile-win.exe', mac: 'downloads/mq-mobile-mac.dmg' },
+    dist:    { win: 'downloads/mq-dist-win.exe', mac: 'downloads/mq-dist-mac.dmg' },
+    delay:   { win: 'downloads/mq-delay-win.zip', mac: 'downloads/mq-delay-mac.zip' },
+    detune:  { win: 'downloads/mq-detune-win.exe', mac: 'downloads/mq-detune-mac.pkg' },
+    detect:  { win: 'downloads/mq-detect-win.exe', mac: 'downloads/mq-detect-mac.pkg' },
+  };
 
-  root.classList.add('site-ready');
-})();
+  document.querySelectorAll('.plugin-card').forEach(card => {
+    const key = card.dataset.plugin;
+    const urls = downloadUrls[key];
+    if (!urls) return;
+    const wrap = document.createElement('div');
+    wrap.className = 'card-downloads';
+    if (urls.win) {
+      const a = document.createElement('a');
+      a.className = 'download-btn';
+      a.href = urls.win;
+      a.setAttribute('download', '');
+      a.innerHTML = '<span>Windows</span><b>↓</b>';
+      wrap.appendChild(a);
+    }
+    if (urls.mac) {
+      const a = document.createElement('a');
+      a.className = 'download-btn';
+      a.href = urls.mac;
+      a.setAttribute('download', '');
+      a.innerHTML = '<span>macOS</span><b>↓</b>';
+      wrap.appendChild(a);
+    }
+    const link = card.querySelector('.card-link');
+    if (link) link.insertAdjacentElement('afterend', wrap);
+  });
 
-/* Catalog filter: all / plugins / programs / free. */
-(() => {
+  /* Add download buttons to plugin cards. */
+  const downloadUrls = {
+    ai:      { win: 'downloads/mq-ai-win.exe', mac: 'downloads/mq-ai-mac.dmg' },
+    monitor: { mac: 'downloads/mq-monitor-mac.dmg' },
+    chek:    { win: 'downloads/mq-chek-win.exe', mac: 'downloads/mq-chek-mac.dmg' },
+    verb:    { win: 'downloads/mq-verb-win.exe', mac: 'downloads/mq-verb-mac.dmg' },
+    pulse:   { mac: 'downloads/mq-pulse-mac.dmg' },
+    mobile:  { win: 'downloads/mq-mobile-win.exe', mac: 'downloads/mq-mobile-mac.dmg' },
+    dist:    { win: 'downloads/mq-dist-win.exe', mac: 'downloads/mq-dist-mac.dmg' },
+    delay:   { win: 'downloads/mq-delay-win.zip', mac: 'downloads/mq-delay-mac.zip' },
+    detune:  { win: 'downloads/mq-detune-win.exe', mac: 'downloads/mq-detune-mac.pkg' },
+    detect:  { win: 'downloads/mq-detect-win.exe', mac: 'downloads/mq-detect-mac.pkg' },
+  };
+
+  document.querySelectorAll('.plugin-card').forEach(card => {
+    const key = card.dataset.plugin;
+    const urls = downloadUrls[key];
+    if (!urls) return;
+    const wrap = document.createElement('div');
+    wrap.className = 'card-downloads';
+    if (urls.win) {
+      const a = document.createElement('a');
+      a.className = 'download-btn';
+      a.href = urls.win;
+      a.setAttribute('download', '');
+      a.innerHTML = '<span>Windows</span><b>↓</b>';
+      wrap.appendChild(a);
+    }
+    if (urls.mac) {
+      const a = document.createElement('a');
+      a.className = 'download-btn';
+      a.href = urls.mac;
+      a.setAttribute('download', '');
+      a.innerHTML = '<span>macOS</span><b>↓</b>';
+      wrap.appendChild(a);
+    }
+    const link = card.querySelector('.card-link');
+    if (link) link.insertAdjacentElement('afterend', wrap);
+  });
+
+  /* Catalog filter: all / plugins / programs / free. */
+  (() => {
   const chips = [...document.querySelectorAll('.filter-chip')];
   const cards = [...document.querySelectorAll('.plugin-card')];
   if (!chips.length || !cards.length) return;
@@ -647,8 +723,8 @@
   }));
 })();
 
-/* Hero tide motion: gentle pointer tilt for the wave panel. */
-(() => {
+/* Hero tide motion */
+  {
   const stage = document.querySelector('.signal-tide, .signal-prism');
   if (!stage || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   let tx = 0, ty = 0, cx = 0, cy = 0;
@@ -669,4 +745,7 @@
     requestAnimationFrame(tick);
   };
   tick();
+  }
+
+  root.classList.add('site-ready');
 })();
