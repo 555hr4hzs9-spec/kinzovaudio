@@ -455,9 +455,9 @@ canvas {
 .hero {
   position: relative;
   display: flex;
-  min-height: 100svh;
+  min-height: auto;
   align-items: center;
-  padding: 138px 0 96px;
+  padding: 128px 0 56px;
   overflow: hidden;
   contain: layout style paint;
 }
@@ -529,7 +529,7 @@ canvas {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(0, 1.04fr) minmax(440px, .96fr);
+  grid-template-columns: minmax(0, 1fr);
   gap: clamp(46px, 7vw, 98px);
   align-items: center;
   max-width: 1200px;
@@ -988,7 +988,7 @@ canvas {
   width: max-content;
   align-items: center;
   gap: 22px;
-  padding: 16px 0;
+  padding: 10px 0;
   animation: marquee 42s linear infinite;
   will-change: transform;
 }
@@ -1016,7 +1016,7 @@ canvas {
 
 .section {
   position: relative;
-  padding: clamp(104px, 13vw, 178px) 0;
+  padding: clamp(72px, 9vw, 120px) 0;
 }
 
 .section-heading {
@@ -2986,16 +2986,7 @@ canvas {
   isolation:isolate;
 }
 .plugin-screenshot::before {
-  content:"";
-  position:absolute;
-  z-index:-1;
-  inset:-8%;
-  background-image:var(--shot-image);
-  background-position:center;
-  background-size:cover;
-  filter:blur(20px) saturate(1.2);
-  opacity:.18;
-  transform:scale(1.08);
+  display: none;
 }
 .plugin-screenshot img {
   display:block;
@@ -3121,12 +3112,8 @@ canvas {
 /* Final framing pass: compact desktop cards, proportional mobile cards. */
 .plugin-grid { align-items: stretch; }
 .plugin-screenshot { background-color: #ffffff; }
-.plugin-screenshot::before {
-  z-index: 0;
-  opacity: .42;
-  filter: blur(24px) saturate(1.35) brightness(.8);
-}
-.plugin-screenshot img { z-index: 1; }
+.plugin-screenshot::before { display: none; }
+.plugin-screenshot { background-color: #ffffff; }
 
 @media (min-width: 901px) {
   .plugin-card .plugin-screenshot,
