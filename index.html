@@ -3,15 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; img-src 'self' data:; script-src 'self' 'sha256-rH8Tlgji2SRjalcbjTNYPcRUBZBnavWrYOAD7b5jyjI='; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; upgrade-insecure-requests">
   <meta name="theme-color" content="#07070a">
   <meta name="description" content="KINZOVAUDIO — десять музыкальных плагинов и программ: ритм, пространство, голос, характер звука и мониторинг.">
   <title>KINZOVAUDIO — плагины и программы</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261019-45">
-  <script>document.documentElement.classList.add('motion-ready');</script>
-  <script src="script.js?v=20261019-45" defer onerror="document.documentElement.classList.remove('motion-ready')"></script>
+  <link rel="stylesheet" href="styles.css?v=20261019-46">
+  <script>document.documentElement.classList.add('motion-ready');addEventListener('error',function(e){var t=e.target;if(t&&t.tagName==='SCRIPT'){document.documentElement.classList.remove('motion-ready')}},true);</script>
+  <script src="script.js?v=20261019-46" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">К содержанию</a>
@@ -68,7 +70,7 @@
         </div>
 
         <div class="plugin-grid">
-          <article class="plugin-card plugin-ai reveal" data-plugin="ai" data-category="program" style="--card-accent:#39d5ff;--card-accent-soft:#7de8ff;">
+          <article class="plugin-card plugin-ai reveal" data-plugin="ai" data-category="program">
             <div class="card-spot" aria-hidden="true"></div>
             <div class="plugin-card-top">
               <div class="plugin-index">01 / 10</div>
@@ -88,7 +90,7 @@
             <button class="card-link" type="button" data-open="ai"><span>Открыть детали</span><b aria-hidden="true">↗</b></button>
           </article>
 
-          <article class="plugin-card plugin-monitor reveal" data-plugin="monitor" data-category="program" style="--card-accent:#39d5ff;--card-accent-soft:#7de8ff;">
+          <article class="plugin-card plugin-monitor reveal" data-plugin="monitor" data-category="program">
             <div class="card-spot" aria-hidden="true"></div>
             <div class="plugin-card-top">
               <div class="plugin-index">02 / 10</div>
@@ -108,7 +110,7 @@
             <button class="card-link" type="button" data-open="monitor"><span>Открыть детали</span><b aria-hidden="true">↗</b></button>
           </article>
 
-          <article class="plugin-card plugin-chek reveal" data-plugin="chek" data-category="plugin" style="--card-accent:#39d5ff;--card-accent-soft:#7de8ff;">
+          <article class="plugin-card plugin-chek reveal" data-plugin="chek" data-category="plugin">
             <div class="card-spot" aria-hidden="true"></div>
             <div class="plugin-card-top">
               <div class="plugin-index">03 / 10</div>
@@ -127,14 +129,14 @@
             <button class="card-link" type="button" data-open="chek"><span>Открыть детали</span><b aria-hidden="true">↗</b></button>
           </article>
 
-          <article class="plugin-card plugin-verb reveal" data-plugin="verb" data-category="plugin" data-free="true" style="--card-accent:#39d5ff;--card-accent-soft:#7de8ff;">
+          <article class="plugin-card plugin-verb reveal" data-plugin="verb" data-category="plugin" data-free="true">
             <div class="card-spot" aria-hidden="true"></div>
             <div class="plugin-card-top">
               <div class="plugin-index">04 / 10</div>
               <div class="plugin-status"><i></i> SPACE</div>
             </div>
             <button class="plugin-visual plugin-screenshot" type="button" data-open="verb" aria-label="Рассмотреть интерфейс MQ-VERB">
-              <img src="plugin-images/mq-verb.jpg" alt="Интерфейс MQ-VERB" loading="eager" decoding="async">
+              <img src="plugin-images/mq-verb.jpg" alt="Интерфейс MQ-VERB" loading="lazy" decoding="async">
               <span class="screenshot-zoom">Рассмотреть ↗</span>
             </button>
             <div class="plugin-card-copy">
@@ -146,14 +148,14 @@
             <button class="card-link" type="button" data-open="verb"><span>Открыть детали</span><b aria-hidden="true">↗</b></button>
           </article>
 
-          <article class="plugin-card plugin-pulse reveal" data-plugin="pulse" data-category="plugin" data-free="true" style="--card-accent:#39d5ff;--card-accent-soft:#7de8ff;">
+          <article class="plugin-card plugin-pulse reveal" data-plugin="pulse" data-category="plugin" data-free="true">
             <div class="card-spot" aria-hidden="true"></div>
             <div class="plugin-card-top">
               <div class="plugin-index">05 / 10</div>
               <div class="plugin-status"><i></i> MOTION</div>
             </div>
             <button class="plugin-visual plugin-screenshot" type="button" data-open="pulse" aria-label="Рассмотреть интерфейс MQ-PULSE">
-              <img src="plugin-images/mq-pulse.jpg" alt="Интерфейс MQ-PULSE" loading="eager" decoding="async">
+              <img src="plugin-images/mq-pulse.jpg" alt="Интерфейс MQ-PULSE" loading="lazy" decoding="async">
               <span class="screenshot-zoom">Рассмотреть ↗</span>
             </button>
             <div class="plugin-card-copy">
@@ -165,14 +167,14 @@
             <button class="card-link" type="button" data-open="pulse"><span>Открыть детали</span><b aria-hidden="true">↗</b></button>
           </article>
 
-          <article class="plugin-card plugin-mobile reveal" data-plugin="mobile" data-category="plugin" data-free="true" style="--card-accent:#39d5ff;--card-accent-soft:#7de8ff;">
+          <article class="plugin-card plugin-mobile reveal" data-plugin="mobile" data-category="plugin" data-free="true">
             <div class="card-spot" aria-hidden="true"></div>
             <div class="plugin-card-top">
               <div class="plugin-index">06 / 10</div>
               <div class="plugin-status"><i></i> FILTER</div>
             </div>
             <button class="plugin-visual plugin-screenshot" type="button" data-open="mobile" aria-label="Рассмотреть интерфейс MQ-MOBILE">
-              <img src="plugin-images/mq-mobile.jpg" alt="Интерфейс MQ-MOBILE" loading="eager" decoding="async">
+              <img src="plugin-images/mq-mobile.jpg" alt="Интерфейс MQ-MOBILE" loading="lazy" decoding="async">
               <span class="screenshot-zoom">Рассмотреть ↗</span>
             </button>
             <div class="plugin-card-copy">
@@ -184,14 +186,14 @@
             <button class="card-link" type="button" data-open="mobile"><span>Открыть детали</span><b aria-hidden="true">↗</b></button>
           </article>
 
-          <article class="plugin-card plugin-dist reveal" data-plugin="dist" data-category="plugin" data-free="true" style="--card-accent:#39d5ff;--card-accent-soft:#7de8ff;">
+          <article class="plugin-card plugin-dist reveal" data-plugin="dist" data-category="plugin" data-free="true">
             <div class="card-spot" aria-hidden="true"></div>
             <div class="plugin-card-top">
               <div class="plugin-index">07 / 10</div>
               <div class="plugin-status"><i></i> DRIVE</div>
             </div>
             <button class="plugin-visual plugin-screenshot" type="button" data-open="dist" aria-label="Рассмотреть интерфейс MQ-DIST">
-              <img src="plugin-images/mq-dist.jpg" alt="Интерфейс MQ-DIST" loading="eager" decoding="async">
+              <img src="plugin-images/mq-dist.jpg" alt="Интерфейс MQ-DIST" loading="lazy" decoding="async">
               <span class="screenshot-zoom">Рассмотреть ↗</span>
             </button>
             <div class="plugin-card-copy">
@@ -203,14 +205,14 @@
             <button class="card-link" type="button" data-open="dist"><span>Открыть детали</span><b aria-hidden="true">↗</b></button>
           </article>
 
-          <article class="plugin-card plugin-delay reveal" data-plugin="delay" data-category="plugin" data-free="true" style="--card-accent:#39d5ff;--card-accent-soft:#7de8ff;">
+          <article class="plugin-card plugin-delay reveal" data-plugin="delay" data-category="plugin" data-free="true">
             <div class="card-spot" aria-hidden="true"></div>
             <div class="plugin-card-top">
               <div class="plugin-index">08 / 10</div>
               <div class="plugin-status"><i></i> RHYTHM</div>
             </div>
             <button class="plugin-visual plugin-screenshot" type="button" data-open="delay" aria-label="Рассмотреть интерфейс MQ-DELAY">
-              <img src="plugin-images/mq-delay.jpg" alt="Интерфейс MQ-DELAY" loading="eager" decoding="async">
+              <img src="plugin-images/mq-delay.jpg" alt="Интерфейс MQ-DELAY" loading="lazy" decoding="async">
               <span class="screenshot-zoom">Рассмотреть ↗</span>
             </button>
             <div class="plugin-card-copy">
@@ -222,14 +224,14 @@
             <button class="card-link" type="button" data-open="delay"><span>Открыть детали</span><b aria-hidden="true">↗</b></button>
           </article>
 
-          <article class="plugin-card plugin-detune reveal" data-plugin="detune" data-category="plugin" data-free="true" style="--card-accent:#39d5ff;--card-accent-soft:#7de8ff;">
+          <article class="plugin-card plugin-detune reveal" data-plugin="detune" data-category="plugin" data-free="true">
             <div class="card-spot" aria-hidden="true"></div>
             <div class="plugin-card-top">
               <div class="plugin-index">09 / 10</div>
               <div class="plugin-status"><i></i> VOICE</div>
             </div>
             <button class="plugin-visual plugin-screenshot" type="button" data-open="detune" aria-label="Рассмотреть интерфейс MQ-DETUNE">
-              <img src="plugin-images/mq-detune.png" alt="Интерфейс MQ-DETUNE" loading="eager" decoding="async">
+              <img src="plugin-images/mq-detune.jpg" alt="Интерфейс MQ-DETUNE" loading="lazy" decoding="async">
               <span class="screenshot-zoom">Рассмотреть ↗</span>
             </button>
             <div class="plugin-card-copy">
@@ -241,14 +243,14 @@
             <button class="card-link" type="button" data-open="detune"><span>Открыть детали</span><b aria-hidden="true">↗</b></button>
           </article>
 
-          <article class="plugin-card plugin-detect reveal" data-plugin="detect" data-category="plugin" data-free="true" style="--card-accent:#39d5ff;--card-accent-soft:#7de8ff;">
+          <article class="plugin-card plugin-detect reveal" data-plugin="detect" data-category="plugin" data-free="true">
             <div class="card-spot" aria-hidden="true"></div>
             <div class="plugin-card-top">
               <div class="plugin-index">10 / 10</div>
               <div class="plugin-status"><i></i> TEMPO</div>
             </div>
             <button class="plugin-visual plugin-screenshot" type="button" data-open="detect" aria-label="Рассмотреть интерфейс MQ-DETECT">
-              <img src="plugin-images/mq-detect.png" alt="Интерфейс MQ-DETECT" loading="eager" decoding="async">
+              <img src="plugin-images/mq-detect.jpg" alt="Интерфейс MQ-DETECT" loading="lazy" decoding="async">
               <span class="screenshot-zoom">Рассмотреть ↗</span>
             </button>
             <div class="plugin-card-copy">
@@ -267,7 +269,7 @@
   <footer class="footer">
     <div class="shell footer-inner">
       <span class="footer-note">© 2026 KINZOV AUDIO · MACOS · VST3 / AU</span>
-      <a class="footer-tg" href="https://t.me/ikinzoff" target="_blank" rel="noopener"><span>Telegram @ikinzoff — покупка и поддержка</span><b aria-hidden="true">↗</b></a>
+      <a class="footer-tg" href="https://t.me/ikinzoff" target="_blank" rel="noopener noreferrer"><span>Telegram @ikinzoff — покупка и поддержка</span><b aria-hidden="true">↗</b></a>
     </div>
   </footer>
 
@@ -280,7 +282,7 @@
     <h2 id="dialogTitle">Эхо, которое держит темп.</h2>
     <p id="dialogText"></p>
     <div class="dialog-features" id="dialogFeatures"></div>
-    <div class="dialog-buy"><div class="dialog-price" id="dialogPrice"></div><a class="dialog-cta" id="dialogBuy" href="https://t.me/ikinzoff" target="_blank" rel="noopener"><span>Купить в Telegram</span><b aria-hidden="true">↗</b></a></div>
+    <div class="dialog-buy"><div class="dialog-price" id="dialogPrice"></div><a class="dialog-cta" id="dialogBuy" href="https://t.me/ikinzoff" target="_blank" rel="noopener noreferrer"><span>Купить в Telegram</span><b aria-hidden="true">↗</b></a></div>
     <p class="dialog-note">Оплата и доставка — через Telegram. Файлы на сайте не выкладываются.</p>
     <div class="dialog-meta" id="dialogMeta"><span>MACOS</span><span>VST3</span><span>AU</span></div>
 

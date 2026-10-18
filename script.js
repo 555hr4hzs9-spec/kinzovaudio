@@ -190,7 +190,7 @@
     "value": 50,
     "wave": "detune",
     "accent": "#39d5ff",
-    "image": "plugin-images/mq-detune.png",
+    "image": "plugin-images/mq-detune.jpg",
     "price": "Бесплатно",
     "kind": "plugin",
     "platforms": ["MACOS", "VST3", "AU"]
@@ -211,7 +211,7 @@
     "value": 0,
     "wave": "detect",
     "accent": "#39d5ff",
-    "image": "plugin-images/mq-detect.png",
+    "image": "plugin-images/mq-detect.jpg",
     "price": "Бесплатно",
     "kind": "plugin",
     "platforms": ["MACOS", "VST3", "AU"]
