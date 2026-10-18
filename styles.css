@@ -199,98 +199,66 @@ canvas {
 .nav {
   position: fixed;
   z-index: 80;
-  top: 0;
+  top: 16px;
   left: 0;
   width: 100%;
-  padding: 16px 0;
-  transition:
-    padding .3s var(--ease),
-    background .3s,
-    border-color .3s;
-  border-bottom: 1px solid transparent;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  transition: top .3s var(--ease);
 }
 
 .nav.scrolled {
-  padding: 10px 0;
-  border-color: var(--line-soft);
-  background: rgba(7, 7, 10, .78);
-  backdrop-filter: blur(18px);
+  top: 8px;
 }
 
 .nav-inner {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 32px;
+  gap: 0;
+  width: auto;
+  margin-inline: auto;
 }
 
-/* Minimal glass top bar: thin strip, glowing bottom edge, no heavy slab. */
 .nav-panel {
   --gx: 50%;
   --gy: 0%;
   position: relative;
-  isolation: isolate;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 26px;
-  width: 100%;
-  min-height: 56px;
-  padding: 0 4px;
-  border: 0;
-  border-bottom: 1px solid rgba(57, 213, 255, .18);
-  border-radius: 0;
-  background: linear-gradient(180deg, rgba(7, 7, 10, .55), rgba(7, 7, 10, .35));
-  backdrop-filter: blur(14px) saturate(160%);
-  -webkit-backdrop-filter: blur(14px) saturate(160%);
-  box-shadow: 0 1px 0 rgba(57, 213, 255, .12);
-  transition: background .3s var(--ease), border-color .3s var(--ease), box-shadow .3s var(--ease);
+  gap: 4px;
+  padding: 6px 8px 6px 14px;
+  border: 1px solid rgba(0, 0, 0, .06);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, .08), 0 1px 2px rgba(0, 0, 0, .04);
+  transition: box-shadow .3s var(--ease), background .3s var(--ease);
+  min-height: 44px;
+  width: auto;
 }
 
-/* Traveling glow along the bottom edge. */
-.nav-panel::before {
-  content: "";
-  position: absolute;
-  left: -30%;
-  bottom: -1px;
-  width: 36%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  filter: blur(2px);
-  animation: navGlow 6s cubic-bezier(.45, 0, .25, 1) infinite;
-  pointer-events: none;
-  z-index: 1;
+.nav-panel:hover {
+  box-shadow: 0 6px 32px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .04);
 }
-
-@keyframes navGlow {
-  0%, 100% { left: -30%; opacity: 0; }
-  15% { opacity: 1; }
-  55% { opacity: 1; }
-  75%, 100% { left: 110%; opacity: 0; }
-}
-
-/* Refraction glint that tracks the cursor. */
-.nav-panel::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background: radial-gradient(300px 80px at var(--gx) var(--gy), rgba(57, 213, 255, .12), transparent 70%);
-  opacity: 0;
-  transition: opacity .4s var(--ease);
-  pointer-events: none;
-}
-.nav-panel:hover::after { opacity: 1; }
 
 .nav-panel > * {
   position: relative;
-  z-index: 2;
+  z-index: 1;
 }
 
 .nav.scrolled .nav-panel {
-  background: linear-gradient(180deg, rgba(7, 7, 10, .85), rgba(7, 7, 10, .7));
-  border-bottom-color: rgba(57, 213, 255, .35);
-  box-shadow: 0 1px 0 rgba(57, 213, 255, .25), 0 8px 24px rgba(0, 0, 0, .4);
+  background: rgba(255, 255, 255, .92);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, .1), 0 1px 2px rgba(0, 0, 0, .04);
+}
+
+/* Remove old glow effects */
+.nav-panel::before,
+.nav-panel::after,
+.nav-panel > .glass-wave {
+  display: none;
 }
 
 .brand {
@@ -332,44 +300,29 @@ canvas {
   gap: 10px;
 }
 
-/* Minimal text links with animated cyan underline. */
 .nav-links a {
   position: relative;
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  padding: 0 4px;
-  color: var(--muted);
+  padding: 0 12px;
+  color: #52525b;
   font-size: .78rem;
   font-weight: 600;
   letter-spacing: .1em;
   text-transform: uppercase;
   transition: color .25s var(--ease);
-}
-
-.nav-links a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 8px;
-  width: 100%;
-  height: 1.5px;
-  background: var(--accent);
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform .35s var(--ease);
-  box-shadow: 0 0 8px var(--accent);
+  border-radius: 999px;
 }
 
 .nav-links a:hover,
 .nav-links a.active {
-  color: var(--text);
+  color: #0a0a0f;
+  background: rgba(0, 0, 0, .04);
 }
 
-.nav-links a:hover::after,
-.nav-links a.active::after {
-  transform: scaleX(1);
-  transform-origin: left;
+.nav-links a::after {
+  display: none;
 }
 
 .nav-actions {
@@ -378,7 +331,6 @@ canvas {
   gap: 12px;
 }
 
-/* Status indicator: glowing dot with expanding ripple rings. */
 .nav-status {
   position: relative;
   display: inline-flex;
@@ -386,7 +338,7 @@ canvas {
   gap: 9px;
   padding: 0 14px;
   min-height: 42px;
-  color: var(--dim);
+  color: #71717a;
   font: 600 .58rem/1 var(--mono);
   letter-spacing: .16em;
 }
@@ -396,10 +348,8 @@ canvas {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #39d5ff;
-  box-shadow:
-    0 0 8px #39d5ff,
-    0 0 18px rgba(57, 213, 255, .6);
+  background: #0099cc;
+  box-shadow: 0 0 8px #0099cc;
 }
 
 .nav-status i::before,
@@ -424,46 +374,29 @@ canvas {
 .nav-cta {
   position: relative;
   overflow: hidden;
-  isolation: isolate;
   display: inline-flex;
   align-items: center;
-  gap: 14px;
-  min-height: 46px;
-  padding: 0 8px 0 22px;
-  border: 1px solid rgba(255, 255, 255, .7);
-  border-radius: 14px;
-  background: linear-gradient(180deg, #ffffff 0%, #f0f0f2 45%, #0a3d4a 100%);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 1),
-    inset 0 -8px 14px rgba(120, 116, 140, .35),
-    0 10px 30px rgba(57, 213, 255, .32),
-    0 0 0 1px rgba(57, 213, 255, .14);
-  color: #0a0a0f;
+  gap: 10px;
+  min-height: 38px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 999px;
+  background: #0099cc;
+  color: #ffffff;
   font-size: .74rem;
   font-weight: 700;
-  letter-spacing: .08em;
+  letter-spacing: .06em;
   text-transform: uppercase;
   transition:
-    transform .3s var(--ease),
-    box-shadow .3s var(--ease),
-    filter .3s var(--ease);
+    transform .2s var(--ease),
+    box-shadow .2s var(--ease),
+    filter .2s var(--ease);
+  box-shadow: 0 2px 8px rgba(0, 153, 204, .25);
 }
 
 /* Travelling glint inside the button. */
 .nav-cta::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  bottom: -50%;
-  left: -80%;
-  width: 45%;
-  z-index: -1;
-  background: linear-gradient(100deg,
-    rgba(255, 255, 255, 0),
-    rgba(255, 255, 255, .95),
-    rgba(255, 255, 255, 0));
-  transform: skewX(-20deg);
-  animation: ctaGlint 4.6s cubic-bezier(.5, 0, .3, 1) infinite;
+  display: none;
 }
 
 @keyframes ctaGlint {
@@ -473,30 +406,23 @@ canvas {
 
 .nav-cta b {
   display: grid;
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   place-items: center;
-  border-radius: 10px;
-  background: linear-gradient(180deg, #f5f5f7, #f5f5f7);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, .25),
-    0 4px 10px rgba(0, 0, 0, .4);
-  color: #f0f0f2;
-  font-size: .8rem;
-  transition: transform .3s var(--ease);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .2);
+  color: #ffffff;
+  font-size: .7rem;
+  transition: transform .2s var(--ease);
 }
 
 .nav-cta:hover {
-  transform: translateY(-2px);
-  filter: brightness(1.05);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 1),
-    inset 0 -8px 14px rgba(120, 116, 140, .35),
-    0 18px 42px rgba(57, 213, 255, .5),
-    0 0 0 1px rgba(255, 255, 255, .35);
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+  box-shadow: 0 4px 16px rgba(0, 153, 204, .35);
 }
 
-.nav-cta:hover b { transform: translate(2px, -2px); }
+.nav-cta:hover b { transform: translate(1px, -1px); }
 
 .menu-toggle {
   display: none;
