@@ -778,6 +778,6 @@
 
   window.addEventListener('resize', resize);
   resize();
-  if (reducedMotion) { renderStatic(); }
-  else { requestAnimationFrame(loop); }
+  renderStatic();                 // paint one frame immediately (instant, RAF-independent)
+  if (!reducedMotion) requestAnimationFrame(loop);
 })();
