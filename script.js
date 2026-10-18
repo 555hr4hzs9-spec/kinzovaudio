@@ -687,7 +687,7 @@
       b.y = Math.sin(a * 1.13 + b.ph) * b.or * 0.9;
     }
 
-    const FIELD = 1.5;             // field range [-1.5,1.5]; blob+halo (~1.38 max) fits inside canvas, no square clip
+    const FIELD = 1.75;            // field range [-1.75,1.75]; blob+halo fully inside canvas, no edge/square clip
     const INV = (2 * FIELD) / RES; // map pixel -> [-FIELD, FIELD]
     const SURF = 1.0;              // surface threshold
     const LIGHT = [0.42, 0.55, 0.72];
@@ -710,9 +710,9 @@
           const g = -2 * r2 / (d2 * d2);
           gx += g * dx; gy += g * dy;
         }
-        if (f < 0.28) { data[idx + 3] = 0; continue; } // far outside -> transparent
+        if (f < 0.40) { data[idx + 3] = 0; continue; } // far outside -> transparent
 
-        const alpha = Math.min(1, (f - 0.28) / (0.72)); // soft edge
+        const alpha = Math.min(1, (f - 0.40) / (0.60)); // soft edge
         // Height dome -> fake normal
         const hgt = Math.min(1, (f - SURF) / 1.6);
         const z = Math.sqrt(Math.max(0, hgt));
