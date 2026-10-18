@@ -547,10 +547,10 @@
   const releaseBase = 'https://github.com/555hr4hzs9-spec/kinzovaudio/releases/download/v1.0/';
   const files = {
     ai:      { win: 'mq-ai-win.exe', mac: 'mq-ai-mac.dmg' },
-    monitor: { mac: 'mq-monitor-mac.dmg' },
+    monitor: { win: 'mq-monitor-win.zip', mac: 'mq-monitor-mac.dmg' },
     chek:    { win: 'mq-chek-win.exe', mac: 'mq-chek-mac.dmg' },
     verb:    { win: 'mq-verb-win.exe', mac: 'mq-verb-mac.dmg' },
-    pulse:   { mac: 'mq-pulse-mac.dmg' },
+    pulse:   { win: 'mq-pulse-win.zip', mac: 'mq-pulse-mac.dmg' },
     mobile:  { win: 'mq-mobile-win.exe', mac: 'mq-mobile-mac.dmg' },
     dist:    { win: 'mq-dist-win.exe', mac: 'mq-dist-mac.dmg' },
     delay:   { win: 'mq-delay-win.zip', mac: 'mq-delay-mac.zip' },
