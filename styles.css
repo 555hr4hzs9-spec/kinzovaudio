@@ -62,8 +62,8 @@
   --text: #0a0a0f;
   --muted: #52525b;
   --dim: #a1a1aa;
-  --accent: #39d5ff;
-  --accent-soft: #7de8ff;
+  --accent: #0099cc;
+  --accent-soft: #00b4e6;
   --accent-deep: #0a3d4a;
   --signal: #39d5ff;
   --shell: min(1240px, calc(100vw - 64px));
