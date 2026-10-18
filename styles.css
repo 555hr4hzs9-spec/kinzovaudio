@@ -2997,7 +2997,7 @@ canvas {
   transition:transform .7s cubic-bezier(.22,1,.36,1), filter .5s;
 }
 .plugin-screenshot:hover img { transform:scale(1.045); filter:saturate(1.08) brightness(1.08); }
-.plugin-chek .plugin-screenshot { background:radial-gradient(circle at 50% 35%, rgba(57,213,255,.13), transparent 60%), #ffffff; }
+.plugin-chek .plugin-screenshot { background: #ffffff; }
 .plugin-chek .plugin-screenshot img { object-fit:contain; padding:0; }
 .screenshot-zoom { position:absolute; right:12px; bottom:12px; padding:8px 10px; border:1px solid rgba(255,255,255,.16); border-radius:5px; background:rgba(4,4,7,.74); color:var(--text); opacity:0; transform:translateY(8px); transition:opacity .25s, transform .25s; font:600 .52rem/1 var(--mono); letter-spacing:.09em; }
 .plugin-screenshot:hover .screenshot-zoom { opacity:1; transform:none; }
