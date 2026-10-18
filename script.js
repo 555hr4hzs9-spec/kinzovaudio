@@ -590,6 +590,50 @@
   dialog?.addEventListener('close', () => document.body.classList.remove('dialog-open'));
   dialog?.querySelector('a[href="#contact"]')?.addEventListener('click', closeDialog);
 
+  /* Hero console: hovering a module swaps the live preview pane. */
+  const previewPane = document.getElementById('tidePreview');
+  const previewCode = document.getElementById('previewCode');
+  const previewPrice = document.getElementById('previewPrice');
+  const previewTitle = document.getElementById('previewTitle');
+  const previewText = document.getElementById('previewText');
+  const previewFeats = document.getElementById('previewFeats');
+  const tideItems = [...document.querySelectorAll('.tide-item')];
+
+  if (previewPane && tideItems.length) {
+    let current = '';
+    let swapTimer = 0;
+
+    const renderPreview = key => {
+      const data = pluginData[key];
+      if (!data || key === current) return;
+      current = key;
+
+      tideItems.forEach(item =>
+        item.classList.toggle('is-active', item.dataset.module === key));
+
+      clearTimeout(swapTimer);
+      previewPane.classList.add('is-swap');
+      swapTimer = setTimeout(() => {
+        previewCode.textContent = data.code;
+        previewPrice.textContent = data.price;
+        previewPrice.classList.toggle('is-free', data.price === 'Бесплатно');
+        previewTitle.textContent = data.title;
+        previewText.textContent = data.text;
+        previewFeats.innerHTML = (data.features || []).slice(0, 3)
+          .map(([label, note]) => `<li><b>${label}</b><span>${note}</span></li>`)
+          .join('');
+        previewPane.classList.remove('is-swap');
+      }, 140);
+    };
+
+    tideItems.forEach(item => {
+      item.addEventListener('pointerenter', () => renderPreview(item.dataset.module));
+      item.addEventListener('focus', () => renderPreview(item.dataset.module));
+    });
+
+    renderPreview('delay');
+  }
+
   root.classList.add('site-ready');
 })();
 
@@ -621,6 +665,8 @@
     ty = ((event.clientY - r.top) / r.height - .5) * 2;
     stage.style.setProperty('--mx', `${tx}`);
     stage.style.setProperty('--my', `${ty}`);
+    stage.style.setProperty('--gx', `${(((event.clientX - r.left) / r.width) * 100).toFixed(1)}%`);
+    stage.style.setProperty('--gy', `${(((event.clientY - r.top) / r.height) * 100).toFixed(1)}%`);
   });
   stage.addEventListener('pointerleave', () => { tx = 0; ty = 0; });
   const tick = () => {
