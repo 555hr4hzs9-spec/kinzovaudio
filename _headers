@@ -1,32 +1,30 @@
-# Security + caching headers.
-# Applied by Cloudflare Pages / Netlify. GitHub Pages ignores files starting with "_"
-# (and .nojekyll disables Jekyll processing), so this file is harmless there.
-#
-# The Content-Security-Policy here only adds frame-ancestors 'none' (clickjacking
-# protection, which cannot be set from a <meta> tag). The full resource policy lives
-# in index.html as a <meta> tag so it stays in sync with the inline script hash.
+# Security + caching headers (Cloudflare Pages / Netlify)
+# GitHub Pages ignores; safe to keep.
 
+# Root and pages
 /*
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), midi=()
-  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   Cross-Origin-Opener-Policy: same-origin
   Content-Security-Policy: frame-ancestors 'none'
 
-# Versioned via ?v=... in index.html, so safe to cache immutably.
+# Immutable assets
 /styles.css
   Cache-Control: public, max-age=31536000, immutable
+
 /script.js
   Cache-Control: public, max-age=31536000, immutable
 
-# Plugin screenshots.
+# Images
 /plugin-images/*
   Cache-Control: public, max-age=604800
 
-# HTML must always revalidate so new asset versions are picked up.
+# HTML must validate
 /
   Cache-Control: public, max-age=0, must-revalidate
+
 /index.html
   Cache-Control: public, max-age=0, must-revalidate
