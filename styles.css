@@ -599,6 +599,26 @@ canvas {
   overflow: hidden;
 }
 
+/* Hero visual column — hosts the electric wave canvas. */
+.hero-visual {
+  position: relative;
+  min-height: 420px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: radial-gradient(60% 60% at 50% 50%, rgba(255, 255, 255, .06), transparent 70%);
+}
+
+/* Electric wave canvas. */
+.hero-wave {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: .95;
+}
+
 .hero::before {
   content: "";
   position: absolute;
@@ -609,6 +629,26 @@ canvas {
   background-size: 84px 84px;
   mask-image: linear-gradient(to bottom, transparent, black 18%, black 78%, transparent);
   pointer-events: none;
+  animation: gridBreathe 8s ease-in-out infinite;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: -12%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(42% 38% at 28% 42%, rgba(255, 255, 255, .16), transparent 70%),
+    radial-gradient(38% 44% at 76% 62%, rgba(255, 255, 255, .10), transparent 72%);
+  filter: blur(46px);
+  animation: heroBreath 9s ease-in-out infinite alternate;
+}
+
+@keyframes heroBreath {
+  0%   { transform: scale(1) translate(0, 0); opacity: .65; }
+  50%  { transform: scale(1.14) translate(-2%, 1%); opacity: 1; }
+  100% { transform: scale(1.06) translate(1%, -1%); opacity: .75; }
 }
 
 .hero-layout {
@@ -618,6 +658,8 @@ canvas {
   grid-template-columns: minmax(0, 1.04fr) minmax(440px, .96fr);
   gap: clamp(46px, 7vw, 98px);
   align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .kicker {
@@ -670,9 +712,10 @@ canvas {
 }
 
 .hero h1 {
-  max-width: 760px;
-  font-size: clamp(3.4rem, 6.6vw, 7.2rem);
-  line-height: .92;
+  max-width: 560px;
+  font-size: clamp(3.6rem, 5.6vw, 7.6rem);
+  line-height: .86;
+  letter-spacing: -.06em;
 }
 
 .hero h1 em,
