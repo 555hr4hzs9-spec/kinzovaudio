@@ -6,335 +6,215 @@
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const pluginData = {
-  "delay": {
+  "ai": {
     "index": "01",
-    "code": "MQ-DELAY",
-    "title": "Эхо в твоём ритме.",
-    "text": "Стереодилей для короткого slap-эхо и ритмических повторов. AMOUNT задаёт количество эффекта, PRE-DELAY — время, FEEDBACK — повторы. SYNC привязывает задержку к темпу проекта, а PING-PONG перемещает повторы между каналами.",
-    "summary": "Стереоэхо с синхронизацией, ping-pong, фильтрами повторов и даккингом.",
+    "code": "MQ-AI",
+    "title": "Дубли L/R из твоего вокала.",
+    "text": "AI-генератор даблов: загрузите вокал и получите левый и правый дубли для широкой стерео-картины. Возможности шире: превращайте свой голос в любой другой и обучайте модели на базе собственного голоса.",
+    "summary": "AI-дубли L/R, конверсия голоса, обучение моделей.",
     "features": [
-      [
-        "SYNC / PRE-DELAY",
-        "Время в миллисекундах или делениях темпа"
-      ],
-      [
-        "FEEDBACK / WIDTH",
-        "Повторы и ширина обработанного сигнала"
-      ],
-      [
-        "TONE / LOW / HIGH CUT",
-        "Окраска и частотная полоса эха"
-      ],
-      [
-        "DUCK / DELTA",
-        "Даккинг и прослушивание только эффекта"
-      ]
+      ["DOUBLES L/R", "Генерация стерео-даблов из вокала"],
+      ["VOICE CONVERT", "Превращение голоса в любой другой"],
+      ["TRAIN MODELS", "Обучение моделей на своём голосе"],
+      ["WAV EXPORT", "Сохранение даблов в WAV"]
     ],
-    "mode": "STEREO DELAY",
-    "value": 45,
-    "wave": "delay",
-    "accent": "#f0eef6",
-    "image": "plugin-images/mq-delay.jpg",
-    "price": "3 000 ₽",
-    "kind": "plugin",
-    "platforms": ["MACOS", "VST3", "AU"]
+    "mode": "VOCAL AI APP",
+    "value": 100,
+    "wave": "ai",
+    "accent": "#39d5ff",
+    "image": "plugin-images/mq-ai.png",
+    "price": "15 000 ₽",
+    "kind": "program",
+    "platforms": ["MACOS", "APP"]
   },
-  "verb": {
+  "monitor": {
     "index": "02",
-    "code": "MQ-VERB",
-    "title": "От комнаты до галактики.",
-    "text": "Ревербератор с пятью пространствами: ROOM, AMBIENCE, HALL, SHIMMER и GALACTIC. AMOUNT регулирует количество реверба; SIZE, PRE-DELAY, DIFFUSION, TONE и WIDTH формируют пространство. Спектральный DUCK освобождает место источнику в хвосте.",
-    "summary": "Пять пространств, спектральный даккинг, фильтры и заморозка хвоста.",
+    "code": "MQ-MONITOR",
+    "title": "Консоль без привязки к карте.",
+    "text": "Замена знаменитой консоли, которая работает с любой аудиокартой. Выбирайте входы и выходы, вешайте любимые VST3/AU и мониторьте в реальном времени с минимальной задержкой — восемь каналов под рукой, ничего лишнего.",
+    "summary": "Консоль мониторинга с любой картой. Свои VST3/AU, реалтайм.",
     "features": [
-      [
-        "5 MODES",
-        "Room · Ambience · Hall · Shimmer · Galactic"
-      ],
-      [
-        "SIZE / DIFFUSION",
-        "Размер пространства и плотность отражений"
-      ],
-      [
-        "DUCK / SAT",
-        "Спектральный даккинг и сатурация реверба"
-      ],
-      [
-        "FREEZE / FILTERS",
-        "Заморозка хвоста, low-cut и high-cut"
-      ]
+      ["ANY INTERFACE", "Работает с любой аудиокартой"],
+      ["VST3 / AU HOST", "Любимые плагины внутри консоли"],
+      ["8 CHANNELS", "Восемь каналов мониторинга"],
+      ["REALTIME", "Мониторинг в реальном времени"]
     ],
-    "mode": "FIVE REVERB SPACES",
-    "value": 32,
-    "wave": "reverb",
-    "accent": "#f0eef6",
-    "image": "plugin-images/mq-verb.jpg",
-    "price": "10 000 ₽",
-    "kind": "plugin",
-    "platforms": ["MACOS", "VST3", "AU"]
-  },
-  "pulse": {
-    "index": "03",
-    "code": "MQ-PULSE",
-    "title": "Нарисуй свой пульс.",
-    "text": "Ритмическая обработка громкости с редактируемой шкалой до 32 шагов. ADSR-огибающая формирует каждый импульс, а MIX смешивает результат с исходным сигналом. Синхронизация с DAW, свободная частота и TAP задают ритм.",
-    "summary": "Редактируемые 2–32 шага, ADSR, восемь паттернов и синхронизация с DAW.",
-    "features": [
-      [
-        "PULSE TIMELINE",
-        "Редактирование паттерна длиной 2–32 шага"
-      ],
-      [
-        "ADSR / MIX",
-        "Attack, Decay, Sustain, Release и баланс"
-      ],
-      [
-        "SYNC / FREE / TAP",
-        "Темп DAW, свободная частота или tap tempo"
-      ],
-      [
-        "8 PATTERNS",
-        "Восемь слотов, Randomize и Reset"
-      ]
-    ],
-    "mode": "32-STEP PULSE SHAPER",
-    "value": 100,
-    "wave": "pulse",
-    "accent": "#f0eef6",
-    "image": "plugin-images/mq-pulse.jpg",
-    "price": "5 000 ₽",
-    "kind": "plugin",
-    "platforms": ["MACOS", "VST3", "AU"]
-  },
-  "mobile": {
-    "index": "04",
-    "code": "MQ-MOBILE",
-    "title": "Телефонный звук. Одна ручка.",
-    "text": "Одноручный эффект мобильного телефона. MOBILE одновременно сужает частотную полосу, добавляет мягкую сатурацию и увеличивает долю обработки. Компенсация громкости помогает сравнивать характер звука, а не только уровень.",
-    "summary": "Сужение частотной полосы, мягкая сатурация и dry/wet под одной ручкой.",
-    "features": [
-      [
-        "MOBILE 0–100%",
-        "Полоса, сатурация и баланс движутся вместе"
-      ],
-      [
-        "PHONE BAND",
-        "HPF 80–380 Гц · LPF 18–3,2 кГц"
-      ],
-      [
-        "LEVEL COMPENSATION",
-        "Компенсация уровня обработанного сигнала"
-      ],
-      [
-        "OFF / 2× / 4×",
-        "Оверсемплинг для офлайн-экспорта"
-      ]
-    ],
-    "mode": "PHONE COLOR",
-    "value": 100,
-    "wave": "mobile",
-    "accent": "#f0eef6",
-    "image": "plugin-images/mq-mobile.jpg",
-    "price": "5 000 ₽",
-    "kind": "plugin",
-    "platforms": ["MACOS", "VST3", "AU"]
-  },
-  "dist": {
-    "index": "05",
-    "code": "MQ-DIST",
-    "title": "От тепла до цифровой грязи.",
-    "text": "Одна ручка постепенно раскрывает цепочку clipper → distortion → bitcrusher → адаптивный low-pass. Стадии подключаются плавно и перекрываются: от мягких гармоник к плотному перегрузу и цифровой текстуре. Компенсация громкости и софт-лимитер завершают цепь.",
-    "summary": "Клиппер, дисторшн и биткрашер с адаптивным фильтром под одной ручкой.",
-    "features": [
-      [
-        "ONE CONTROL",
-        "Плавное управление всей цепью обработки"
-      ],
-      [
-        "CLIP / DIST / CRUSH",
-        "Контроль пиков, гармоники и биткрашинг"
-      ],
-      [
-        "ADAPTIVE LPF",
-        "Фильтр смягчает верха по мере усиления эффекта"
-      ],
-      [
-        "OFFLINE 2× / 4×",
-        "Оверсемплинг при офлайн-экспорте"
-      ]
-    ],
-    "mode": "CLIP · DISTORT · CRUSH",
-    "value": 50,
-    "wave": "dist",
-    "accent": "#f0eef6",
-    "image": "plugin-images/mq-dist.jpg",
-    "price": "4 000 ₽",
-    "kind": "plugin",
-    "platforms": ["MACOS", "VST3", "AU"]
+    "mode": "CONSOLE APP",
+    "value": 0,
+    "wave": "monitor",
+    "accent": "#39d5ff",
+    "image": "plugin-images/mq-monitor.png",
+    "price": "15 000 ₽",
+    "kind": "program",
+    "platforms": ["MACOS", "APP"]
   },
   "chek": {
-    "index": "06",
+    "index": "03",
     "code": "MQ-CHEK",
     "title": "Микс из DAW — на iPhone. Без QR-кодов.",
     "text": "MQ-CHEK находит iPhone сам: включите приёмник, и плагин увидит его в локальной сети. Никаких QR-кодов, ручного ввода IP и повторного сопряжения при каждом переподключении — открыл проект и проверяешь микс. Копия мастер-сигнала идёт на телефон, а выход DAW остаётся нетронутым passthrough. На экране всегда живая диагностика: потери, буфер, обрывы, формат, сессия и порт, а честный RTT меряется на самом iPhone, а не угадывается. Это не LUFS-анализатор и не эквалайзер.",
     "summary": "Авто-поиск iPhone в сети без QR-кодов. Диагностика линка и честный RTT.",
     "features": [
-      [
-        "АВТО-ПОИСК",
-        "iPhone находится сам — QR-коды не нужны"
-      ],
-      [
-        "ДИАГНОСТИКА",
-        "Потери, буфер, обрывы, формат и сессия"
-      ],
-      [
-        "ЧЕСТНЫЙ RTT",
-        "Задержка меряется на iPhone, а не угадывается"
-      ],
-      [
-        "PASSTHROUGH",
-        "Мастер-выход DAW остаётся неизменным"
-      ]
+      ["АВТО-ПОИСК", "iPhone находится сам — QR-коды не нужны"],
+      ["ДИАГНОСТИКА", "Потери, буфер, обрывы, формат и сессия"],
+      ["ЧЕСТНЫЙ RTT", "Задержка меряется на iPhone, а не угадывается"],
+      ["PASSTHROUGH", "Мастер-выход DAW остаётся неизменным"]
     ],
     "mode": "DAW TO iPHONE / NO QR",
     "value": 0,
     "wave": "check",
-    "accent": "#f0eef6",
+    "accent": "#39d5ff",
     "image": "plugin-images/mq-chek.png",
     "price": "5 000 ₽",
     "kind": "plugin",
     "platforms": ["MACOS", "VST3", "AU", "iOS"]
   },
-  "detune": {
+  "verb": {
+    "index": "04",
+    "code": "MQ-VERB",
+    "title": "От комнаты до галактики.",
+    "text": "Ревербератор с пятью пространствами: ROOM, AMBIENCE, HALL, SHIMMER и GALACTIC. AMOUNT регулирует количество реверба; SIZE, PRE-DELAY, DIFFUSION, TONE и WIDTH формируют пространство. Спектральный DUCK освобождает место источнику в хвосте.",
+    "summary": "Пять пространств, спектральный даккинг, фильтры и заморозка хвоста.",
+    "features": [
+      ["5 MODES", "Room · Ambience · Hall · Shimmer · Galactic"],
+      ["SIZE / DIFFUSION", "Размер пространства и плотность отражений"],
+      ["DUCK / SAT", "Спектральный даккинг и сатурация реверба"],
+      ["FREEZE / FILTERS", "Заморозка хвоста, low-cut и high-cut"]
+    ],
+    "mode": "FIVE REVERB SPACES",
+    "value": 32,
+    "wave": "reverb",
+    "accent": "#39d5ff",
+    "image": "plugin-images/mq-verb.jpg",
+    "price": "Бесплатно",
+    "kind": "plugin",
+    "platforms": ["MACOS", "VST3", "AU"]
+  },
+  "pulse": {
+    "index": "05",
+    "code": "MQ-PULSE",
+    "title": "Нарисуй свой пульс.",
+    "text": "Ритмическая обработка громкости с редактируемой шкалой до 32 шагов. ADSR-огибающая формирует каждый импульс, а MIX смешивает результат с исходным сигналом. Синхронизация с DAW, свободная частота и TAP задают ритм.",
+    "summary": "Редактируемые 2–32 шага, ADSR, восемь паттернов и синхронизация с DAW.",
+    "features": [
+      ["PULSE TIMELINE", "Редактирование паттерна длиной 2–32 шага"],
+      ["ADSR / MIX", "Attack, Decay, Sustain, Release и баланс"],
+      ["SYNC / FREE / TAP", "Темп DAW, свободная частота или tap tempo"],
+      ["8 PATTERNS", "Восемь слотов, Randomize и Reset"]
+    ],
+    "mode": "32-STEP PULSE SHAPER",
+    "value": 100,
+    "wave": "pulse",
+    "accent": "#39d5ff",
+    "image": "plugin-images/mq-pulse.jpg",
+    "price": "Бесплатно",
+    "kind": "plugin",
+    "platforms": ["MACOS", "VST3", "AU"]
+  },
+  "mobile": {
+    "index": "06",
+    "code": "MQ-MOBILE",
+    "title": "Телефонный звук. Одна ручка.",
+    "text": "Одноручный эффект мобильного телефона. MOBILE одновременно сужает частотную полосу, добавляет мягкую сатурацию и увеличивает долю обработки. Компенсация громкости помогает сравнивать характер звука, а не только уровень.",
+    "summary": "Сужение частотной полосы, мягкая сатурация и dry/wet под одной ручкой.",
+    "features": [
+      ["MOBILE 0–100%", "Полоса, сатурация и баланс движутся вместе"],
+      ["PHONE BAND", "HPF 80–380 Гц · LPF 18–3,2 кГц"],
+      ["LEVEL COMPENSATION", "Компенсация уровня обработанного сигнала"],
+      ["OFF / 2× / 4×", "Оверсемплинг для офлайн-экспорта"]
+    ],
+    "mode": "PHONE COLOR",
+    "value": 100,
+    "wave": "mobile",
+    "accent": "#39d5ff",
+    "image": "plugin-images/mq-mobile.jpg",
+    "price": "Бесплатно",
+    "kind": "plugin",
+    "platforms": ["MACOS", "VST3", "AU"]
+  },
+  "dist": {
     "index": "07",
+    "code": "MQ-DIST",
+    "title": "От тепла до цифровой грязи.",
+    "text": "Одна ручка постепенно раскрывает цепочку clipper → distortion → bitcrusher → адаптивный low-pass. Стадии подключаются плавно и перекрываются: от мягких гармоник к плотному перегрузу и цифровой текстуре. Компенсация громкости и софт-лимитер завершают цепь.",
+    "summary": "Клиппер, дисторшн и биткрашер с адаптивным фильтром под одной ручкой.",
+    "features": [
+      ["ONE CONTROL", "Плавное управление всей цепью обработки"],
+      ["CLIP / DIST / CRUSH", "Контроль пиков, гармоники и биткрашинг"],
+      ["ADAPTIVE LPF", "Фильтр смягчает верха по мере усиления эффекта"],
+      ["OFFLINE 2× / 4×", "Оверсемплинг при офлайн-экспорте"]
+    ],
+    "mode": "CLIP · DISTORT · CRUSH",
+    "value": 50,
+    "wave": "dist",
+    "accent": "#39d5ff",
+    "image": "plugin-images/mq-dist.jpg",
+    "price": "Бесплатно",
+    "kind": "plugin",
+    "platforms": ["MACOS", "VST3", "AU"]
+  },
+  "delay": {
+    "index": "08",
+    "code": "MQ-DELAY",
+    "title": "Эхо в твоём ритме.",
+    "text": "Стереодилей для короткого slap-эхо и ритмических повторов. AMOUNT задаёт количество эффекта, PRE-DELAY — время, FEEDBACK — повторы. SYNC привязывает задержку к темпу проекта, а PING-PONG перемещает повторы между каналами.",
+    "summary": "Стереоэхо с синхронизацией, ping-pong, фильтрами повторов и даккингом.",
+    "features": [
+      ["SYNC / PRE-DELAY", "Время в миллисекундах или делениях темпа"],
+      ["FEEDBACK / WIDTH", "Повторы и ширина обработанного сигнала"],
+      ["TONE / LOW / HIGH CUT", "Окраска и частотная полоса эха"],
+      ["DUCK / DELTA", "Даккинг и прослушивание только эффекта"]
+    ],
+    "mode": "STEREO DELAY",
+    "value": 45,
+    "wave": "delay",
+    "accent": "#39d5ff",
+    "image": "plugin-images/mq-delay.jpg",
+    "price": "Бесплатно",
+    "kind": "plugin",
+    "platforms": ["MACOS", "VST3", "AU"]
+  },
+  "detune": {
+    "index": "09",
     "code": "MQ-DETUNE",
     "title": "Один морф вместо четырёх ручек.",
     "text": "Атмосферный вокальный detune: одна ручка INTENSITY непрерывно морфирует detune → chorus → flanger → mega-wide doubler без стыков и щелчков. Два micro-pitch голоса, защита низов и моно-совместимость. Маленькая ручка DUCK спектрально пригибает эффект под вокал.",
     "summary": "Морф detune → chorus → flanger → doubler. Спектральный даккинг DUCK.",
     "features": [
-      [
-        "INTENSITY 0–100%",
-        "Бесшовный морф четырёх характеров"
-      ],
-      [
-        "MICRO-PITCH",
-        "Два расстроенных голоса L −24 / R +24 цента"
-      ],
-      [
-        "SPECTRAL DUCK",
-        "Вокальная полоса −12 дБ, тело почти цело"
-      ],
-      [
-        "FREE",
-        "Бесплатно: ноль задержки, ~1% CPU"
-      ]
+      ["INTENSITY 0–100%", "Бесшовный морф четырёх характеров"],
+      ["MICRO-PITCH", "Два расстроенных голоса L −24 / R +24 цента"],
+      ["SPECTRAL DUCK", "Вокальная полоса −12 дБ, тело почти цело"],
+      ["FREE", "Бесплатно: ноль задержки, ~1% CPU"]
     ],
     "mode": "VOCAL MORPH",
     "value": 50,
     "wave": "detune",
-    "accent": "#f0eef6",
+    "accent": "#39d5ff",
     "image": "plugin-images/mq-detune.png",
     "price": "Бесплатно",
     "kind": "plugin",
     "platforms": ["MACOS", "VST3", "AU"]
   },
   "detect": {
-    "index": "08",
+    "index": "10",
     "code": "MQ-DETECT",
     "title": "Темп и тональность — сразу.",
     "text": "Простой измеритель темпа и тональности с возможностью тапинга: постучите темп пальцем и сразу увидите BPM и тональность материала. Никаких настроек и регистрации — открыл и пользуешься.",
     "summary": "Измеритель темпа и тональности с тапингом. Бесплатно.",
     "features": [
-      [
-        "TAP TEMPO",
-        "Настучите темп — BPM посчитается сам"
-      ],
-      [
-        "KEY DETECT",
-        "Определение тональности материала"
-      ],
-      [
-        "SIMPLE",
-        "Ничего лишнего: открыл и пользуешься"
-      ],
-      [
-        "FREE",
-        "Бесплатно, без регистрации"
-      ]
+      ["TAP TEMPO", "Настучите темп — BPM посчитается сам"],
+      ["KEY DETECT", "Определение тональности материала"],
+      ["SIMPLE", "Ничего лишнего: открыл и пользуешься"],
+      ["FREE", "Бесплатно, без регистрации"]
     ],
     "mode": "BPM · KEY",
     "value": 0,
     "wave": "detect",
-    "accent": "#f0eef6",
+    "accent": "#39d5ff",
     "image": "plugin-images/mq-detect.png",
     "price": "Бесплатно",
     "kind": "plugin",
     "platforms": ["MACOS", "VST3", "AU"]
-  },
-  "monitor": {
-    "index": "09",
-    "code": "MQ-MONITOR",
-    "title": "Консоль без привязки к карте.",
-    "text": "Замена знаменитой консоли, которая работает с любой аудиокартой. Выбирайте входы и выходы, вешайте любимые VST3/AU и мониторьте в реальном времени с минимальной задержкой — восемь каналов под рукой, ничего лишнего.",
-    "summary": "Консоль мониторинга с любой картой. Свои VST3/AU, реалтайм.",
-    "features": [
-      [
-        "ANY INTERFACE",
-        "Работает с любой аудиокартой"
-      ],
-      [
-        "VST3 / AU HOST",
-        "Любимые плагины внутри консоли"
-      ],
-      [
-        "8 CHANNELS",
-        "Восемь каналов мониторинга"
-      ],
-      [
-        "REALTIME",
-        "Мониторинг в реальном времени"
-      ]
-    ],
-    "mode": "CONSOLE APP",
-    "value": 0,
-    "wave": "monitor",
-    "accent": "#f0eef6",
-    "image": "plugin-images/mq-monitor.png",
-    "price": "15 000 ₽",
-    "kind": "program",
-    "platforms": ["MACOS", "APP"]
-  },
-  "ai": {
-    "index": "10",
-    "code": "MQ-AI",
-    "title": "Дубли L/R из твоего вокала.",
-    "text": "AI-генератор даблов: загрузите вокал и получите левый и правый дубли для широкой стерео-картины. Возможности шире: превращайте свой голос в любой другой и обучайте модели на базе собственного голоса.",
-    "summary": "AI-дубли L/R, конверсия голоса, обучение моделей.",
-    "features": [
-      [
-        "DOUBLES L/R",
-        "Генерация стерео-даблов из вокала"
-      ],
-      [
-        "VOICE CONVERT",
-        "Превращение голоса в любой другой"
-      ],
-      [
-        "TRAIN MODELS",
-        "Обучение моделей на своём голосе"
-      ],
-      [
-        "WAV EXPORT",
-        "Сохранение даблов в WAV"
-      ]
-    ],
-    "mode": "VOCAL AI APP",
-    "value": 100,
-    "wave": "ai",
-    "accent": "#f0eef6",
-    "image": "plugin-images/mq-ai.png",
-    "price": "15 000 ₽",
-    "kind": "program",
-    "platforms": ["MACOS", "APP"]
   }
 };
 
@@ -345,7 +225,6 @@
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
-  /* Liquid Glass: move the refraction glint with the cursor over the panel. */
   const navPanel = document.querySelector('.nav-panel');
   if (navPanel && !reducedMotion) {
     let raf = 0;
