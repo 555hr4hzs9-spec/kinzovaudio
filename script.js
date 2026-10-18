@@ -469,85 +469,78 @@
   dialog?.addEventListener('close', () => document.body.classList.remove('dialog-open'));
   dialog?.querySelector('a[href="#contact"]')?.addEventListener('click', closeDialog);
 
-  /* Hero: electric waves with glowing dots + plugin names. */
-  const heroCanvas = document.getElementById('heroWave');
-  if (heroCanvas) {
-    const ctx = heroCanvas.getContext('2d');
-    const codes = Object.keys(pluginData).map(k => pluginData[k].code);
-    const positions = codes.map((_, i) => (i + 0.5) / codes.length);
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    let t = 0;
-    let running = true;
-
-    const resize = () => {
-      const rect = heroCanvas.getBoundingClientRect();
-      heroCanvas.width = Math.max(1, Math.floor(rect.width * dpr));
-      heroCanvas.height = Math.max(1, Math.floor(rect.height * dpr));
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  /* Hero: techno background lines — full page, dark. */
+  const heroBg = document.getElementById('technoBg');
+  if (heroBg) {
+    const bgCtx = heroBg.getContext('2d');
+    const bgDpr = Math.min(window.devicePixelRatio || 1, 2);
+    let bgT = 0;
+    const bgResize = () => {
+      const rect = heroBg.getBoundingClientRect();
+      heroBg.width = Math.max(1, Math.floor(window.innerWidth * bgDpr));
+      heroBg.height = Math.max(1, Math.floor(window.innerHeight * bgDpr));
+      bgCtx.setTransform(bgDpr, 0, 0, bgDpr, 0, 0);
     };
-    resize();
-    window.addEventListener('resize', resize);
+    bgResize();
+    window.addEventListener('resize', bgResize);
 
-    const waves = [
-      { amp: 0.16, freq: 2.4, speed: 0.7, color: 'rgba(57,213,255,0.95)', width: 2.2, shadow: 12 },
-      { amp: 0.11, freq: 3.8, speed: -0.45, color: 'rgba(125,232,255,0.45)', width: 1.4, shadow: 6 },
-      { amp: 0.07, freq: 5.6, speed: 1.0, color: 'rgba(57,213,255,0.28)', width: 1.0, shadow: 4 },
-    ];
+    const drawBg = () => {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      bgCtx.clearRect(0, 0, w, h);
 
-    const yAt = (wave, nx, time) =>
-      0.5 + Math.sin(nx * Math.PI * wave.freq + time * wave.speed) * wave.amp
-            + Math.sin(nx * Math.PI * wave.freq * 0.5 + time * wave.speed * 0.6) * (wave.amp * 0.28);
-
-    const draw = () => {
-      const w = heroCanvas.width / dpr;
-      const h = heroCanvas.height / dpr;
-      ctx.clearRect(0, 0, w, h);
-
-      waves.forEach(wv => {
-        ctx.beginPath();
-        ctx.strokeStyle = wv.color;
-        ctx.lineWidth = wv.width;
-        ctx.shadowColor = 'rgba(57,213,255,0.7)';
-        ctx.shadowBlur = wv.shadow;
-        const step = 2;
-        for (let x = 0; x <= w; x += step) {
-          const nx = x / w;
-          const y = yAt(wv, nx, t) * h;
-          if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-        }
-        ctx.stroke();
-        ctx.shadowBlur = 0;
-      });
-
-      const primary = waves[0];
-      positions.forEach((pos, i) => {
-        const x = pos * w;
-        const y = yAt(primary, pos, t) * h;
-        const grd = ctx.createRadialGradient(x, y, 0, x, y, 16);
-        grd.addColorStop(0, 'rgba(125,232,255,1)');
-        grd.addColorStop(0.35, 'rgba(57,213,255,0.55)');
-        grd.addColorStop(1, 'rgba(57,213,255,0)');
-        ctx.fillStyle = grd;
-        ctx.beginPath();
-        ctx.arc(x, y, 16, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = '#7de8ff';
-        ctx.beginPath();
-        ctx.arc(x, y, 3.2, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.font = '600 11px "JetBrains Mono", monospace';
-        ctx.fillStyle = 'rgba(125,232,255,0.9)';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'bottom';
-        ctx.fillText(codes[i], x, y - 12);
-      });
-
-      if (running) {
-        t += 0.018;
-        requestAnimationFrame(draw);
+      // Grid
+      const gridSize = 80;
+      bgCtx.strokeStyle = 'rgba(0, 0, 0, 0.06)';
+      bgCtx.lineWidth = 1;
+      for (let x = 0; x <= w; x += gridSize) {
+        bgCtx.beginPath();
+        bgCtx.moveTo(x, 0);
+        bgCtx.lineTo(x, h);
+        bgCtx.stroke();
       }
+      for (let y = 0; y <= h; y += gridSize) {
+        bgCtx.beginPath();
+        bgCtx.moveTo(0, y);
+        bgCtx.lineTo(w, y);
+        bgCtx.stroke();
+      }
+
+      // Flowing horizontal lines (dark)
+      const lineCount = 6;
+      for (let i = 0; i < lineCount; i++) {
+        const baseY = (i + 1) * (h / (lineCount + 1));
+        const amp = 25 + i * 10;
+        const freq = 0.002 + i * 0.0008;
+        const speed = 0.4 + i * 0.25;
+        bgCtx.beginPath();
+        bgCtx.strokeStyle = `rgba(0, 0, 0, ${0.08 + i * 0.03})`;
+        bgCtx.lineWidth = 1.2;
+        for (let x = 0; x <= w; x += 2) {
+          const y = baseY + Math.sin(x * freq + bgT * speed) * amp
+                    + Math.sin(x * freq * 0.5 + bgT * speed * 0.7) * (amp * 0.3);
+          if (x === 0) bgCtx.moveTo(x, y); else bgCtx.lineTo(x, y);
+        }
+        bgCtx.stroke();
+      }
+
+      // Dark dots at grid intersections
+      const dotSpacing = gridSize * 2;
+      for (let x = dotSpacing; x < w; x += dotSpacing) {
+        for (let y = dotSpacing; y < h; y += dotSpacing) {
+          const pulse = Math.sin(bgT * 1.5 + x * 0.008 + y * 0.008) * 0.5 + 0.5;
+          const radius = 1.2 + pulse * 1.2;
+          bgCtx.fillStyle = `rgba(0, 0, 0, ${0.15 + pulse * 0.15})`;
+          bgCtx.beginPath();
+          bgCtx.arc(x, y, radius, 0, Math.PI * 2);
+          bgCtx.fill();
+        }
+      }
+
+      bgT += 0.008;
+      requestAnimationFrame(drawBg);
     };
-    draw();
+    drawBg();
   }
 
   /* Hero: techno background lines. */
