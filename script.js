@@ -687,7 +687,8 @@
       b.y = Math.sin(a * 1.13 + b.ph) * b.or * 0.9;
     }
 
-    const INV = 2 / RES;           // map pixel -> [-1,1]
+    const FIELD = 1.5;             // field range [-1.5,1.5]; blob+halo (~1.38 max) fits inside canvas, no square clip
+    const INV = (2 * FIELD) / RES; // map pixel -> [-FIELD, FIELD]
     const SURF = 1.0;              // surface threshold
     const LIGHT = [0.42, 0.55, 0.72];
     const ll = Math.hypot(...LIGHT);
@@ -695,9 +696,9 @@
 
     let idx = 0;
     for (let py = 0; py < RES; py++) {
-      const fy = py * INV - 1;
+      const fy = py * INV - FIELD;
       for (let px = 0; px < RES; px++, idx += 4) {
-        const fx = px * INV - 1;
+        const fx = px * INV - FIELD;
         let f = 0, gx = 0, gy = 0;
         for (let k = 0; k < balls.length; k++) {
           const b = balls[k];
