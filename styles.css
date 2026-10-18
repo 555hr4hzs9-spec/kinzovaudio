@@ -3537,7 +3537,7 @@ main { position:relative; z-index:1; }
 }
 
 .hero {
-  padding: 150px 0 44px;
+  padding: 72px 0 44px;
 }
 
 .hero .kicker {
@@ -3588,7 +3588,7 @@ main { position:relative; z-index:1; }
 
 @media (max-width: 900px) {
   .nav-tag { display: none; }
-  .hero { padding: 120px 0 36px; }
+  .hero { padding: 48px 0 36px; }
 }
 
 @media (max-width: 620px) {
@@ -3597,7 +3597,7 @@ main { position:relative; z-index:1; }
   .hero-lead { margin-top: 30px; }
 }
 
-/* ================= Hero visual — animated aurora orb ================= */
+/* ================= Hero visual — liquid chrome blob ================= */
 @media (min-width: 980px) {
   .hero-layout {
     grid-template-columns: minmax(0, 1fr) minmax(340px, .82fr);
@@ -3613,126 +3613,46 @@ main { position:relative; z-index:1; }
   min-height: clamp(300px, 38vw, 520px);
 }
 
-.aurora {
+.chrome-wrap {
   position: relative;
-  width: min(78%, 460px);
+  width: min(80%, 480px);
   aspect-ratio: 1;
   display: grid;
   place-items: center;
+}
+
+.chrome-blob {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: block;
   will-change: transform;
 }
 
-/* Core morphing gradient body */
-.aurora-core {
+/* Ambient glow that tints to the blob's dominant hue via JS (--glow-hue). */
+.chrome-glow {
   position: absolute;
-  inset: 14%;
-  border-radius: 46% 54% 58% 42% / 52% 44% 56% 48%;
-  background:
-    radial-gradient(60% 60% at 30% 28%, rgba(255, 255, 255, .95), transparent 55%),
-    conic-gradient(from 0deg,
-      #39d5ff, #4f7dff, #8b5cf6, #ff5ca8, #ff9f45, #34e2b0, #39d5ff);
-  filter: saturate(140%);
-  box-shadow:
-    0 30px 90px -20px rgba(79, 125, 255, .55),
-    0 10px 40px -10px rgba(255, 92, 168, .45),
-    inset 0 0 60px rgba(255, 255, 255, .35);
-  animation: auroraMorph 14s ease-in-out infinite, auroraSpin 26s linear infinite;
-}
-
-/* Soft glow halo behind core */
-.aurora-core::after {
-  content: "";
-  position: absolute;
-  inset: -34%;
+  inset: -22%;
   border-radius: 50%;
-  background: radial-gradient(closest-side, rgba(57, 213, 255, .38), rgba(139, 92, 246, .22) 55%, transparent 72%);
-  filter: blur(28px);
-  z-index: -1;
-  animation: auroraPulse 7s ease-in-out infinite;
+  background: radial-gradient(closest-side,
+    hsla(var(--glow-hue, 198), 95%, 60%, .40),
+    hsla(calc(var(--glow-hue, 198) + 60), 85%, 55%, .20) 55%,
+    transparent 72%);
+  filter: blur(34px);
+  animation: chromePulse 7s ease-in-out infinite;
 }
 
-/* Rotating light rings */
-.aurora-ring {
-  position: absolute;
-  border-radius: 50%;
-  border: 1.5px solid transparent;
-  background:
-    conic-gradient(from 0deg, transparent 0deg, rgba(57, 213, 255, .85) 60deg, rgba(255, 92, 168, .8) 150deg, transparent 220deg, transparent 360deg) border-box;
-  -webkit-mask: linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask: linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0);
-  mask-composite: exclude;
-}
-
-.aurora-ring-a { inset: 0; animation: auroraSpin 12s linear infinite; }
-.aurora-ring-b { inset: 7%; animation: auroraSpin 18s linear infinite reverse; opacity: .8; }
-.aurora-ring-c { inset: -9%; animation: auroraSpin 30s linear infinite; opacity: .55; }
-
-/* Orbiting sparks */
-.aurora-spark {
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  margin: -6px;
-}
-
-.aurora-spark-a {
-  background: radial-gradient(circle at 35% 35%, #fff, #39d5ff 60%, transparent 75%);
-  box-shadow: 0 0 22px 4px rgba(57, 213, 255, .75);
-  animation: auroraOrbitA 9s linear infinite;
-}
-.aurora-spark-b {
-  width: 9px; height: 9px; margin: -4.5px;
-  background: radial-gradient(circle at 35% 35%, #fff, #ff5ca8 60%, transparent 75%);
-  box-shadow: 0 0 20px 4px rgba(255, 92, 168, .7);
-  animation: auroraOrbitB 13s linear infinite;
-}
-.aurora-spark-c {
-  width: 8px; height: 8px; margin: -4px;
-  background: radial-gradient(circle at 35% 35%, #fff, #34e2b0 60%, transparent 75%);
-  box-shadow: 0 0 18px 4px rgba(52, 226, 176, .65);
-  animation: auroraOrbitC 17s linear infinite;
-}
-
-@keyframes auroraMorph {
-  0%, 100% { border-radius: 46% 54% 58% 42% / 52% 44% 56% 48%; }
-  33%      { border-radius: 60% 40% 42% 58% / 44% 58% 42% 56%; }
-  66%      { border-radius: 40% 60% 55% 45% / 60% 40% 60% 40%; }
-}
-
-@keyframes auroraSpin {
-  to { transform: rotate(360deg); }
-}
-
-@keyframes auroraPulse {
-  0%, 100% { opacity: .65; transform: scale(1); }
-  50%      { opacity: 1; transform: scale(1.12); }
-}
-
-@keyframes auroraOrbitA {
-  from { transform: rotate(0deg) translateX(min(38vw, 220px)) rotate(0deg); }
-  to   { transform: rotate(360deg) translateX(min(38vw, 220px)) rotate(-360deg); }
-}
-@keyframes auroraOrbitB {
-  from { transform: rotate(120deg) translateX(min(30vw, 178px)) rotate(-120deg); }
-  to   { transform: rotate(480deg) translateX(min(30vw, 178px)) rotate(-480deg); }
-}
-@keyframes auroraOrbitC {
-  from { transform: rotate(240deg) translateX(min(44vw, 258px)) rotate(-240deg); }
-  to   { transform: rotate(600deg) translateX(min(44vw, 258px)) rotate(-600deg); }
+@keyframes chromePulse {
+  0%, 100% { opacity: .7; transform: scale(1); }
+  50%      { opacity: 1; transform: scale(1.08); }
 }
 
 @media (max-width: 979px) {
   .hero-visual { min-height: clamp(240px, 62vw, 360px); order: -1; margin-bottom: 18px; }
-  .aurora { width: min(70%, 300px); }
-  .aurora-spark { display: none; }
+  .chrome-wrap { width: min(72%, 320px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .aurora-core, .aurora-core::after, .aurora-ring, .aurora-spark { animation: none; }
-  .aurora-core { border-radius: 50%; }
-  .aurora-ring { opacity: .4; }
+  .chrome-glow { animation: none; }
 }

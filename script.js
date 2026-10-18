@@ -640,3 +640,144 @@
   tick();
   })();
 })();
+/* ================= Hero — liquid chrome blob (metaballs, iridescent) ============ */
+(() => {
+  const canvas = document.getElementById('chromeBlob');
+  if (!canvas || !canvas.getContext) return;
+  const ctx = canvas.getContext('2d', { alpha: true });
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const RES = 220;                 // offscreen field resolution (upscaled = soft liquid look)
+  const off = document.createElement('canvas');
+  off.width = RES; off.height = RES;
+  const octx = off.getContext('2d');
+  const img = octx.createImageData(RES, RES);
+  const data = img.data;
+
+  // Metaballs: orbit inside unit square [-1,1]
+  const balls = [
+    { cx: 0, cy: 0, or: 0.26, r: 0.52, sp: 0.55, ph: 0.0, dir: 1 },
+    { cx: 0, cy: 0, or: 0.34, r: 0.44, sp: 0.41, ph: 2.1, dir: -1 },
+    { cx: 0, cy: 0, or: 0.30, r: 0.40, sp: 0.63, ph: 4.2, dir: 1 },
+    { cx: 0, cy: 0, or: 0.40, r: 0.32, sp: 0.33, ph: 1.3, dir: -1 },
+    { cx: 0, cy: 0, or: 0.22, r: 0.36, sp: 0.72, ph: 5.5, dir: 1 }
+  ];
+
+  function hsl2rgb(h, s, l, out, i) {
+    h = ((h % 1) + 1) % 1;
+    const a = s * Math.min(l, 1 - l);
+    const f = n => {
+      const k = (n + h * 12) % 12;
+      return l - a * Math.max(-1, Math.min(k - 3, Math.min(9 - k, 1)));
+    };
+    out[i] = f(0) * 255; out[i + 1] = f(8) * 255; out[i + 2] = f(4) * 255;
+  }
+
+  let baseHue = 198; // drives ambient glow CSS var
+  const wrap = canvas.parentElement;
+  let glowTick = 0;
+
+  function render(t) {
+    const time = t * 0.001;
+
+    // Move balls
+    for (const b of balls) {
+      const a = b.ph + time * b.sp * b.dir;
+      b.x = Math.cos(a) * b.or;
+      b.y = Math.sin(a * 1.13 + b.ph) * b.or * 0.9;
+    }
+
+    const INV = 2 / RES;           // map pixel -> [-1,1]
+    const SURF = 1.0;              // surface threshold
+    const LIGHT = [0.42, 0.55, 0.72];
+    const ll = Math.hypot(...LIGHT);
+    const LX = LIGHT[0] / ll, LY = LIGHT[1] / ll, LZ = LIGHT[2] / ll;
+
+    let idx = 0;
+    for (let py = 0; py < RES; py++) {
+      const fy = py * INV - 1;
+      for (let px = 0; px < RES; px++, idx += 4) {
+        const fx = px * INV - 1;
+        let f = 0, gx = 0, gy = 0;
+        for (let k = 0; k < balls.length; k++) {
+          const b = balls[k];
+          const dx = fx - b.x, dy = fy - b.y;
+          const d2 = dx * dx + dy * dy + 1e-4;
+          const r2 = b.r * b.r;
+          const c = r2 / d2;
+          f += c;
+          const g = -2 * r2 / (d2 * d2);
+          gx += g * dx; gy += g * dy;
+        }
+        if (f < 0.28) { data[idx + 3] = 0; continue; } // far outside -> transparent
+
+        const alpha = Math.min(1, (f - 0.28) / (0.72)); // soft edge
+        // Height dome -> fake normal
+        const hgt = Math.min(1, (f - SURF) / 1.6);
+        const z = Math.sqrt(Math.max(0, hgt));
+        const gl = Math.hypot(gx, gy) + 1e-5;
+        // Blend surface normal with field gradient for wavy mercury look
+        let nx = -gx / gl, ny = -gy / gl;
+        nx = nx * 0.55; ny = ny * 0.55;
+        const nl = Math.hypot(nx, ny, z) + 1e-5;
+        nx /= nl; ny /= nl; const nz = z / nl;
+
+        // Reflect view(0,0,1) about normal
+        const dot = 2 * nz;
+        const rx = dot * nx, ry = dot * ny, rz = dot * nz - 1;
+
+        // Iridescent thin-film hue from reflection + depth + time
+        const hue = baseHue / 360 + 0.45 * rx + 0.30 * ry + 0.22 * hgt + time * 0.02;
+        const light = 0.42 + 0.34 * Math.max(0, rz) + 0.14 * hgt;
+        hsl2rgb(hue, 0.72, Math.min(0.82, light), data, idx);
+
+        // Fresnel rim
+        const fres = Math.pow(1 - Math.max(0, nz), 2.5) * 0.55;
+        data[idx] += fres * 60; data[idx + 1] += fres * 70; data[idx + 2] += fres * 90;
+
+        // Specular
+        const spec = Math.pow(Math.max(0, rx * LX + ry * LY + rz * LZ), 48) * 230;
+        data[idx] = Math.min(255, data[idx] + spec);
+        data[idx + 1] = Math.min(255, data[idx + 1] + spec);
+        data[idx + 2] = Math.min(255, data[idx + 2] + spec);
+
+        data[idx + 3] = alpha * 255;
+      }
+    }
+    octx.putImageData(img, 0, 0);
+
+    // Upscale to display canvas (smooth = liquid)
+    const cw = canvas.width, ch = canvas.height;
+    ctx.clearRect(0, 0, cw, ch);
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+    ctx.drawImage(off, 0, 0, cw, ch);
+
+    // Sync ambient glow hue a few times per second
+    if ((glowTick++ % 12) === 0 && wrap) {
+      wrap.style.setProperty('--glow-hue', Math.round(baseHue + 40 * Math.sin(time * 0.3)));
+    }
+  }
+
+  function resize() {
+    const rect = canvas.getBoundingClientRect();
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    canvas.width = Math.max(1, Math.round(rect.width * dpr));
+    canvas.height = Math.max(1, Math.round(rect.height * dpr));
+    if (reducedMotion) renderStatic();
+  }
+
+  let start = null;
+  function loop(ts) {
+    if (start === null) start = ts;
+    render(ts - start);
+    requestAnimationFrame(loop);
+  }
+
+  function renderStatic() { render(2200); } // one pretty frozen frame
+
+  window.addEventListener('resize', resize);
+  resize();
+  if (reducedMotion) { renderStatic(); }
+  else { requestAnimationFrame(loop); }
+})();
