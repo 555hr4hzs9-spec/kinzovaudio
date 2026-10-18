@@ -22,7 +22,7 @@
     "value": 100,
     "wave": "ai",
     "accent": "#39d5ff",
-    "image": "plugin-images/mq-ai.png",
+    "image": "plugin-images/mq-ai.jpg",
     "price": "15 000 ₽",
     "kind": "program",
     "platforms": ["MACOS", "APP"]
@@ -43,7 +43,7 @@
     "value": 0,
     "wave": "monitor",
     "accent": "#39d5ff",
-    "image": "plugin-images/mq-monitor.png",
+    "image": "plugin-images/mq-monitor.jpg",
     "price": "15 000 ₽",
     "kind": "program",
     "platforms": ["MACOS", "APP"]
@@ -64,7 +64,7 @@
     "value": 0,
     "wave": "check",
     "accent": "#39d5ff",
-    "image": "plugin-images/mq-chek.png",
+    "image": "plugin-images/mq-chek.jpg",
     "price": "5 000 ₽",
     "kind": "plugin",
     "platforms": ["MACOS", "VST3", "AU", "iOS"]
@@ -355,11 +355,11 @@
     pulse: '780 / 620',
     mobile: '1 / 1',
     dist: '1 / 1',
-    chek: '960 / 1292',
+    chek: '1 / 1',
     detune: '1 / 1',
     detect: '420 / 168',
-    monitor: '780 / 1640',
-    ai: '2252 / 1818'
+    monitor: '1 / 1',
+    ai: '1000 / 729'
   };
   const viewerRatios = {
     delay: '1280 / 1036',
@@ -367,11 +367,11 @@
     pulse: '780 / 620',
     mobile: '1 / 1',
     dist: '1 / 1',
-    chek: '960 / 1292',
+    chek: '1 / 1',
     detune: '1 / 1',
     detect: '420 / 168',
-    monitor: '780 / 1640',
-    ai: '2252 / 1818'
+    monitor: '1 / 1',
+    ai: '1000 / 729'
   };
   document.querySelectorAll('.plugin-screenshot').forEach(button => {
     const key = button.dataset.open;
