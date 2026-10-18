@@ -3630,14 +3630,14 @@ main { position:relative; z-index:1; }
   will-change: transform;
 }
 
-/* Ambient glow that tints to the blob's dominant hue via JS (--glow-hue). */
+/* Soft neutral halo behind the bubble (colorless). */
 .chrome-glow {
   position: absolute;
   inset: -22%;
   border-radius: 50%;
   background: radial-gradient(closest-side,
-    hsla(var(--glow-hue, 198), 95%, 60%, .40),
-    hsla(calc(var(--glow-hue, 198) + 60), 85%, 55%, .20) 55%,
+    rgba(10, 15, 30, .10),
+    rgba(10, 15, 30, .05) 55%,
     transparent 72%);
   filter: blur(34px);
   animation: chromePulse 7s ease-in-out infinite;

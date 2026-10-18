@@ -640,124 +640,110 @@
   tick();
   })();
 })();
-/* ================= Hero — liquid chrome blob (metaballs, iridescent) ============ */
+/* ================= Hero — colorless glass bubble with inner wave ================= */
 (() => {
   const canvas = document.getElementById('chromeBlob');
   if (!canvas || !canvas.getContext) return;
   const ctx = canvas.getContext('2d', { alpha: true });
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const RES = 220;                 // offscreen field resolution (upscaled = soft liquid look)
-  const off = document.createElement('canvas');
-  off.width = RES; off.height = RES;
-  const octx = off.getContext('2d');
-  const img = octx.createImageData(RES, RES);
-  const data = img.data;
-
-  // Metaballs: orbit inside unit square [-1,1]
-  const balls = [
-    { cx: 0, cy: 0, or: 0.26, r: 0.52, sp: 0.55, ph: 0.0, dir: 1 },
-    { cx: 0, cy: 0, or: 0.34, r: 0.44, sp: 0.41, ph: 2.1, dir: -1 },
-    { cx: 0, cy: 0, or: 0.30, r: 0.40, sp: 0.63, ph: 4.2, dir: 1 },
-    { cx: 0, cy: 0, or: 0.40, r: 0.32, sp: 0.33, ph: 1.3, dir: -1 },
-    { cx: 0, cy: 0, or: 0.22, r: 0.36, sp: 0.72, ph: 5.5, dir: 1 }
+  // Wave layers travelling through the bubble (neutral, no color).
+  const waves = [
+    { amp: 0.20, k: 2.2, sp: 1.6,  ph: 0.0, lw: 0.034, a: 0.72 },
+    { amp: 0.13, k: 3.3, sp: -1.1, ph: 1.3, lw: 0.020, a: 0.38 },
+    { amp: 0.07, k: 5.1, sp: 2.3,  ph: 2.7, lw: 0.012, a: 0.24 }
   ];
-
-  function hsl2rgb(h, s, l, out, i) {
-    h = ((h % 1) + 1) % 1;
-    const a = s * Math.min(l, 1 - l);
-    const f = n => {
-      const k = (n + h * 12) % 12;
-      return l - a * Math.max(-1, Math.min(k - 3, Math.min(9 - k, 1)));
-    };
-    out[i] = f(0) * 255; out[i + 1] = f(8) * 255; out[i + 2] = f(4) * 255;
-  }
-
-  let baseHue = 198; // drives ambient glow CSS var
-  const wrap = canvas.parentElement;
-  let glowTick = 0;
 
   function render(t) {
     const time = t * 0.001;
-
-    // Move balls
-    for (const b of balls) {
-      const a = b.ph + time * b.sp * b.dir;
-      b.x = Math.cos(a) * b.or;
-      b.y = Math.sin(a * 1.13 + b.ph) * b.or * 0.9;
-    }
-
-    const FIELD = 1.75;            // field range [-1.75,1.75]; blob+halo fully inside canvas, no edge/square clip
-    const INV = (2 * FIELD) / RES; // map pixel -> [-FIELD, FIELD]
-    const SURF = 1.0;              // surface threshold
-    const LIGHT = [0.42, 0.55, 0.72];
-    const ll = Math.hypot(...LIGHT);
-    const LX = LIGHT[0] / ll, LY = LIGHT[1] / ll, LZ = LIGHT[2] / ll;
-
-    let idx = 0;
-    for (let py = 0; py < RES; py++) {
-      const fy = py * INV - FIELD;
-      for (let px = 0; px < RES; px++, idx += 4) {
-        const fx = px * INV - FIELD;
-        let f = 0, gx = 0, gy = 0;
-        for (let k = 0; k < balls.length; k++) {
-          const b = balls[k];
-          const dx = fx - b.x, dy = fy - b.y;
-          const d2 = dx * dx + dy * dy + 1e-4;
-          const r2 = b.r * b.r;
-          const c = r2 / d2;
-          f += c;
-          const g = -2 * r2 / (d2 * d2);
-          gx += g * dx; gy += g * dy;
-        }
-        if (f < 0.40) { data[idx + 3] = 0; continue; } // far outside -> transparent
-
-        const alpha = Math.min(1, (f - 0.40) / (0.60)); // soft edge
-        // Height dome -> fake normal
-        const hgt = Math.min(1, (f - SURF) / 1.6);
-        const z = Math.sqrt(Math.max(0, hgt));
-        const gl = Math.hypot(gx, gy) + 1e-5;
-        // Blend surface normal with field gradient for wavy mercury look
-        let nx = -gx / gl, ny = -gy / gl;
-        nx = nx * 0.55; ny = ny * 0.55;
-        const nl = Math.hypot(nx, ny, z) + 1e-5;
-        nx /= nl; ny /= nl; const nz = z / nl;
-
-        // Reflect view(0,0,1) about normal
-        const dot = 2 * nz;
-        const rx = dot * nx, ry = dot * ny, rz = dot * nz - 1;
-
-        // Iridescent thin-film hue from reflection + depth + time
-        const hue = baseHue / 360 + 0.45 * rx + 0.30 * ry + 0.22 * hgt + time * 0.02;
-        const light = 0.42 + 0.34 * Math.max(0, rz) + 0.14 * hgt;
-        hsl2rgb(hue, 0.72, Math.min(0.82, light), data, idx);
-
-        // Fresnel rim
-        const fres = Math.pow(1 - Math.max(0, nz), 2.5) * 0.55;
-        data[idx] += fres * 60; data[idx + 1] += fres * 70; data[idx + 2] += fres * 90;
-
-        // Specular
-        const spec = Math.pow(Math.max(0, rx * LX + ry * LY + rz * LZ), 48) * 230;
-        data[idx] = Math.min(255, data[idx] + spec);
-        data[idx + 1] = Math.min(255, data[idx + 1] + spec);
-        data[idx + 2] = Math.min(255, data[idx + 2] + spec);
-
-        data[idx + 3] = alpha * 255;
-      }
-    }
-    octx.putImageData(img, 0, 0);
-
-    // Upscale to display canvas (smooth = liquid)
     const cw = canvas.width, ch = canvas.height;
-    ctx.clearRect(0, 0, cw, ch);
-    ctx.imageSmoothingEnabled = true;
-    ctx.imageSmoothingQuality = 'high';
-    ctx.drawImage(off, 0, 0, cw, ch);
+    if (!cw || !ch) return;
+    const cx = cw / 2, cy = ch / 2;
+    const R = Math.min(cw, ch) * 0.40;   // bubble radius, inset from canvas edges
 
-    // Sync ambient glow hue a few times per second
-    if ((glowTick++ % 12) === 0 && wrap) {
-      wrap.style.setProperty('--glow-hue', Math.round(baseHue + 40 * Math.sin(time * 0.3)));
+    ctx.clearRect(0, 0, cw, ch);
+
+    // ---- soft floating shadow ----
+    ctx.save();
+    ctx.translate(cx, cy + R * 1.0);
+    ctx.scale(1, 0.22);
+    const sh = ctx.createRadialGradient(0, 0, 0, 0, 0, R * 0.9);
+    sh.addColorStop(0, 'rgba(10,15,30,0.14)');
+    sh.addColorStop(1, 'rgba(10,15,30,0)');
+    ctx.fillStyle = sh;
+    ctx.beginPath(); ctx.arc(0, 0, R * 0.9, 0, Math.PI * 2); ctx.fill();
+    ctx.restore();
+
+    // ---- glass body (spherical shading) ----
+    ctx.save();
+    ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2);
+    const body = ctx.createRadialGradient(cx - R * 0.32, cy - R * 0.36, R * 0.08, cx, cy, R);
+    body.addColorStop(0, 'rgba(255,255,255,0.92)');
+    body.addColorStop(0.58, 'rgba(240,243,247,0.55)');
+    body.addColorStop(1, 'rgba(186,193,203,0.60)');
+    ctx.fillStyle = body;
+    ctx.fill();
+    ctx.restore();
+
+    // ---- inner wave, clipped inside the bubble ----
+    ctx.save();
+    ctx.beginPath(); ctx.arc(cx, cy, R * 0.94, 0, Math.PI * 2); ctx.clip();
+    const x0 = cx - R, span = R * 2;
+    for (const w of waves) {
+      const g = ctx.createLinearGradient(x0, 0, cx + R, 0);
+      g.addColorStop(0, 'rgba(10,10,15,0)');
+      g.addColorStop(0.20, `rgba(10,10,15,${w.a})`);
+      g.addColorStop(0.80, `rgba(10,10,15,${w.a})`);
+      g.addColorStop(1, 'rgba(10,10,15,0)');
+      ctx.beginPath();
+      const N = 140;
+      for (let i = 0; i <= N; i++) {
+        const u = i / N;
+        const x = x0 + u * span;
+        const y = cy
+          + Math.sin(u * Math.PI * 2 * w.k + w.ph + time * w.sp) * (R * w.amp)
+          + Math.sin(u * Math.PI * 4 * w.k + w.ph * 1.7 + time * w.sp * 1.35) * (R * w.amp * 0.28);
+        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = g;
+      ctx.lineWidth = Math.max(1, R * w.lw);
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.shadowColor = 'rgba(10,10,15,0.20)';
+      ctx.shadowBlur = R * 0.07;
+      ctx.stroke();
     }
+    ctx.shadowBlur = 0;
+    ctx.restore();
+
+    // ---- rim (top light, bottom darker so it reads on white) ----
+    ctx.save();
+    ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2);
+    const rim = ctx.createLinearGradient(cx, cy - R, cx, cy + R);
+    rim.addColorStop(0, 'rgba(255,255,255,0.95)');
+    rim.addColorStop(0.5, 'rgba(150,157,168,0.55)');
+    rim.addColorStop(1, 'rgba(70,77,88,0.80)');
+    ctx.lineWidth = Math.max(1.5, R * 0.022);
+    ctx.strokeStyle = rim;
+    ctx.stroke();
+    ctx.restore();
+
+    // ---- highlights ----
+    ctx.save();
+    ctx.beginPath(); ctx.arc(cx, cy, R * 0.98, 0, Math.PI * 2); ctx.clip();
+    const hx = cx - R * 0.36, hy = cy - R * 0.44;
+    const hg = ctx.createRadialGradient(hx, hy, 0, hx, hy, R * 0.45);
+    hg.addColorStop(0, 'rgba(255,255,255,0.75)');
+    hg.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = hg;
+    ctx.beginPath(); ctx.ellipse(hx, hy, R * 0.34, R * 0.24, -0.55, 0, Math.PI * 2); ctx.fill();
+    // faint bottom inner reflection for depth
+    const bg = ctx.createRadialGradient(cx + R * 0.18, cy + R * 0.5, 0, cx + R * 0.18, cy + R * 0.5, R * 0.6);
+    bg.addColorStop(0, 'rgba(10,15,30,0.10)');
+    bg.addColorStop(1, 'rgba(10,15,30,0)');
+    ctx.fillStyle = bg;
+    ctx.beginPath(); ctx.ellipse(cx + R * 0.15, cy + R * 0.46, R * 0.5, R * 0.3, 0.3, 0, Math.PI * 2); ctx.fill();
+    ctx.restore();
   }
 
   function resize() {
@@ -775,7 +761,7 @@
     requestAnimationFrame(loop);
   }
 
-  function renderStatic() { render(2200); } // one pretty frozen frame
+  function renderStatic() { render(1600); }
 
   window.addEventListener('resize', resize);
   resize();
