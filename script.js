@@ -583,6 +583,8 @@
   });
 
 
+  root.classList.add('site-ready');
+
   /* Catalog filter: all / plugins / programs / free. */
   (() => {
   const chips = [...document.querySelectorAll('.filter-chip')];
@@ -601,7 +603,7 @@
 })();
 
 /* Hero tide motion */
-  {
+  (() => {
   const stage = document.querySelector('.signal-tide, .signal-prism');
   if (!stage || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   let tx = 0, ty = 0, cx = 0, cy = 0;
@@ -622,7 +624,5 @@
     requestAnimationFrame(tick);
   };
   tick();
-  }
-
-  root.classList.add('site-ready');
+  })();
 })();
