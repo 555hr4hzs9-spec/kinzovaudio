@@ -3001,7 +3001,7 @@ canvas {
 .plugin-chek .plugin-screenshot img { object-fit:contain; padding:0; }
 .screenshot-zoom { position:absolute; right:12px; bottom:12px; padding:8px 10px; border:1px solid rgba(255,255,255,.16); border-radius:5px; background:rgba(4,4,7,.74); color:var(--text); opacity:0; transform:translateY(8px); transition:opacity .25s, transform .25s; font:600 .52rem/1 var(--mono); letter-spacing:.09em; }
 .plugin-screenshot:hover .screenshot-zoom { opacity:1; transform:none; }
-.dialog-image { display:block; width:100%; max-height:42vh; margin:24px 0; object-fit:contain; border:1px solid rgba(255,255,255,.12); border-radius:12px; background:#000; }
+.dialog-image { display:block; width:100%; max-height:42vh; margin:24px 0; object-fit:contain; border:1px solid rgba(255,255,255,.12); border-radius:12px; background:#fff; }
 
 /* Desktop card reset: real plugin shots stay compact and fully visible. */
 @media (min-width: 901px) {
