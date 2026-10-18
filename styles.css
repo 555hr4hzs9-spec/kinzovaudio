@@ -457,7 +457,7 @@ canvas {
   display: flex;
   min-height: auto;
   align-items: center;
-  padding: 128px 0 56px;
+  padding: 112px 0 48px;
   overflow: hidden;
   contain: layout style paint;
 }
@@ -988,7 +988,7 @@ canvas {
   width: max-content;
   align-items: center;
   gap: 22px;
-  padding: 10px 0;
+  padding: 8px 0;
   animation: marquee 42s linear infinite;
   will-change: transform;
 }
@@ -1016,11 +1016,11 @@ canvas {
 
 .section {
   position: relative;
-  padding: clamp(72px, 9vw, 120px) 0;
+  padding: clamp(48px, 7vw, 96px) 0;
 }
 
 .section-heading {
-  margin-bottom: clamp(50px, 7vw, 84px);
+  margin-bottom: clamp(40px, 6vw, 68px);
 }
 
 .section-heading.compact {
@@ -2997,11 +2997,11 @@ canvas {
   transition:transform .7s cubic-bezier(.22,1,.36,1), filter .5s;
 }
 .plugin-screenshot:hover img { transform:scale(1.045); filter:saturate(1.08) brightness(1.08); }
-.plugin-chek .plugin-screenshot { background:radial-gradient(circle at 50% 35%, rgba(57,213,255,.13), transparent 60%), #050507; }
+.plugin-chek .plugin-screenshot { background:radial-gradient(circle at 50% 35%, rgba(57,213,255,.13), transparent 60%), #ffffff; }
 .plugin-chek .plugin-screenshot img { object-fit:contain; padding:0; }
 .screenshot-zoom { position:absolute; right:12px; bottom:12px; padding:8px 10px; border:1px solid rgba(255,255,255,.16); border-radius:5px; background:rgba(4,4,7,.74); color:var(--text); opacity:0; transform:translateY(8px); transition:opacity .25s, transform .25s; font:600 .52rem/1 var(--mono); letter-spacing:.09em; }
 .plugin-screenshot:hover .screenshot-zoom { opacity:1; transform:none; }
-.dialog-image { display:block; width:100%; max-height:42vh; margin:24px 0; object-fit:contain; border:1px solid rgba(255,255,255,.12); border-radius:12px; background:#fff; }
+.dialog-image { display:block; width:100%; max-height:42vh; margin:24px 0; object-fit:contain; border:1px solid rgba(0,0,0,.08); border-radius:12px; background:#ffffff; }
 
 /* Desktop card reset: real plugin shots stay compact and fully visible. */
 @media (min-width: 901px) {
