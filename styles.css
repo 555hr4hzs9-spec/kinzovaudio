@@ -1131,7 +1131,7 @@ canvas {
 }
 
 /* Bento: first (featured) card spans 2x2. */
-.plugin-card[data-plugin="ai"] {
+.plugin-card:first-child {
   grid-column: span 2;
   grid-row: span 2;
   min-height: 570px;
