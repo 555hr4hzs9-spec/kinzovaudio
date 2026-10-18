@@ -506,7 +506,7 @@
         bgCtx.stroke();
       }
 
-      // Flowing horizontal lines (dark)
+      // Flowing horizontal lines (black → blue glow)
       const lineCount = 6;
       for (let i = 0; i < lineCount; i++) {
         const baseY = (i + 1) * (h / (lineCount + 1));
@@ -514,26 +514,32 @@
         const freq = 0.002 + i * 0.0008;
         const speed = 0.4 + i * 0.25;
         bgCtx.beginPath();
-        bgCtx.strokeStyle = `rgba(0, 0, 0, ${0.08 + i * 0.03})`;
+        bgCtx.strokeStyle = `rgba(0, 153, 204, ${0.18 + i * 0.06})`;
         bgCtx.lineWidth = 1.2;
+        bgCtx.shadowColor = 'rgba(0, 153, 204, 0.45)';
+        bgCtx.shadowBlur = 10;
         for (let x = 0; x <= w; x += 2) {
           const y = baseY + Math.sin(x * freq + bgT * speed) * amp
                     + Math.sin(x * freq * 0.5 + bgT * speed * 0.7) * (amp * 0.3);
           if (x === 0) bgCtx.moveTo(x, y); else bgCtx.lineTo(x, y);
         }
         bgCtx.stroke();
+        bgCtx.shadowBlur = 0;
       }
 
-      // Dark dots at grid intersections
+      // Glowing blue dots at grid intersections
       const dotSpacing = gridSize * 2;
       for (let x = dotSpacing; x < w; x += dotSpacing) {
         for (let y = dotSpacing; y < h; y += dotSpacing) {
           const pulse = Math.sin(bgT * 1.5 + x * 0.008 + y * 0.008) * 0.5 + 0.5;
-          const radius = 1.2 + pulse * 1.2;
-          bgCtx.fillStyle = `rgba(0, 0, 0, ${0.15 + pulse * 0.15})`;
+          const radius = 1.4 + pulse * 1.6;
+          bgCtx.fillStyle = `rgba(0, 153, 204, ${0.4 + pulse * 0.45})`;
+          bgCtx.shadowColor = 'rgba(0, 153, 204, 0.7)';
+          bgCtx.shadowBlur = 8;
           bgCtx.beginPath();
           bgCtx.arc(x, y, radius, 0, Math.PI * 2);
           bgCtx.fill();
+          bgCtx.shadowBlur = 0;
         }
       }
 
