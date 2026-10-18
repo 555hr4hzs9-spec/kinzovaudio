@@ -542,19 +542,27 @@
     };
     drawBg();
   }
-  /* Add download buttons to plugin cards. */
-  const downloadUrls = {
-    ai:      { win: 'downloads/mq-ai-win.exe', mac: 'downloads/mq-ai-mac.dmg' },
-    monitor: { mac: 'downloads/mq-monitor-mac.dmg' },
-    chek:    { win: 'downloads/mq-chek-win.exe', mac: 'downloads/mq-chek-mac.dmg' },
-    verb:    { win: 'downloads/mq-verb-win.exe', mac: 'downloads/mq-verb-mac.dmg' },
-    pulse:   { mac: 'downloads/mq-pulse-mac.dmg' },
-    mobile:  { win: 'downloads/mq-mobile-win.exe', mac: 'downloads/mq-mobile-mac.dmg' },
-    dist:    { win: 'downloads/mq-dist-win.exe', mac: 'downloads/mq-dist-mac.dmg' },
-    delay:   { win: 'downloads/mq-delay-win.zip', mac: 'downloads/mq-delay-mac.zip' },
-    detune:  { win: 'downloads/mq-detune-win.exe', mac: 'downloads/mq-detune-mac.pkg' },
-    detect:  { win: 'downloads/mq-detect-win.exe', mac: 'downloads/mq-detect-mac.pkg' },
+  /* Add download buttons to plugin cards.
+     Файлы лежат в GitHub Releases (папка downloads/ не входит в репозиторий). */
+  const releaseBase = 'https://github.com/555hr4hzs9-spec/kinzovaudio/releases/download/v1.0/';
+  const files = {
+    ai:      { win: 'mq-ai-win.exe', mac: 'mq-ai-mac.dmg' },
+    monitor: { mac: 'mq-monitor-mac.dmg' },
+    chek:    { win: 'mq-chek-win.exe', mac: 'mq-chek-mac.dmg' },
+    verb:    { win: 'mq-verb-win.exe', mac: 'mq-verb-mac.dmg' },
+    pulse:   { mac: 'mq-pulse-mac.dmg' },
+    mobile:  { win: 'mq-mobile-win.exe', mac: 'mq-mobile-mac.dmg' },
+    dist:    { win: 'mq-dist-win.exe', mac: 'mq-dist-mac.dmg' },
+    delay:   { win: 'mq-delay-win.zip', mac: 'mq-delay-mac.zip' },
+    detune:  { win: 'mq-detune-win.exe', mac: 'mq-detune-mac.pkg' },
+    detect:  { win: 'mq-detect-win.exe', mac: 'mq-detect-mac.pkg' },
   };
+  const downloadUrls = {};
+  Object.keys(files).forEach(k => {
+    downloadUrls[k] = {};
+    if (files[k].win) downloadUrls[k].win = releaseBase + files[k].win;
+    if (files[k].mac) downloadUrls[k].mac = releaseBase + files[k].mac;
+  });
 
   document.querySelectorAll('.plugin-card').forEach(card => {
     const key = card.dataset.plugin;
