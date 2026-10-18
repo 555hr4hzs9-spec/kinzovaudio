@@ -648,27 +648,58 @@
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // Wave layers travelling through the bubble (neutral, no color).
+  // Low harmonics keep the lines silky; curves are drawn as smoothed beziers below.
   const waves = [
     { amp: 0.20, k: 2.2, sp: 1.6,  ph: 0.0, lw: 0.034, a: 0.72 },
     { amp: 0.13, k: 3.3, sp: -1.1, ph: 1.3, lw: 0.020, a: 0.38 },
     { amp: 0.07, k: 5.1, sp: 2.3,  ph: 2.7, lw: 0.012, a: 0.24 }
   ];
 
+  // Per-wave phase accumulators (advanced by dt so hover speed-ups never jump).
+  const phases = waves.map(w => w.ph);
+
+  // Hover state: 0 = rest, 1 = fully hovered (smoothly lerped).
+  let hoverAmt = 0, hoverTarget = 0;
+  let ripplePhase = 0;
+
+  function onEnter() { hoverTarget = 1; }
+  function onLeave() { hoverTarget = 0; }
+  canvas.addEventListener('pointerenter', onEnter);
+  canvas.addEventListener('pointerleave', onLeave);
+  canvas.addEventListener('pointercancel', onLeave);
+
+  // Stroke a polyline as a smooth quadratic-bezier curve (no visible facets).
+  function strokeSmooth(pts) {
+    const n = pts.length;
+    if (n < 2) return;
+    ctx.beginPath();
+    ctx.moveTo(pts[0].x, pts[0].y);
+    for (let i = 1; i < n - 1; i++) {
+      const p = pts[i], q = pts[i + 1];
+      ctx.quadraticCurveTo(p.x, p.y, (p.x + q.x) * 0.5, (p.y + q.y) * 0.5);
+    }
+    ctx.lineTo(pts[n - 1].x, pts[n - 1].y);
+    ctx.stroke();
+  }
+
   function render(t) {
-    const time = t * 0.001;
     const cw = canvas.width, ch = canvas.height;
     if (!cw || !ch) return;
     const cx = cw / 2, cy = ch / 2;
-    const R = Math.min(cw, ch) * 0.40;   // bubble radius, inset from canvas edges
+
+    const h = hoverAmt;
+    const R = Math.min(cw, ch) * 0.40 * (1 + 0.05 * h); // bubble swells slightly on hover
+    const ampMul = 1 + 0.85 * h;                        // waves grow on hover
+    const pts = [];
 
     ctx.clearRect(0, 0, cw, ch);
 
-    // ---- soft floating shadow ----
+    // ---- soft floating shadow (deepens a touch on hover) ----
     ctx.save();
     ctx.translate(cx, cy + R * 1.0);
     ctx.scale(1, 0.22);
     const sh = ctx.createRadialGradient(0, 0, 0, 0, 0, R * 0.9);
-    sh.addColorStop(0, 'rgba(10,15,30,0.14)');
+    sh.addColorStop(0, `rgba(10,15,30,${(0.14 + 0.06 * h).toFixed(3)})`);
     sh.addColorStop(1, 'rgba(10,15,30,0)');
     ctx.fillStyle = sh;
     ctx.beginPath(); ctx.arc(0, 0, R * 0.9, 0, Math.PI * 2); ctx.fill();
@@ -689,31 +720,51 @@
     ctx.save();
     ctx.beginPath(); ctx.arc(cx, cy, R * 0.94, 0, Math.PI * 2); ctx.clip();
     const x0 = cx - R, span = R * 2;
-    for (const w of waves) {
+    for (let wi = 0; wi < waves.length; wi++) {
+      const w = waves[wi];
       const g = ctx.createLinearGradient(x0, 0, cx + R, 0);
+      const a = Math.min(0.95, w.a * (1 + 0.25 * h));
       g.addColorStop(0, 'rgba(10,10,15,0)');
-      g.addColorStop(0.20, `rgba(10,10,15,${w.a})`);
-      g.addColorStop(0.80, `rgba(10,10,15,${w.a})`);
+      g.addColorStop(0.20, `rgba(10,10,15,${a.toFixed(3)})`);
+      g.addColorStop(0.80, `rgba(10,10,15,${a.toFixed(3)})`);
       g.addColorStop(1, 'rgba(10,10,15,0)');
-      ctx.beginPath();
-      const N = 140;
+
+      pts.length = 0;
+      const N = 120;
+      const ph = phases[wi];
       for (let i = 0; i <= N; i++) {
         const u = i / N;
         const x = x0 + u * span;
         const y = cy
-          + Math.sin(u * Math.PI * 2 * w.k + w.ph + time * w.sp) * (R * w.amp)
-          + Math.sin(u * Math.PI * 4 * w.k + w.ph * 1.7 + time * w.sp * 1.35) * (R * w.amp * 0.28);
-        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+          + Math.sin(u * Math.PI * 2 * w.k + ph) * (R * w.amp * ampMul)
+          + Math.sin(u * Math.PI * 4 * w.k + ph * 1.7) * (R * w.amp * 0.14 * ampMul);
+        pts.push({ x, y });
       }
+
       ctx.strokeStyle = g;
-      ctx.lineWidth = Math.max(1, R * w.lw);
+      ctx.lineWidth = Math.max(1, R * w.lw * (1 + 0.15 * h));
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
       ctx.shadowColor = 'rgba(10,10,15,0.20)';
       ctx.shadowBlur = R * 0.07;
-      ctx.stroke();
+      strokeSmooth(pts);
     }
     ctx.shadowBlur = 0;
+
+    // ---- hover ripple: rings radiating from the centre while hovered ----
+    if (h > 0.02) {
+      for (let j = 0; j < 3; j++) {
+        const p = (ripplePhase + j / 3) % 1;
+        const rr = R * (0.16 + p * 0.78);
+        const a = (1 - p) * 0.30 * h;
+        if (a <= 0.006) continue;
+        ctx.beginPath();
+        ctx.arc(cx, cy, rr, 0, Math.PI * 2);
+        ctx.lineWidth = Math.max(1, R * 0.013 * (1 - p * 0.55));
+        ctx.strokeStyle = `rgba(10,10,15,${a.toFixed(3)})`;
+        ctx.stroke();
+      }
+    }
     ctx.restore();
 
     // ---- rim (top light, bottom darker so it reads on white) ----
@@ -721,19 +772,19 @@
     ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2);
     const rim = ctx.createLinearGradient(cx, cy - R, cx, cy + R);
     rim.addColorStop(0, 'rgba(255,255,255,0.95)');
-    rim.addColorStop(0.5, 'rgba(150,157,168,0.55)');
-    rim.addColorStop(1, 'rgba(70,77,88,0.80)');
-    ctx.lineWidth = Math.max(1.5, R * 0.022);
+    rim.addColorStop(0.5, `rgba(150,157,168,${(0.55 + 0.15 * h).toFixed(3)})`);
+    rim.addColorStop(1, `rgba(70,77,88,${(0.80 + 0.15 * h).toFixed(3)})`);
+    ctx.lineWidth = Math.max(1.5, R * 0.022 * (1 + 0.2 * h));
     ctx.strokeStyle = rim;
     ctx.stroke();
     ctx.restore();
 
-    // ---- highlights ----
+    // ---- highlights (brighten on hover) ----
     ctx.save();
     ctx.beginPath(); ctx.arc(cx, cy, R * 0.98, 0, Math.PI * 2); ctx.clip();
     const hx = cx - R * 0.36, hy = cy - R * 0.44;
     const hg = ctx.createRadialGradient(hx, hy, 0, hx, hy, R * 0.45);
-    hg.addColorStop(0, 'rgba(255,255,255,0.75)');
+    hg.addColorStop(0, `rgba(255,255,255,${(0.75 + 0.2 * h).toFixed(3)})`);
     hg.addColorStop(1, 'rgba(255,255,255,0)');
     ctx.fillStyle = hg;
     ctx.beginPath(); ctx.ellipse(hx, hy, R * 0.34, R * 0.24, -0.55, 0, Math.PI * 2); ctx.fill();
@@ -754,9 +805,23 @@
     if (reducedMotion) renderStatic();
   }
 
-  let start = null;
+  let start = null, last = null;
   function loop(ts) {
-    if (start === null) start = ts;
+    if (start === null) { start = ts; last = ts; }
+    const dt = Math.min(64, ts - last);   // clamp so tab-switches don't lurch
+    last = ts;
+
+    // smooth hover easing (~180ms in / ~260ms out)
+    const rate = hoverTarget > hoverAmt ? 0.012 : 0.0075;
+    hoverAmt += (hoverTarget - hoverAmt) * Math.min(1, dt * rate);
+    if (Math.abs(hoverTarget - hoverAmt) < 0.0015) hoverAmt = hoverTarget;
+
+    const spMul = 1 + 1.7 * hoverAmt;      // waves rush faster on hover
+    for (let i = 0; i < waves.length; i++) {
+      phases[i] += dt * 0.001 * waves[i].sp * spMul;
+    }
+    if (hoverAmt > 0.02) ripplePhase = (ripplePhase + dt * 0.0011) % 1;
+
     render(ts - start);
     requestAnimationFrame(loop);
   }
