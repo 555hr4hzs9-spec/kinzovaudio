@@ -598,7 +598,7 @@
     const positions = codes.map((_, i) => (i + 0.5) / codes.length);
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     let t = 0;
-    let running = !reducedMotion;
+    let running = true;
 
     const resize = () => {
       const rect = heroCanvas.getBoundingClientRect();
@@ -610,9 +610,9 @@
     window.addEventListener('resize', resize);
 
     const waves = [
-      { amp: 0.16, freq: 2.4, speed: 0.7, color: 'rgba(255,255,255,0.95)', width: 2.2, shadow: 12 },
-      { amp: 0.11, freq: 3.8, speed: -0.45, color: 'rgba(255,255,255,0.45)', width: 1.4, shadow: 6 },
-      { amp: 0.07, freq: 5.6, speed: 1.0, color: 'rgba(255,255,255,0.28)', width: 1.0, shadow: 4 },
+      { amp: 0.16, freq: 2.4, speed: 0.7, color: 'rgba(57,213,255,0.95)', width: 2.2, shadow: 12 },
+      { amp: 0.11, freq: 3.8, speed: -0.45, color: 'rgba(125,232,255,0.45)', width: 1.4, shadow: 6 },
+      { amp: 0.07, freq: 5.6, speed: 1.0, color: 'rgba(57,213,255,0.28)', width: 1.0, shadow: 4 },
     ];
 
     const yAt = (wave, nx, time) =>
@@ -628,7 +628,7 @@
         ctx.beginPath();
         ctx.strokeStyle = wv.color;
         ctx.lineWidth = wv.width;
-        ctx.shadowColor = 'rgba(255,255,255,0.7)';
+        ctx.shadowColor = 'rgba(57,213,255,0.7)';
         ctx.shadowBlur = wv.shadow;
         const step = 2;
         for (let x = 0; x <= w; x += step) {
@@ -645,19 +645,19 @@
         const x = pos * w;
         const y = yAt(primary, pos, t) * h;
         const grd = ctx.createRadialGradient(x, y, 0, x, y, 16);
-        grd.addColorStop(0, 'rgba(255,255,255,1)');
-        grd.addColorStop(0.35, 'rgba(255,255,255,0.55)');
-        grd.addColorStop(1, 'rgba(255,255,255,0)');
+        grd.addColorStop(0, 'rgba(125,232,255,1)');
+        grd.addColorStop(0.35, 'rgba(57,213,255,0.55)');
+        grd.addColorStop(1, 'rgba(57,213,255,0)');
         ctx.fillStyle = grd;
         ctx.beginPath();
         ctx.arc(x, y, 16, 0, Math.PI * 2);
         ctx.fill();
-        ctx.fillStyle = '#fff';
+        ctx.fillStyle = '#7de8ff';
         ctx.beginPath();
         ctx.arc(x, y, 3.2, 0, Math.PI * 2);
         ctx.fill();
         ctx.font = '600 11px "JetBrains Mono", monospace';
-        ctx.fillStyle = 'rgba(255,255,255,0.85)';
+        ctx.fillStyle = 'rgba(125,232,255,0.9)';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'bottom';
         ctx.fillText(codes[i], x, y - 12);
