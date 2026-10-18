@@ -542,90 +542,6 @@
     };
     drawBg();
   }
-
-  /* Hero: techno background lines. */
-  const heroBg = document.getElementById('heroBg');
-  if (heroBg) {
-    const bgCtx = heroBg.getContext('2d');
-    const bgDpr = Math.min(window.devicePixelRatio || 1, 2);
-    let bgT = 0;
-    const bgResize = () => {
-      const rect = heroBg.getBoundingClientRect();
-      heroBg.width = Math.max(1, Math.floor(rect.width * bgDpr));
-      heroBg.height = Math.max(1, Math.floor(rect.height * bgDpr));
-      bgCtx.setTransform(bgDpr, 0, 0, bgDpr, 0, 0);
-    };
-    bgResize();
-    window.addEventListener('resize', bgResize);
-
-    const drawBg = () => {
-      const w = heroBg.width / bgDpr;
-      const h = heroBg.height / bgDpr;
-      bgCtx.clearRect(0, 0, w, h);
-
-      // Grid
-      const gridSize = 60;
-      bgCtx.strokeStyle = 'rgba(0, 153, 204, 0.08)';
-      bgCtx.lineWidth = 1;
-      for (let x = 0; x <= w; x += gridSize) {
-        bgCtx.beginPath();
-        bgCtx.moveTo(x, 0);
-        bgCtx.lineTo(x, h);
-        bgCtx.stroke();
-      }
-      for (let y = 0; y <= h; y += gridSize) {
-        bgCtx.beginPath();
-        bgCtx.moveTo(0, y);
-        bgCtx.lineTo(w, y);
-        bgCtx.stroke();
-      }
-
-      // Flowing horizontal lines
-      const lineCount = 5;
-      for (let i = 0; i < lineCount; i++) {
-        const baseY = (i + 1) * (h / (lineCount + 1));
-        const amp = 20 + i * 8;
-        const freq = 0.003 + i * 0.001;
-        const speed = 0.5 + i * 0.3;
-        bgCtx.beginPath();
-        bgCtx.strokeStyle = `rgba(0, 153, 204, ${0.15 + i * 0.05})`;
-        bgCtx.lineWidth = 1.5;
-        bgCtx.shadowColor = 'rgba(0, 153, 204, 0.4)';
-        bgCtx.shadowBlur = 6;
-        for (let x = 0; x <= w; x += 2) {
-          const y = baseY + Math.sin(x * freq + bgT * speed) * amp
-                    + Math.sin(x * freq * 0.5 + bgT * speed * 0.7) * (amp * 0.3);
-          if (x === 0) bgCtx.moveTo(x, y); else bgCtx.lineTo(x, y);
-        }
-        bgCtx.stroke();
-        bgCtx.shadowBlur = 0;
-      }
-
-      // Glowing dots at grid intersections
-      const dotSpacing = gridSize * 2;
-      for (let x = dotSpacing; x < w; x += dotSpacing) {
-        for (let y = dotSpacing; y < h; y += dotSpacing) {
-          const pulse = Math.sin(bgT * 2 + x * 0.01 + y * 0.01) * 0.5 + 0.5;
-          const radius = 1.5 + pulse * 1.5;
-          const grd = bgCtx.createRadialGradient(x, y, 0, x, y, radius * 4);
-          grd.addColorStop(0, `rgba(0, 153, 204, ${0.4 + pulse * 0.4})`);
-          grd.addColorStop(1, 'rgba(0, 153, 204, 0)');
-          bgCtx.fillStyle = grd;
-          bgCtx.beginPath();
-          bgCtx.arc(x, y, radius * 4, 0, Math.PI * 2);
-          bgCtx.fill();
-          bgCtx.fillStyle = `rgba(0, 153, 204, ${0.6 + pulse * 0.4})`;
-          bgCtx.beginPath();
-          bgCtx.arc(x, y, radius, 0, Math.PI * 2);
-          bgCtx.fill();
-        }
-      }
-
-      bgT += 0.012;
-      requestAnimationFrame(drawBg);
-    };
-    drawBg();
-  }
   /* Add download buttons to plugin cards. */
   const downloadUrls = {
     ai:      { win: 'downloads/mq-ai-win.exe', mac: 'downloads/mq-ai-mac.dmg' },
@@ -666,45 +582,6 @@
     if (link) link.insertAdjacentElement('afterend', wrap);
   });
 
-  /* Add download buttons to plugin cards. */
-  const downloadUrls = {
-    ai:      { win: 'downloads/mq-ai-win.exe', mac: 'downloads/mq-ai-mac.dmg' },
-    monitor: { mac: 'downloads/mq-monitor-mac.dmg' },
-    chek:    { win: 'downloads/mq-chek-win.exe', mac: 'downloads/mq-chek-mac.dmg' },
-    verb:    { win: 'downloads/mq-verb-win.exe', mac: 'downloads/mq-verb-mac.dmg' },
-    pulse:   { mac: 'downloads/mq-pulse-mac.dmg' },
-    mobile:  { win: 'downloads/mq-mobile-win.exe', mac: 'downloads/mq-mobile-mac.dmg' },
-    dist:    { win: 'downloads/mq-dist-win.exe', mac: 'downloads/mq-dist-mac.dmg' },
-    delay:   { win: 'downloads/mq-delay-win.zip', mac: 'downloads/mq-delay-mac.zip' },
-    detune:  { win: 'downloads/mq-detune-win.exe', mac: 'downloads/mq-detune-mac.pkg' },
-    detect:  { win: 'downloads/mq-detect-win.exe', mac: 'downloads/mq-detect-mac.pkg' },
-  };
-
-  document.querySelectorAll('.plugin-card').forEach(card => {
-    const key = card.dataset.plugin;
-    const urls = downloadUrls[key];
-    if (!urls) return;
-    const wrap = document.createElement('div');
-    wrap.className = 'card-downloads';
-    if (urls.win) {
-      const a = document.createElement('a');
-      a.className = 'download-btn';
-      a.href = urls.win;
-      a.setAttribute('download', '');
-      a.innerHTML = '<span>Windows</span><b>↓</b>';
-      wrap.appendChild(a);
-    }
-    if (urls.mac) {
-      const a = document.createElement('a');
-      a.className = 'download-btn';
-      a.href = urls.mac;
-      a.setAttribute('download', '');
-      a.innerHTML = '<span>macOS</span><b>↓</b>';
-      wrap.appendChild(a);
-    }
-    const link = card.querySelector('.card-link');
-    if (link) link.insertAdjacentElement('afterend', wrap);
-  });
 
   /* Catalog filter: all / plugins / programs / free. */
   (() => {
